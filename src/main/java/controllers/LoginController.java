@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +42,20 @@ public class LoginController implements Initializable {
 
         System.out.println("Usuario: " + username);
         System.out.println("Contraseña: " + password);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/principal.fxml"));
+            GridPane pane = FXMLLoader.load(getClass().getResource("/principal.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Alta de Plantas");
+            stage.setScene(new Scene(pane));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+            Stage currentStage = (Stage) txtUser.getScene().getWindow();
+            currentStage.close();
+            stage.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -50,5 +66,7 @@ public class LoginController implements Initializable {
         alert.setContentText("Falta ver como agregar esto jaja");
         alert.showAndWait();
     }
+
+
 
 }

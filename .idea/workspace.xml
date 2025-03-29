@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="" />
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Iniciar Proyecto">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/configuracion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles_principal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/cosa de la bienvenida jaja.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/flor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/cosa de la bienvenida jaja.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/flor.png" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,10 +29,26 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Hiramrr"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Hiramrr/POSmart.git",
+    "accountId": "a9516f0e-173f-49a4-bdc9-bf756c1ad690"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2uycoNPjjPYacbGfC003Nf5iGxQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -31,6 +59,8 @@
     "Application.POSMart.executor": "Run",
     "Application.POSmart.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/hiram/IdeaProjects/POSmart/Base de datos",
     "node.js.detected.package.eslint": "true",
@@ -38,10 +68,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -95,12 +125,25 @@
       <workItem from="1743224429574" duration="1792000" />
       <workItem from="1743226234708" duration="45000" />
       <workItem from="1743226403551" duration="73000" />
-      <workItem from="1743226512486" duration="5563000" />
+      <workItem from="1743226512486" duration="10871000" />
     </task>
+    <task id="LOCAL-00001" summary="Iniciar Proyecto">
+      <option name="closed" value="true" />
+      <created>1743262696059</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743262696059</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Iniciar Proyecto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Iniciar Proyecto" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
