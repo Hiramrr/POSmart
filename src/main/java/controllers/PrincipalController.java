@@ -1,26 +1,20 @@
 package controllers;
-import BaseDatos.BaseDatos;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.net.URL;
+
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class PrincipalController {
     @FXML
@@ -28,6 +22,9 @@ public class PrincipalController {
 
     @FXML
     private Text hora;
+
+    @FXML
+    private Button cerrarSesion;
 
     @FXML
     public void initialize() {
@@ -41,6 +38,33 @@ public class PrincipalController {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         hora.setText(dateFormat.format(date));
+    }
 
+    public void handleCerrarSesion(ActionEvent event) {
+        try {
+            File sessionFile = new File(".ultimaSesion.txt");
+            if (sessionFile.exists()) {
+                if (sessionFile.delete()) {
+                } else {
+                    System.out.println("Ojala no pase esto");
+                }
+            }
+        } catch (Exception e) {
+            //no hay que hacer nada jaja
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/login.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("POSmart");
+            stage.setScene(new Scene(pane));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+            Stage currentStage = (Stage) dia.getScene().getWindow();
+            currentStage.close();
+            stage.close();
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

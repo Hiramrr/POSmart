@@ -1,6 +1,7 @@
 package controllers;
 
 import BaseDatos.BaseDatos;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +36,12 @@ public class LoginController implements Initializable {
 
     @FXML
     private Hyperlink olvidarDatos;
+
+    @FXML
+    private CheckBox recordarDatos;
+
+    @FXML
+    private Text titulo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +84,9 @@ public class LoginController implements Initializable {
             alert.showAndWait();
             return;
         }
-
+        if(recordarDatos.isSelected()){
+            guardarDatos();
+        }
         cargarVentantaPrincipal();
     }
 
@@ -87,12 +98,20 @@ public class LoginController implements Initializable {
             stage.setTitle("POSmart");
             stage.setScene(new Scene(pane));
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
-            Stage currentStage = (Stage) txtUser.getScene().getWindow();
+            Stage currentStage = (Stage) this.txtUser.getScene().getWindow();
             currentStage.close();
             stage.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void guardarDatos() {
+        try (BufferedWriter datos = new BufferedWriter(new FileWriter(".ultimaSesion.txt"))) {
+            datos.write(txtUser.getText() + "\n" + txtPassword.getText() );
+        } catch (IOException e) {
+            System.err.println("ojala no pase esto: " + e.getMessage());
         }
     }
 }
