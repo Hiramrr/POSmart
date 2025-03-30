@@ -1,13 +1,19 @@
 package controllers;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -27,18 +33,34 @@ public class PrincipalController {
     private Button cerrarSesion;
 
     @FXML
+    private Button agregarEmpleado;
+
+    @FXML
+    private Pane contenedor;
+
+    @FXML
     public void initialize() {
         obtenerDia();
     }
 
-    public void obtenerDia(){
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        dia.setText(localDate.format(formatter));
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        hora.setText(dateFormat.format(date));
-    }
+   public void obtenerDia(){
+       LocalDate localDate = LocalDate.now();
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       dia.setText(localDate.format(formatter));
+       actualizarHora();
+
+       Timeline timeline = new Timeline(
+           new KeyFrame(Duration.seconds(1), event -> actualizarHora())
+       );
+       timeline.setCycleCount(Animation.INDEFINITE);
+       timeline.play();
+   }
+
+   private void actualizarHora() {
+       DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+       Date date = new Date();
+       hora.setText(dateFormat.format(date));
+   }
 
     public void handleCerrarSesion(ActionEvent event) {
         try {
@@ -67,4 +89,17 @@ public class PrincipalController {
             System.out.println(e);
         }
     }
+
+    @FXML
+    void handleAgregarEmpleado(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarEmpleados.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

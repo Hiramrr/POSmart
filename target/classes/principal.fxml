@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -24,11 +23,6 @@
   </rowConstraints>
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#293540" height="805.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="226.0" />
-      <BorderPane prefHeight="200.0" prefWidth="173.0">
-         <bottom>
-            <Button id="CerrarSesion" mnemonicParsing="false" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesión" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <Pane id="Pane" prefHeight="77.0" prefWidth="225.0" styleClass="Pane" stylesheets="@styles_principal.css">
@@ -47,7 +41,12 @@
             <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="43.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Principal" />
             <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="48.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Producto" />
             <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Proveedor" />
-            <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Empleado" />
+            <Button id="buttonOpciones" fx:id="agregarEmpleado" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Empleado" onAction="#handleAgregarEmpleado"/>
+            <Pane prefHeight="536.0" prefWidth="225.0">
+               <children>
+                  <Button id="CerrarSesion" fx:id="cerrarSesion" layoutX="65.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesion" />
+               </children>
+            </Pane>
          </children>
       </VBox>
       <Pane prefHeight="200.0" prefWidth="932.0" GridPane.columnIndex="1">
@@ -64,6 +63,7 @@
                   <Text fx:id="hora" layoutX="107.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora" textAlignment="CENTER" wrappingWidth="101.81422103461318" />
                </children>
             </Pane>
+            <Pane fx:id="contenedor" layoutX="6.0" layoutY="82.0" prefHeight="706.0" prefWidth="914.0" />
          </children>
       </Pane>
    </children>
