@@ -12,12 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+
+    BaseDatos mBD = new BaseDatos();
 
     @FXML
     private TextField txtUser;
@@ -40,13 +43,16 @@ public class LoginController implements Initializable {
         String username = txtUser.getText();
         String password = txtPassword.getText();
 
-        System.out.println("Usuario: " + username);
-        System.out.println("Contraseña: " + password);
+        validarCredenciales(username, password);
+    }
+
+    @FXML
+    void handleOlvidarDatos(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/principal.fxml"));
-            GridPane pane = FXMLLoader.load(getClass().getResource("/principal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recuperarCuental.fxml"));
+            VBox pane = FXMLLoader.load(getClass().getResource("/recuperarCuenta.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Alta de Plantas");
+            stage.setTitle("Cambio de datos");
             stage.setScene(new Scene(pane));
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
             Stage currentStage = (Stage) txtUser.getScene().getWindow();
@@ -58,15 +64,35 @@ public class LoginController implements Initializable {
         }
     }
 
-    @FXML
-    void handleOlvidarDatos(ActionEvent event) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Olvidar Datos");
-        alert.setHeaderText(null);
-        alert.setContentText("Falta ver como agregar esto jaja");
-        alert.showAndWait();
+    public void validarCredenciales(String username, String password) {
+        Boolean exito = mBD.validarUsuario(username, password);
+
+        if (!exito) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Alerta de Login");
+            alert.setHeaderText(null);
+            alert.setContentText("usuario o contraseña, invalido");
+            alert.showAndWait();
+            return;
+        }
+
+        cargarVentantaPrincipal();
     }
 
-
-
+    public void cargarVentantaPrincipal(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/principal.fxml"));
+            GridPane pane = FXMLLoader.load(getClass().getResource("/principal.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("POSmart");
+            stage.setScene(new Scene(pane));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+            Stage currentStage = (Stage) txtUser.getScene().getWindow();
+            currentStage.close();
+            stage.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

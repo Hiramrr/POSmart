@@ -1,5 +1,6 @@
 package application;
 
+import BaseDatos.BaseDatos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 
 public class App extends Application {
+    BaseDatos bd = new BaseDatos();
+
     public static void main(String[] args) {
         launch(args);
     }
