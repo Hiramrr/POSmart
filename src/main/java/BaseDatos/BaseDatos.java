@@ -61,4 +61,18 @@ public class BaseDatos {
         }
         return false;
     }
+
+    public boolean agregarEmpleado(int id, String nombre, String contraseña, String nombre_completo, String rol, String Telefono, String ciudad, String direccion){
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("CALL agregar_usuario('" + id + "', '" + nombre + "', '" + contraseña + "', '" + nombre_completo + "', '" + rol + "', '" + Telefono + "', '" + ciudad + "', '" + direccion + "')");
+            if (resultado.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+
+    }
 }

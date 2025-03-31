@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Se implemento la funcion de mantener sesion abierta">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/AgregarEmpleadosController.java" afterDir="false" />
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Se me olvido subir la interfaz jaja">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base de datos/PoSmart.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Base de datos/PoSmart.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base de datos/Procesos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Base de datos/Procesos.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AgregarEmpleadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AgregarEmpleadosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/agregarEmpleados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/agregarEmpleados.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/LoginController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +73,13 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -117,6 +122,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="" />
@@ -129,7 +137,7 @@
       <workItem from="1743226403551" duration="73000" />
       <workItem from="1743226512486" duration="12015000" />
       <workItem from="1743289193296" duration="6528000" />
-      <workItem from="1743351573570" duration="9468000" />
+      <workItem from="1743351573570" duration="13436000" />
     </task>
     <task id="LOCAL-00001" summary="Iniciar Proyecto">
       <option name="closed" value="true" />
@@ -179,7 +187,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743365321026</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se implemento la interfaz para agregar usuario y se hicieron mejoras">
+      <option name="closed" value="true" />
+      <created>1743375630841</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743375630841</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se me olvido subir la interfaz jaja">
+      <option name="closed" value="true" />
+      <created>1743375651997</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1743375651997</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,7 +216,9 @@
     <MESSAGE value="Se agregaron procesos a la base de datos" />
     <MESSAGE value="Se agrega los datos de la base de datos" />
     <MESSAGE value="Se implemento la funcion de mantener sesion abierta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se implemento la funcion de mantener sesion abierta" />
+    <MESSAGE value="Se implemento la interfaz para agregar usuario y se hicieron mejoras" />
+    <MESSAGE value="Se me olvido subir la interfaz jaja" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se me olvido subir la interfaz jaja" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -9,11 +9,11 @@ WHERE Nombre_usuario = Nombre_User
 END //
 DELIMITER ;
 
-INSERT INTO Usuario (id_Usuario, Nombre_usuario, Contraseña, Nombre_completo, Rol)
-VALUES (1, "Miyu", "coco123", "Miyu Maldonado","Administrador");
+INSERT INTO Usuario (id_Usuario, Nombre_usuario, Contraseña, Nombre_completo, Rol, Telefono, Ciudad, Direccion)
+VALUES (1, "Miyu", "coco123", "Miyu Maldonado","Administrador", "2284246692", "Xalapa", "Los lagos #1");
 
 
-DELETE FROM Usuario WHERE id_Usuario = 1;
+DELETE FROM Usuario WHERE id_Usuario = 2;
 
 SELECT * FROM Usuario;
 
@@ -43,3 +43,21 @@ FROM Usuario
 WHERE Nombre_completo = Nombre_Com;
 END //
 DELIMITER ;
+
+
+/*Valida si el usuario existe por medio de su nombre completo*/
+DELIMITER //
+CREATE PROCEDURE agregar_usuario(p_id int, p_Nombre_usuario VARCHAR(20), p_Contraseña VARCHAR(50), p_Nombre_completo VARCHAR(50), p_Rol VARCHAR(20), p_Telefono VARCHAR(15), p_Ciudad VARCHAR(30), p_Direccion VARCHAR(100)
+)
+BEGIN
+    INSERT INTO Usuario (id_usuario, Nombre_usuario, Contraseña, Nombre_completo, Rol, Telefono, Ciudad, Direccion)
+    VALUES (p_id, p_Nombre_usuario, p_Contraseña, p_Nombre_completo, p_Rol, p_Telefono, p_Ciudad, p_Direccion);
+    
+    SELECT id_usuario
+    FROM Usuario
+    WHERE id_usuario = p_id;
+END //
+DELIMITER ;
+
+DROP PROCEDURE agregar_usuario;
+
