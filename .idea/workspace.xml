@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Por si acaso">
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="funciona por favor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base de datos/BaseDatos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Base de datos/BaseDatos.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,7 @@
       <workItem from="1745415031128" duration="1239000" />
       <workItem from="1745417437235" duration="29000" />
       <workItem from="1745590107707" duration="658000" />
-      <workItem from="1745591709717" duration="4176000" />
+      <workItem from="1745591709717" duration="5107000" />
     </task>
     <task id="LOCAL-00001" summary="Iniciar Proyecto">
       <option name="closed" value="true" />
@@ -226,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745598998087</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="funciona por favor">
+      <option name="closed" value="true" />
+      <created>1745600030448</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745600030448</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +250,8 @@
     <MESSAGE value="Se me olvido subir la interfaz jaja" />
     <MESSAGE value="Se implemento la funcionalidad de agregar empleados" />
     <MESSAGE value="Por si acaso" />
-    <option name="LAST_COMMIT_MESSAGE" value="Por si acaso" />
+    <MESSAGE value="funciona por favor" />
+    <option name="LAST_COMMIT_MESSAGE" value="funciona por favor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
