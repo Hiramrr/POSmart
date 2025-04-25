@@ -16,6 +16,10 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Dumping events for database 'PoSmart'
+--
+
+--
 -- Dumping routines for database 'PoSmart'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `agregar_usuario` */;
@@ -121,4 +125,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-31  7:05:09
+-- Dump completed on 2025-04-25  9:17:10

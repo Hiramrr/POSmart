@@ -73,6 +73,5 @@ public class BaseDatos {
             System.out.println(e);
         }
         return false;
-
     }
 }
