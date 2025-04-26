@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Se implemento la funcion de mantener sesion abierta">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/AgregarEmpleadosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/principal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/principal.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Se implemento la funcion de mantener sesion abierta" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +29,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Hiramrr/POSmart.git&quot;,
-    &quot;accountId&quot;: &quot;a9516f0e-173f-49a4-bdc9-bf756c1ad690&quot;
+    &quot;accountId&quot;: &quot;64a1b04a-fec8-449e-a45c-ea243891f765&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -54,29 +44,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.POSMart.executor": "Run",
-    "Application.POSmart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/hiram/IdeaProjects/POSmart/Base de datos",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.POSMart.executor&quot;: &quot;Run&quot;,
+    &quot;Application.POSmart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hiram/IdeaProjects/POSmart/Base de datos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Base de datos" />
@@ -91,7 +81,7 @@
     <configuration name="POSMart" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="application.App" />
       <module name="HolaJavaFx" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/Downloads/javafx-sdk-23.0.2/lib --add-modules javafx.controls,javafx.fxml " />
+      <option name="VM_PARAMETERS" value="--module-path C:\javafx-sdk-23.0.2\lib --add-modules javafx.controls,javafx.fxml " />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -111,8 +101,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -130,6 +120,8 @@
       <workItem from="1743226512486" duration="12015000" />
       <workItem from="1743289193296" duration="6528000" />
       <workItem from="1743351573570" duration="9468000" />
+      <workItem from="1744589771927" duration="583000" />
+      <workItem from="1745701194286" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="Iniciar Proyecto">
       <option name="closed" value="true" />
