@@ -40,7 +40,7 @@
             </Pane>
             <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="43.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Principal" />
             <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="48.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Producto" />
-            <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Proveedor" />
+            <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Proveedor" onAction="#handleAgregarProovedor" />
             <Button id="buttonOpciones" fx:id="agregarEmpleado" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Empleado" onAction="#handleAgregarEmpleado"/>
             <Pane prefHeight="536.0" prefWidth="225.0">
                <children>

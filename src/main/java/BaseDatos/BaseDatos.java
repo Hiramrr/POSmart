@@ -74,4 +74,23 @@ public class BaseDatos {
         }
         return false;
     }
+
+
+    public boolean agregarProveedor(int id, String nombre, String telefono, String correo, String direccion) {
+        try {
+            consulta = con.createStatement();
+            String query = "CALL agregar_proveedor('" + id + "', '" + nombre + "', '" + telefono + "', '" + correo + "', '" + direccion + "')";
+            resultado = consulta.executeQuery(query);
+            if (resultado.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+
+
+
 }

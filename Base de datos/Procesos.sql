@@ -61,3 +61,26 @@ DELIMITER ;
 
 DROP PROCEDURE agregar_usuario;
 
+/*Agregar Proveedor*/
+DELIMITER //
+
+CREATE PROCEDURE agregar_proveedor(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_telefono VARCHAR(30),
+    IN p_correo VARCHAR(70),
+    IN p_direccion VARCHAR(255)
+)
+BEGIN
+    -- Insert a new provider into the Proveedor table
+    INSERT INTO Proveedor (id_Proveedor, Nombre, Telefono, Correo, Direccion)
+    VALUES (p_id, p_nombre, p_telefono, p_correo, p_direccion);
+
+    -- Return the ID of the newly added provider
+    SELECT id_Proveedor AS Proveedor_Agregado
+    FROM Proveedor
+    WHERE id_Proveedor = p_id;
+END //
+
+DELIMITER ;
+

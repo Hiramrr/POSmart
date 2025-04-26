@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="funciona por favor">
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Por si acaso">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/principal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -46,34 +53,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.POSMart.executor&quot;: &quot;Run&quot;,
-    &quot;Application.POSmart.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/hiram/IdeaProjects/POSmart/Base de datos&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.POSMart.executor": "Run",
+    "Application.POSmart.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/alfre/OneDrive/Escritorio/inventario-plantas",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Base de datos" />
@@ -88,7 +95,7 @@
     <configuration name="POSMart" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="application.App" />
       <module name="HolaJavaFx" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/Downloads/javafx-sdk-23.0.2/lib --add-modules javafx.controls,javafx.fxml " />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\alfre\Downloads\openjfx-23.0.2_windows-x64_bin-sdk\javafx-sdk-23.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -135,7 +142,7 @@
       <workItem from="1745415031128" duration="1239000" />
       <workItem from="1745417437235" duration="29000" />
       <workItem from="1745590107707" duration="658000" />
-      <workItem from="1745591709717" duration="5107000" />
+      <workItem from="1745591709717" duration="4176000" />
     </task>
     <task id="LOCAL-00001" summary="Iniciar Proyecto">
       <option name="closed" value="true" />
@@ -225,15 +232,7 @@
       <option name="project" value="LOCAL" />
       <updated>1745598998087</updated>
     </task>
-    <task id="LOCAL-00012" summary="funciona por favor">
-      <option name="closed" value="true" />
-      <created>1745600030448</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1745600030448</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,8 +249,7 @@
     <MESSAGE value="Se me olvido subir la interfaz jaja" />
     <MESSAGE value="Se implemento la funcionalidad de agregar empleados" />
     <MESSAGE value="Por si acaso" />
-    <MESSAGE value="funciona por favor" />
-    <option name="LAST_COMMIT_MESSAGE" value="funciona por favor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Por si acaso" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
