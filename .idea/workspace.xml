@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Pantalla y funcion agregar proveedor">
+    <list default="true" id="5d1893ad-89f9-4a8a-bc66-1ff6fa248d4f" name="Changes" comment="Pantalla y funcion agregar, editar y eliminar proveedor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Base de datos/Procesos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Base de datos/Procesos.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BaseDatos/BaseDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/principal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles_principal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles_principal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BaseDatos/BaseDatos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/PrincipalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/principal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles_principal.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/styles_principal.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745704391983</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Pantalla y funcion agregar, editar y eliminar proveedor">
+      <option name="closed" value="true" />
+      <created>1745715909212</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745715909212</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +260,8 @@
     <MESSAGE value="Se implemento la funcionalidad de agregar empleados" />
     <MESSAGE value="Por si acaso" />
     <MESSAGE value="Pantalla y funcion agregar proveedor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pantalla y funcion agregar proveedor" />
+    <MESSAGE value="Pantalla y funcion agregar, editar y eliminar proveedor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pantalla y funcion agregar, editar y eliminar proveedor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
