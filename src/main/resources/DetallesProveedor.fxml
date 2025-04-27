@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="350.0" prefWidth="350.0" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetallesProveedorController">
+   <children>
+      <Label text="Detalles Proveedor">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="idLabel" text="ID: " textFill="#1122dc">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="nombreLabel" text="Nombre: " textFill="#1122dc">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="telefonoLabel" text="Teléfono: " textFill="#1122dc">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="correoLabel" text="Correo: " textFill="#1122dc">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="direccionLabel" text="Dirección: " textFill="#1122dc">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+   </children>
+</VBox>

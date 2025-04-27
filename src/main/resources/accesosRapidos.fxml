@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccesosRapidosController">
+   <children>
+      <Button fx:id="buttonProveedores" layoutX="82.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="116.0" prefWidth="169.0" text="Proveedores" />
+   </children>
+</AnchorPane>
