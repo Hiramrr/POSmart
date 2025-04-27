@@ -114,4 +114,17 @@ public class PrincipalController {
         }
     }
 
+    @FXML
+    void handlePrincipal(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/accesosRapidos.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

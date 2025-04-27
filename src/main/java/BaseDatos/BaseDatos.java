@@ -1,5 +1,6 @@
 package BaseDatos;
 
+import controllers.Proveedor;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
@@ -7,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BaseDatos {
     private static Connection con;
@@ -89,6 +91,56 @@ public class BaseDatos {
         }
         return false;
     }
+
+    public List<Proveedor> obtenerProveedores() {
+        List<Proveedor> proveedores = new ArrayList<>();
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("SELECT * FROM Proveedor");
+            while (resultado.next()) {
+                Proveedor proveedor = new Proveedor(
+                        resultado.getInt("id_Proveedor"),
+                        resultado.getString("Nombre"),
+                        resultado.getString("Telefono"),
+                        resultado.getString("Correo"),
+                        resultado.getString("Direccion")
+                );
+                proveedores.add(proveedor);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return proveedores;
+    }
+
+
+    public boolean modificarProveedor(int id, String nombre, String telefono, String correo, String direccion) {
+        try {
+            consulta = con.createStatement();
+            String query = "CALL modificar_proveedor('" + id + "', '" + nombre + "', '" + telefono + "', '" + correo + "', '" + direccion + "')";
+            int rowsAffected = consulta.executeUpdate(query);
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean eliminarProveedor(int id) {
+        try {
+            consulta = con.createStatement();
+            String query = "CALL eliminar_proveedor('" + id + "')";
+            int rowsAffected = consulta.executeUpdate(query);
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+
+
+
 
 
 

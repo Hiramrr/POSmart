@@ -84,3 +84,38 @@ END //
 
 DELIMITER ;
 
+/*Modificar Proveedor*/
+
+DELIMITER $$
+
+CREATE PROCEDURE modificar_proveedor(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_telefono VARCHAR(50),
+    IN p_correo VARCHAR(255),
+    IN p_direccion VARCHAR(255)
+)
+BEGIN
+    UPDATE Proveedor
+    SET Nombre = p_nombre,
+        Telefono = p_telefono,
+        Correo = p_correo,
+        Direccion = p_direccion
+    WHERE id_Proveedor = p_id;
+END$$
+
+DELIMITER ;
+
+/*Eliminar Proveedor*/
+DELIMITER $$
+
+CREATE PROCEDURE eliminar_proveedor(IN id INT)
+BEGIN
+    DELETE FROM Proveedor WHERE id_Proveedor = id;
+END$$
+
+DELIMITER ;
+
+
+
+
