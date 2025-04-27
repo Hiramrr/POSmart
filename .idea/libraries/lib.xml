@@ -2,6 +2,8 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$USER_HOME$/Downloads/javafx-sdk-23.0.2/lib" />
+      <root url="file://$USER_HOME$/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" />
+      <root url="file://$USER_HOME$/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
@@ -9,5 +11,7 @@
     </NATIVE>
     <SOURCES />
     <jarDirectory url="file://$USER_HOME$/Downloads/javafx-sdk-23.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" recursive="false" />
   </library>
 </component>
