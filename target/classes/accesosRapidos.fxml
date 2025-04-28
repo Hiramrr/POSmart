@@ -2,9 +2,66 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccesosRapidosController">
+<AnchorPane id="fondo" fx:id="rootPane" prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccesosRapidosController">
    <children>
-      <Button fx:id="buttonProveedores" layoutX="82.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="116.0" prefWidth="169.0" text="Proveedores" />
+      <HBox layoutX="104.0" layoutY="70.0" prefHeight="542.0" prefWidth="759.0">
+         <children>
+            <Pane prefHeight="542.0" prefWidth="363.0">
+               <children>
+                  <VBox layoutX="-3.0" layoutY="-2.0" prefHeight="548.0" prefWidth="312.0">
+                     <children>
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Empleado" fx:id="buttonProveedores" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Empleado" stylesheets="@styles_accesorapido.css" text="Empleado" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="62.0" prefWidth="312.0" />
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Proveedor" fx:id="buttonProveedores1" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Proveedor" stylesheets="@styles_accesorapido.css" text="Proveedores" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="62.0" prefWidth="312.0" />
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Historial" fx:id="buttonProveedores11" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Historial" stylesheets="@styles_accesorapido.css" text="Historial" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane prefHeight="542.0" prefWidth="145.0" />
+            <Pane prefHeight="542.0" prefWidth="363.0">
+               <children>
+                  <VBox prefHeight="548.0" prefWidth="312.0">
+                     <children>
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Productos" fx:id="buttonProveedores1" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Productos" stylesheets="@styles_accesorapido.css" text="Productos" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="62.0" prefWidth="312.0" />
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Reportes" fx:id="buttonProveedores11" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Reportes" stylesheets="@styles_accesorapido.css" text="Reportes" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="62.0" prefWidth="312.0" />
+                        <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
+                           <children>
+                              <Button id="Categorias" fx:id="buttonProveedores111" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Categorias" stylesheets="@styles_accesorapido.css" text="Categorias" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
