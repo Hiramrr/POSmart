@@ -1,6 +1,9 @@
 package BaseDatos;
 
+import controllers.Producto;
 import controllers.Proveedor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
@@ -138,9 +141,77 @@ public class BaseDatos {
         return false;
     }
 
+    public boolean agregarProducto(int id, String nombre, String descripcion, int cantidad, double precio, String categoria, String ubicacion) {
+        try {
+            consulta = con.createStatement();
+            String query = "CALL agregar_producto('" + id + "', '" + nombre + "', '" + descripcion + "', '" + cantidad + "', '" + precio + "', '" + categoria + "', '" + ubicacion + "')";
 
+            boolean result = consulta.execute(query);
 
+            return true;
+        } catch (Exception e) {
+            System.out.println("error base");
+            e.printStackTrace();
+        }
+        return false;
+    }
 
+    /** public ObservableList<Producto> cargarProductos() {
+        System.out.println("cargar productos");
+        ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT id_producto, nombre, descripcion, cantidad, precio FROM productos";  // Ajusta según tu tabla y columnas
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println("cargar productos");
+                Producto producto = new Producto(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("descripcion"),
+                        rs.getInt("cantidad"),
+                        rs.getDouble("precio"),
+                        rs.getString("categoria"),
+                        rs.getString("ubicacion")
+                );
+                listaProductos.add(producto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaProductos;
+    }*/
+
+//////////////////////////////////////////////////////////////////
+    public ObservableList<Producto> obtenerProductos() {
+        System.out.println("entra a obtener productos");
+        ObservableList<Producto> productos = FXCollections.observableArrayList();
+        String query = "SELECT * FROM productosPD"; // Cambia "productos" si tu tabla tiene otro nombre
+
+        try (PreparedStatement stmt = con.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Producto producto = new Producto(
+                        rs.getInt("id_producto"),          // Nombre de las columnas en tu tabla
+                        rs.getString("nombre"),
+                        rs.getString("descripcion"),
+                        rs.getInt("cantidad"),
+                        rs.getDouble("precio"),
+                        rs.getString("categoria"),
+                        rs.getString("ubicacion")
+                );
+                productos.add(producto);
+            }
+            System.out.println("termina de hacer en la obtener productos");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("obtiene los productos con exito");
+        return productos;
+    }
 
 
 

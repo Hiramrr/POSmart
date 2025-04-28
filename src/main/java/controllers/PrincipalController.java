@@ -134,5 +134,19 @@ public class PrincipalController {
         }
     }
 
+    @FXML
+    void handleAgregarProductos(ActionEvent event) {
+        System.out.println("Clic en 'Agregar Producto'");
+        try {
+            System.out.println("entra try'");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Productos.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        } catch (Exception e) {
+            System.out.println("entra a catch");
+            e.printStackTrace();
+        }
+    }
 
 }

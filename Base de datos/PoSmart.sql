@@ -73,3 +73,12 @@ CREATE TABLE Detalle_compra (
 );
 
 
+CREATE TABLE productos (
+                           id_producto INT PRIMARY KEY,
+                           nombre VARCHAR(255) NOT NULL,
+                           descripcion TEXT,
+                           cantidad INT NOT NULL,
+                           precio DOUBLE NOT NULL,
+                           ubicacion VARCHAR(255),
+                           categoria VARCHAR(255)
+);

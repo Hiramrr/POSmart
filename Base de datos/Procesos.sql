@@ -117,5 +117,24 @@ END$$
 DELIMITER ;
 
 
+DELIMITER //
+
+CREATE PROCEDURE agregar_producto(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_descripcion TEXT,
+    IN p_cantidad INT,
+    IN p_precio DOUBLE,
+    IN p_ubicacion VARCHAR(255),
+    IN p_categoria VARCHAR(255)
+)
+BEGIN
+    INSERT INTO productos (id_producto, nombre, descripcion, cantidad, precio, ubicacion, categoria)
+    VALUES (p_id, p_nombre, p_descripcion, p_cantidad, p_precio, p_categoria, p_ubicacion);
+END //
+
+DELIMITER ;
+
+
 
 
