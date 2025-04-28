@@ -87,6 +87,11 @@ public class LoginController implements Initializable {
         if(recordarDatos.isSelected()){
             guardarDatos();
         }
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Bienvenido");
+        alert.setHeaderText(null);
+        alert.setContentText("Bienvenido de vuelta " + txtUser.getText() + "!" );
+        alert.showAndWait();
         cargarVentantaPrincipal();
     }
 

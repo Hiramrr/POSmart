@@ -16,7 +16,7 @@
       <Pane prefHeight="706.0" prefWidth="914.0">
          <children>
             <Circle layoutX="765.0" layoutY="304.0" radius="101.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button layoutX="688.0" layoutY="613.0" mnemonicParsing="false" text="Agregar empleado">
+            <Button layoutX="688.0" layoutY="613.0" mnemonicParsing="false" text="Agregar empleado" onAction="#handleAgregarEmpleado">
                <font>
                   <Font size="17.0" />
                </font>
@@ -36,19 +36,19 @@
             <VBox layoutX="260.0" layoutY="94.0" prefHeight="497.0" prefWidth="359.0">
                <children>
                   <Pane prefHeight="5.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="id" />
+                  <TextField fx:id="id" prefHeight="33.0" prefWidth="359.0" promptText="id" />
                   <Pane prefHeight="23.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Nombre" />
+                  <TextField fx:id="nombre" prefHeight="33.0" prefWidth="359.0" promptText="Nombre" />
                   <Pane prefHeight="29.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Contraseña" />
+                  <TextField fx:id="contraseña" prefHeight="33.0" prefWidth="359.0" promptText="Contraseña" />
                   <Pane prefHeight="31.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Nombre Completo" />
+                  <TextField fx:id="nombre_completo" prefHeight="33.0" prefWidth="359.0" promptText="Nombre Completo" />
                   <Pane prefHeight="34.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Teléfono" />
+                  <TextField fx:id="telefono" prefHeight="33.0" prefWidth="359.0" promptText="Teléfono" />
                   <Pane prefHeight="32.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Ciudad" />
+                  <TextField fx:id="ciudad" prefHeight="33.0" prefWidth="359.0" promptText="Ciudad" />
                   <Pane prefHeight="31.0" prefWidth="359.0" />
-                  <TextField prefHeight="33.0" prefWidth="359.0" promptText="Dirección" />
+                  <TextField fx:id="direccion" prefHeight="33.0" prefWidth="359.0" promptText="Dirección" />
                   <Pane prefHeight="29.0" prefWidth="359.0" />
                   <ComboBox fx:id="rolOpciones" prefHeight="33.0" prefWidth="359.0" promptText="Rol" visibleRowCount="2" />
                </children>

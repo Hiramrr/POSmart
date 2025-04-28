@@ -41,6 +41,14 @@ public class PrincipalController {
     @FXML
     public void initialize() {
         obtenerDia();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/accesosRapidos.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
    public void obtenerDia(){
@@ -101,5 +109,30 @@ public class PrincipalController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void handleAgregarProovedor(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarProveedores.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handlePrincipal(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/accesosRapidos.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
