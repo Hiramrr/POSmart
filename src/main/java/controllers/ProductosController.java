@@ -4,6 +4,7 @@ import BaseDatos.BaseDatos;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -13,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -171,6 +173,34 @@ public class ProductosController {
 
     }
 
+
+    // editar producto---------------------------------------------------------------------
+    @FXML
+    private void handleEditarProducto() {
+        Producto productoSeleccionado = TProductos.getSelectionModel().getSelectedItem();
+
+        if (productoSeleccionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editarProducto.fxml"));
+                Parent root = loader.load();
+
+                editarProductoController editarController = loader.getController();
+                editarController.setProducto(productoSeleccionado);
+
+                Stage stage = new Stage();
+                stage.setTitle("Editar Producto");
+                stage.setScene(new Scene(root));
+                stage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana anterior
+                stage.showAndWait(); // Espera a que cierres la edición
+
+                actualizarTabla(); // Actualiza la tabla después de editar
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Mostrar alerta: No se ha seleccionado un producto
+        }
+    }
 
 }
 

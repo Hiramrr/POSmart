@@ -213,7 +213,27 @@ public class BaseDatos {
         return productos;
     }
 
+    public boolean actualizarProductoEnBaseDeDatos(Producto producto) {
+        String query = "UPDATE productosPD SET nombre = ?, descripcion = ?, cantidad = ?, precio = ?, categoria = ?, ubicacion = ? WHERE id_producto = ?";
 
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            // Establecer los parámetros en la consulta
+            stmt.setString(1, producto.getNombre());
+            stmt.setString(2, producto.getDescripcion());
+            stmt.setInt(3, producto.getCantidad());
+            stmt.setDouble(4, producto.getPrecio());
+            stmt.setString(5, producto.getCategoria());
+            stmt.setString(6, producto.getUbicacion());
+            stmt.setInt(7, producto.getId());
+
+            // Ejecutar la actualización
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;  // Si se actualizó al menos un registro, retorna true
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 }

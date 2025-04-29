@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import BaseDatos.BaseDatos;
+import javafx.stage.Stage;
 
 public class AgregarProductosController {
 
@@ -111,6 +112,10 @@ public class AgregarProductosController {
                 if (productosController != null) {
                     System.out.println("si actualiza la tabla");
                     productosController.actualizarTabla(); // <<--- actualizamos la tabla de la otra pantalla
+                    // Código para cerrar la ventana actual
+                    Stage stage = (Stage) GuardarP.getScene().getWindow();
+                    stage.close();
+
                 }
                  // Llamamos a actualizar la tabla
             }
@@ -145,6 +150,8 @@ public class AgregarProductosController {
     public void setProductosController(ProductosController productosController) {
         this.productosController = productosController;
     }
+
+
 
 
 }
