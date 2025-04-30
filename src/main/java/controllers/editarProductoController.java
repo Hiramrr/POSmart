@@ -21,7 +21,7 @@ public class editarProductoController {
     @FXML private TextField catEditP;
     @FXML private TextField ubiEditP;
     @FXML private Button GuardarEdicionP;
-    @FXML private Button CancelarEdicionP;
+    @FXML private Button CancelEdicionP;
 
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
@@ -49,8 +49,6 @@ public class editarProductoController {
         producto.setCategoria(catEditP.getText());
         producto.setUbicacion(ubiEditP.getText());
 
-        // Aquí llamas al método que actualiza el producto en la base de datos
-        // Por ejemplo:
         baseController.actualizarProductoEnBaseDeDatos(producto);
 
         // Cerrar la ventana de edición
@@ -60,17 +58,43 @@ public class editarProductoController {
 
     @FXML
     private void guardarCambios(ActionEvent event) {
-        System.out.println("Obtener los valores editados");
+        // Obtener valores de los campos
         String nombre = nomEditP.getText();
         String descripcion = descEditP.getText();
-        double precio = Double.parseDouble(precioEditP.getText());
-        int cantidad = Integer.parseInt(cantEditP.getText());
+        String precioStr = precioEditP.getText();
+        String cantidadStr = cantEditP.getText();
         String categoria = catEditP.getText();
         String ubicacion = ubiEditP.getText();
 
-        System.out.println("Crear el producto actualizado");
+        // Validar campos vacíos
+        if (nombre.isEmpty() || descripcion.isEmpty() || precioStr.isEmpty() ||
+                cantidadStr.isEmpty() || categoria.isEmpty() || ubicacion.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, completa todos los campos.");
+            return;
+        }
+
+        double precio;
+        int cantidad;
+
+        // Validar formato de precio
+        try {
+            precio = Double.parseDouble(precioStr);
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Formato inválido", "El campo 'Precio' debe ser un número decimal válido.");
+            return;
+        }
+
+        // Validar formato de cantidad
+        try {
+            cantidad = Integer.parseInt(cantidadStr);
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Formato inválido", "El campo 'Cantidad' debe ser un número entero válido.");
+            return;
+        }
+
+        // Crear el producto actualizado
         Producto productoActualizado = new Producto(
-                producto.getId(),  // ID del producto original (no se edita)
+                producto.getId(),
                 nombre,
                 descripcion,
                 cantidad,
@@ -79,18 +103,29 @@ public class editarProductoController {
                 ubicacion
         );
 
-        System.out.println("Actualizar en la base de datos");
+        // Actualizar en la base de datos
         if (baseController.actualizarProductoEnBaseDeDatos(productoActualizado)) {
-            System.out.println("Producto actualizado con éxito.");
-            // Cerrar la ventana de edición (opcional)
+            mostrarAlerta("Éxito", "Producto actualizado con éxito.");
             Stage stage = (Stage) GuardarEdicionP.getScene().getWindow();
             stage.close();
         } else {
-            System.out.println("Hubo un error al actualizar el producto.");
+            mostrarAlerta("Error", "Hubo un error al actualizar el producto.");
         }
     }
 
 
+    public void handleCancelEdicionP() {
+        mostrarAlerta("Cancelar","Cancelando edicion del producto");
+        Stage stage = (Stage) CancelEdicionP.getScene().getWindow();
+        stage.close();
+    }
 
+    private void mostrarAlerta(String titulo, String mensaje) {
+        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 
 }

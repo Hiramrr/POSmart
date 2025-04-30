@@ -134,6 +134,8 @@ public class AgregarProductosController {
     private void handleCancelarProducto() {
         System.out.println("Cancelando...");
         limpiarCampos(); // Limpiar los campos
+        Stage stage = (Stage) CancelarP.getScene().getWindow();
+        stage.close();
     }
 
 

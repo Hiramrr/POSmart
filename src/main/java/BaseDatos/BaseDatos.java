@@ -156,34 +156,6 @@ public class BaseDatos {
         return false;
     }
 
-    /** public ObservableList<Producto> cargarProductos() {
-        System.out.println("cargar productos");
-        ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
-        try {
-            String sql = "SELECT id_producto, nombre, descripcion, cantidad, precio FROM productos";  // Ajusta según tu tabla y columnas
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                System.out.println("cargar productos");
-                Producto producto = new Producto(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("descripcion"),
-                        rs.getInt("cantidad"),
-                        rs.getDouble("precio"),
-                        rs.getString("categoria"),
-                        rs.getString("ubicacion")
-                );
-                listaProductos.add(producto);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listaProductos;
-    }*/
-
-//////////////////////////////////////////////////////////////////
     public ObservableList<Producto> obtenerProductos() {
         System.out.println("entra a obtener productos");
         ObservableList<Producto> productos = FXCollections.observableArrayList();
@@ -234,6 +206,19 @@ public class BaseDatos {
         }
         return false;
     }
+    //------Eliminar producto------------------------------------------
+    public boolean eliminarProductoDeBaseDeDatos(int idProducto) {
+        String query = "DELETE FROM productosPD WHERE id_producto = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, idProducto);
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
 }

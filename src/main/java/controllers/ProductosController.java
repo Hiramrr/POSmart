@@ -6,9 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -79,7 +77,6 @@ public class ProductosController {
         PrecioCol.setCellValueFactory(new PropertyValueFactory<>("Precio"));
         System.out.println("si paso");
 
-        ///////////////////////////////////////
         this.baseDatos = new BaseDatos();
         ObservableList<Producto> productos = baseDatos.obtenerProductos();
         TProductos.setItems(productos);
@@ -134,7 +131,7 @@ public class ProductosController {
             e.printStackTrace();
         }
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void actualizarTabla() {
         System.out.println("entra a actualizar tabla");
         if (baseDatos == null) {
@@ -150,13 +147,45 @@ public class ProductosController {
 
     @FXML
     private void eliminarProducto(ActionEvent event) {
-        System.out.println("Eliminar Producto");
+        Producto productoSeleccionado = TProductos.getSelectionModel().getSelectedItem();
+
+        if (productoSeleccionado == null) {
+            mostrarAlerta("Sin selección", "Por favor, selecciona un producto para eliminar.");
+            return;
+        }
+
+        String mensaje = "¿Estás seguro de que deseas eliminar el siguiente producto?\n\n" +
+                "ID: " + productoSeleccionado.getId() + "\n" +
+                "Nombre: " + productoSeleccionado.getNombre() + "\n" +
+                "Descripción: " + productoSeleccionado.getDescripcion() + "\n" +
+                "Cantidad: " + productoSeleccionado.getCantidad() + "\n" +
+                "Precio: " + productoSeleccionado.getPrecio();
+
+        Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacion.setTitle("Confirmar Eliminación");
+        alertaConfirmacion.setHeaderText("Confirmación requerida");
+        alertaConfirmacion.setContentText(mensaje);
+
+        // Esperar respuesta del usuario
+        alertaConfirmacion.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == ButtonType.OK) {
+                if (baseDatos.eliminarProductoDeBaseDeDatos(productoSeleccionado.getId())) {
+                    mostrarAlerta("Éxito", "Producto eliminado correctamente.");
+                    actualizarTabla(); // Refrescar la tabla
+                } else {
+                    mostrarAlerta("Error", "No se pudo eliminar el producto.");
+                }
+            }
+        });
+    }
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
-    @FXML
-    private void editarProducto(ActionEvent event) {
-        System.out.println("Editar Producto");
-    }
 
     @FXML
     private void consultarProducto(ActionEvent event) {

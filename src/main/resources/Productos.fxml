@@ -68,7 +68,7 @@
                             </columns>
                         </TableView>
                         <Button id="OpAgregar" layoutX="433.0" layoutY="241.0" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar" />
-                        <Button id="OpEliminar" layoutX="433.0" layoutY="271.0" mnemonicParsing="false" text="Eliminar" />
+                        <Button fx:id="OpEliminar" id="OpEliminar" layoutX="433.0" layoutY="271.0" mnemonicParsing="false" text="Eliminar" onAction="#eliminarProducto"/>
                         <Button fx:id="OpEditar" id="OpEditar" layoutX="438.0" layoutY="302.0" mnemonicParsing="false" text="Editar" onAction="#handleEditarProducto" />
                         <Button id="OpListar" layoutX="440.0" layoutY="340.0" mnemonicParsing="false" text="Listar" />
                         <Button id="OpConsultar" layoutX="403.0" layoutY="373.0" mnemonicParsing="false" text="Consultar Producto" />

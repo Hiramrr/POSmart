@@ -8,18 +8,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.editarProductoController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #;">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
             <Pane layoutX="82.0" layoutY="14.0" prefHeight="54.0" prefWidth="445.0" style="-fx-background-color: #f2b85b;">
                <children>
                   <Text fill="#100f0f" layoutX="191.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Productos" textAlignment="CENTER" />
                </children>
             </Pane>
-            <Button fx:id="GuardarEdicionP" layoutX="324.0" layoutY="304.0" mnemonicParsing="false" style="-fx-background-color: #f2b85b;" text="Guardar Cambios" onAction="#guardarCambios"/>
-            <Button fx:id="CancelEdicionP" layoutX="192.0" layoutY="304.0" mnemonicParsing="false" style="-fx-background-color: #f2b85b;" text="Cancelar" textAlignment="CENTER" />
+            <Button fx:id="GuardarEdicionP" layoutX="324.0" layoutY="304.0" mnemonicParsing="false" onAction="#guardarCambios" style="-fx-background-color: #f2b85b;" text="Guardar Cambios" />
+            <Button fx:id="CancelEdicionP" layoutX="192.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleCancelEdicionP" style="-fx-background-color: #f2b85b;" text="Cancelar" textAlignment="CENTER" />
             <Label layoutX="54.0" layoutY="89.0" text="ID" />
             <Label layoutX="38.0" layoutY="128.0" text="Nombre" />
             <Label layoutX="29.0" layoutY="180.0" text="Descripcion" />
@@ -32,8 +31,8 @@
             <TextField fx:id="nomEditP" layoutX="105.0" layoutY="124.0" />
             <TextField fx:id="cantEditP" layoutX="378.0" layoutY="85.0" />
             <TextField fx:id="precioEditP" layoutX="378.0" layoutY="124.0" />
-            <TextField fx:id="catEditP" layoutX="378.0" layoutY="164.0" />
-            <TextField fx:id="ubiEditP" layoutX="378.0" layoutY="204.0" />
+            <TextField fx:id="catEditP" layoutX="378.0" layoutY="204.0" />
+            <TextField fx:id="ubiEditP" layoutX="378.0" layoutY="164.0" />
          </children>
       </AnchorPane>
    </children>
