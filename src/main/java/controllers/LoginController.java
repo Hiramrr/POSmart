@@ -45,6 +45,13 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(!mBD.seConecto()){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Alerta de base de datos");
+            alert.setHeaderText(null);
+            alert.setContentText("No se encontro la conexion con la base de datos, contacta a un administrador");
+            alert.showAndWait();
+        }
     }
 
     @FXML

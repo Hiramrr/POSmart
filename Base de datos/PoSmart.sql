@@ -82,3 +82,5 @@ CREATE TABLE productos (
                            ubicacion VARCHAR(255),
                            categoria VARCHAR(255)
 );
+
+SELECT * from Usuario;

@@ -28,6 +28,17 @@ public class BaseDatos {
         }
     }
 
+    public boolean seConecto() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/POSMart", "Hiram", "coco123");
+            System.out.println("Si ves esto es que se conecto la base");
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public boolean validarUsuario(String username, String password){
         try {
             consulta = con.createStatement();
