@@ -133,8 +133,100 @@ BEGIN
     VALUES (p_id, p_nombre, p_descripcion, p_cantidad, p_precio, p_categoria, p_ubicacion);
 END //
 
+
 DELIMITER ;
 
+/*Agregar Ubicacion*/
+DELIMITER //
 
+CREATE PROCEDURE agregar_Ubicacion(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    INSERT INTO Ubicacion (id_Ubicacion, Nombre, Descripcion)
+    VALUES (p_id, p_nombre, p_descripcion);
 
+    SELECT id_Ubicacion AS Ubicacion_agregada
+    FROM Ubicacion
+    WHERE id_Ubicacion = p_id;
+END //
+
+DELIMITER ;
+
+/*Modificar Ubicacion*/
+
+DELIMITER $$
+
+CREATE PROCEDURE modificar_Ubicacion(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    UPDATE Ubicacion
+    SET Nombre = p_nombre,
+        Descripcion = p_descripcion
+    WHERE id_Ubicacion = p_id;
+END$$
+
+DELIMITER ;
+
+/*Eliminar Ubicacion*/
+DELIMITER $$
+
+CREATE PROCEDURE eliminar_Ubicacion(IN id INT)
+BEGIN
+    DELETE FROM Ubicacion WHERE id_Ubicacion = id;
+END$$
+
+DELIMITER ;
+
+/*Agregar Categoria*/
+DELIMITER //
+
+CREATE PROCEDURE agregar_Categoria(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    INSERT INTO Categoria (id_Categoria, Nombre, Descripcion)
+    VALUES (p_id, p_nombre, p_descripcion);
+
+    SELECT id_Categoria AS Categoria_agregada
+    FROM Categoria
+    WHERE id_Categoria = p_id;
+END //
+
+DELIMITER ;
+
+/*Modificar Categoria*/
+
+DELIMITER $$
+
+CREATE PROCEDURE modificar_Categoria(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    UPDATE Categoria
+    SET Nombre = p_nombre,
+        Descripcion = p_descripcion
+    WHERE id_Categoria = p_id;
+END$$
+
+DELIMITER ;
+
+/*Eliminar Categoria*/
+DELIMITER $$
+
+CREATE PROCEDURE eliminar_Categoria(IN id INT)
+BEGIN
+    DELETE FROM Categoria WHERE id_Categoria = id;
+END$$
+
+DELIMITER ;
 

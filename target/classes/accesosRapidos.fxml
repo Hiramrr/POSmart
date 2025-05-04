@@ -48,13 +48,13 @@
                         <Pane prefHeight="62.0" prefWidth="312.0" />
                         <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
                            <children>
-                              <Button id="Reportes" fx:id="buttonProveedores11" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Reportes" stylesheets="@styles_accesorapido.css" text="Reportes" />
+                              <Button id="Reportes" fx:id="buttonUbicaciones" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonUbicaciones" prefHeight="143.0" prefWidth="143.0" styleClass="Reportes" stylesheets="@styles_accesorapido.css" text="Ubicaciones" />
                            </children>
                         </Pane>
                         <Pane prefHeight="62.0" prefWidth="312.0" />
                         <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
                            <children>
-                              <Button id="Categorias" fx:id="buttonProveedores111" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Categorias" stylesheets="@styles_accesorapido.css" text="Categorias" />
+                              <Button id="Categorias" fx:id="buttonCategorias" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="143.0" prefWidth="143.0" styleClass="Categorias" stylesheets="@styles_accesorapido.css" text="Categorias" />
                            </children>
                         </Pane>
                      </children>
