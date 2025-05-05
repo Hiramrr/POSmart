@@ -42,7 +42,7 @@
                      <children>
                         <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
                            <children>
-                              <Button id="Productos" fx:id="buttonProveedores1" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Productos" stylesheets="@styles_accesorapido.css" text="Productos" />
+                              <Button id="Productos" fx:id="buttonProductos" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleAgregarProductos" prefHeight="143.0" prefWidth="143.0" styleClass="Productos" stylesheets="@styles_accesorapido.css" text="Productos" />
                            </children>
                         </Pane>
                         <Pane prefHeight="62.0" prefWidth="312.0" />
