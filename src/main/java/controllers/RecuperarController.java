@@ -32,6 +32,8 @@ public class RecuperarController {
     @FXML
     private Button cambiar;
 
+    AlertPOSmart alerta;
+
     @FXML
     void handleCambiar(ActionEvent event){
         if(seLleno()) {
@@ -72,11 +74,7 @@ public class RecuperarController {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Se ha cambiado la contraseña");
-        alert.setHeaderText(null);
-        alert.setContentText("Se cambio la contraseña con exito!");
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, "Se ha cambiado la contraseña", "Se cambio la contraseña con exito!");
 
         regresarLogin();
         ((Stage) cambiar.getScene().getWindow()).close();
@@ -103,11 +101,7 @@ public class RecuperarController {
     }
 
     public void error(String titulo, String mensaje){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+       alerta = new AlertPOSmart(Alert.AlertType.ERROR, titulo, mensaje);
     }
 
     public void regresarLogin(){
