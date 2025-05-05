@@ -34,4 +34,5 @@ public class Ubicacion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
 }

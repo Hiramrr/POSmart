@@ -117,7 +117,7 @@ END$$
 DELIMITER ;
 
 
-DELIMITER //
+/*DELIMITER //
 
 CREATE PROCEDURE agregar_producto(
     IN p_id INT,
@@ -132,6 +132,62 @@ BEGIN
     INSERT INTO productos (id_producto, nombre, descripcion, cantidad, precio, ubicacion, categoria)
     VALUES (p_id, p_nombre, p_descripcion, p_cantidad, p_precio, p_categoria, p_ubicacion);
 END //
+
+DELIMITER ;*/
+
+
+DELIMITER //
+
+CREATE PROCEDURE agregar_producto(
+    IN p_id_producto INT,
+    IN p_nombre VARCHAR(100),
+    IN p_descripcion VARCHAR(200),
+    IN p_cantidad_stock INT,
+    IN p_precio_compra INT,
+    IN p_precio_venta INT,
+    IN p_nombre_categoria VARCHAR(50),
+    IN p_nombre_ubicacion VARCHAR(50)
+)
+BEGIN
+    DECLARE v_id_categoria INT;
+    DECLARE v_id_ubicacion INT;
+
+    -- Buscar la categoría
+    SELECT id_Categoria INTO v_id_categoria
+    FROM Categoria
+    WHERE Nombre = p_nombre_categoria
+    LIMIT 1;
+
+    -- Si no existe, insertarla
+    IF v_id_categoria IS NULL THEN
+        INSERT INTO Categoria(Nombre, Descripcion) VALUES (p_nombre_categoria, 'Categoría agregada automáticamente');
+        SET v_id_categoria = LAST_INSERT_ID();
+    END IF;
+
+    -- Buscar la ubicación
+    SELECT id_Ubicacion INTO v_id_ubicacion
+    FROM Ubicacion
+    WHERE Nombre = p_nombre_ubicacion
+    LIMIT 1;
+
+    -- Si no existe, insertarla
+    IF v_id_ubicacion IS NULL THEN
+        INSERT INTO Ubicacion(Nombre, Descripcion) VALUES (p_nombre_ubicacion, 'Ubicación agregada automáticamente');
+        SET v_id_ubicacion = LAST_INSERT_ID();
+    END IF;
+
+    -- Insertar el producto
+    INSERT INTO Productos (
+        id_Producto, Nombre, Descripcion, Cantidad_stock,
+        Precio_compra, Precio_venta, id_Categoria, id_Ubicacion
+    ) VALUES (
+                 p_id_producto, p_nombre, p_descripcion, p_cantidad_stock,
+                 p_precio_compra, p_precio_venta, v_id_categoria, v_id_ubicacion
+             );
+END//
+
+DELIMITER ;
+
 
 
 DELIMITER ;

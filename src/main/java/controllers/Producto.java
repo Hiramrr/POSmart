@@ -5,19 +5,24 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private int cantidad;
-    private double precio;
+    private double precioCompra;
+    private double precioVenta;
     private String ubicacion;
     private String categoria;
 
-    public Producto() {
+    public Producto(){
+
     }
 
-    public Producto(int id, String nombre, String descripcion, int cantidad, double precio, String ubicacion, String categoria){
+
+    public Producto(int id, String nombre, String descripcion, int cantidad,
+                    Double precioCompra, Double precioVenta, String categoria, String ubicacion){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
-        this.precio = precio;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
         this.ubicacion = ubicacion;
         this.categoria = categoria;
     }
@@ -54,12 +59,20 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = this.precioCompra;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = this.precioVenta;
     }
 
     public String getUbicacion() {

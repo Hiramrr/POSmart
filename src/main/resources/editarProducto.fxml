@@ -22,17 +22,19 @@
             <Label layoutX="54.0" layoutY="89.0" text="ID" />
             <Label layoutX="38.0" layoutY="128.0" text="Nombre" />
             <Label layoutX="29.0" layoutY="180.0" text="Descripcion" />
-            <Label layoutX="322.0" layoutY="89.0" text="Cantidad" />
-            <Label layoutX="322.0" layoutY="128.0" text="Precio" />
+            <Label layoutX="36.0" layoutY="260.0" text="Cantidad" />
+            <Label layoutX="288.0" layoutY="128.0" text="Precio de venta" />
             <Label layoutX="312.0" layoutY="168.0" text="Categoria" />
             <Label layoutX="312.0" layoutY="208.0" text="Ubicación" />
             <TextArea fx:id="descEditP" layoutX="105.0" layoutY="160.0" prefHeight="80.0" prefWidth="149.0" />
             <TextField fx:id="idEditP" layoutX="105.0" layoutY="85.0" />
             <TextField fx:id="nomEditP" layoutX="105.0" layoutY="124.0" />
-            <TextField fx:id="cantEditP" layoutX="378.0" layoutY="85.0" />
-            <TextField fx:id="precioEditP" layoutX="378.0" layoutY="124.0" />
+            <TextField fx:id="cantEditP" layoutX="105.0" layoutY="256.0" />
+            <TextField fx:id="precioVentaEditP" layoutX="378.0" layoutY="124.0" />
             <TextField fx:id="catEditP" layoutX="378.0" layoutY="204.0" />
             <TextField fx:id="ubiEditP" layoutX="378.0" layoutY="164.0" />
+            <Label layoutX="277.0" layoutY="89.0" text="Precio de compra" />
+            <TextField fx:id="precioCompraEditP" layoutX="378.0" layoutY="85.0" />
          </children>
       </AnchorPane>
    </children>

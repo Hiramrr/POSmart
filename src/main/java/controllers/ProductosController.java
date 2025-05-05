@@ -74,7 +74,7 @@ public class ProductosController {
         NomCol.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         DesCol.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         CantCol.setCellValueFactory(new PropertyValueFactory<>("Cantidad"));
-        PrecioCol.setCellValueFactory(new PropertyValueFactory<>("Precio"));
+        PrecioCol.setCellValueFactory(new PropertyValueFactory<>("PrecioVenta"));
         System.out.println("si paso");
 
         this.baseDatos = new BaseDatos();
@@ -158,26 +158,29 @@ public class ProductosController {
                 "ID: " + productoSeleccionado.getId() + "\n" +
                 "Nombre: " + productoSeleccionado.getNombre() + "\n" +
                 "Descripción: " + productoSeleccionado.getDescripcion() + "\n" +
-                "Cantidad: " + productoSeleccionado.getCantidad() + "\n" +
-                "Precio: " + productoSeleccionado.getPrecio();
+                "Cantidad en stock: " + productoSeleccionado.getCantidad() + "\n" +
+                "Precio de compra: " + productoSeleccionado.getPrecioCompra() + "\n" +
+                "Precio de venta: " + productoSeleccionado.getPrecioVenta() + "\n" +
+                "Categoría: " + productoSeleccionado.getCategoria() + "\n" +
+                "Ubicación: " + productoSeleccionado.getUbicacion();
 
         Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         alertaConfirmacion.setTitle("Confirmar Eliminación");
         alertaConfirmacion.setHeaderText("Confirmación requerida");
         alertaConfirmacion.setContentText(mensaje);
 
-        // Esperar respuesta del usuario
         alertaConfirmacion.showAndWait().ifPresent(respuesta -> {
             if (respuesta == ButtonType.OK) {
                 if (baseDatos.eliminarProductoDeBaseDeDatos(productoSeleccionado.getId())) {
                     mostrarAlerta("Éxito", "Producto eliminado correctamente.");
-                    actualizarTabla(); // Refrescar la tabla
+                    actualizarTabla();
                 } else {
                     mostrarAlerta("Error", "No se pudo eliminar el producto.");
                 }
             }
         });
     }
+
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
@@ -193,14 +196,14 @@ public class ProductosController {
     }
 
     private void llenarCampos(Producto producto) {
-        // Asumiendo que tienes campos de texto en tu interfaz para cada atributo del producto
         IDCol.setText(String.valueOf(producto.getId()));
         NomCol.setText(producto.getNombre());
         DesCol.setText(producto.getDescripcion());
         CantCol.setText(String.valueOf(producto.getCantidad()));
-        PrecioCol.setText(String.valueOf(producto.getPrecio()));
-
+        PrecioCol.setText(String.valueOf(producto.getPrecioVenta()));  // Asegúrate que esto sea "precio venta"
+          // Nuevo campo
     }
+
 
 
     // editar producto---------------------------------------------------------------------
