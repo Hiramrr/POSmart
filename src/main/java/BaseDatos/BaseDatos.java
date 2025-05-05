@@ -150,50 +150,6 @@ public class BaseDatos {
         return false;
     }
 
-    /**public boolean agregarProducto(int id, String nombre, String descripcion, int cantidad, double precio, String categoria, String ubicacion) {
-        try {
-            consulta = con.createStatement();
-            String query = "CALL agregar_producto('" + id + "', '" + nombre + "', '" + descripcion + "', '" + cantidad + "', '" + precio + "', '" + categoria + "', '" + ubicacion + "')";
-
-            boolean result = consulta.execute(query);
-
-            return true;
-        } catch (Exception e) {
-            System.out.println("error base");
-            e.printStackTrace();
-        }
-        return false;
-    }*/
-
-    /**public ObservableList<Producto> obtenerProductos() {
-        System.out.println("entra a obtener productos");
-        ObservableList<Producto> productos = FXCollections.observableArrayList();
-        String query = "SELECT * FROM productosPD"; // Cambia "productos" si tu tabla tiene otro nombre
-
-        try (PreparedStatement stmt = con.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Producto producto = new Producto(
-                        rs.getInt("id_producto"),          // Nombre de las columnas en tu tabla
-                        rs.getString("nombre"),
-                        rs.getString("descripcion"),
-                        rs.getInt("cantidad"),
-                        rs.getDouble("precio"),
-                        rs.getString("categoria"),
-                        rs.getString("ubicacion")
-                );
-                productos.add(producto);
-            }
-            System.out.println("termina de hacer en la obtener productos");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("obtiene los productos con exito");
-        return productos;
-    }*/
-
     public ObservableList<Producto> obtenerProductos() {
         System.out.println("entra a obtener productos");
         ObservableList<Producto> productos = FXCollections.observableArrayList();
@@ -284,27 +240,6 @@ public class BaseDatos {
         return false;
     }
 
-    /**public boolean actualizarProductoEnBaseDeDatos(Producto producto) {
-        String query = "UPDATE productosPD SET nombre = ?, descripcion = ?, cantidad = ?, precio = ?, categoria = ?, ubicacion = ? WHERE id_producto = ?";
-
-        try (PreparedStatement stmt = con.prepareStatement(query)) {
-            // Establecer los parámetros en la consulta
-            stmt.setString(1, producto.getNombre());
-            stmt.setString(2, producto.getDescripcion());
-            stmt.setInt(3, producto.getCantidad());
-            stmt.setDouble(4, producto.getPrecio());
-            stmt.setString(5, producto.getCategoria());
-            stmt.setString(6, producto.getUbicacion());
-            stmt.setInt(7, producto.getId());
-
-            // Ejecutar la actualización
-            int filasAfectadas = stmt.executeUpdate();
-            return filasAfectadas > 0;  // Si se actualizó al menos un registro, retorna true
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }*/
     public boolean actualizarProductoEnBaseDeDatos(Producto producto) {
         String query = """
         UPDATE Productos

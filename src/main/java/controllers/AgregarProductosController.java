@@ -82,69 +82,6 @@ public class AgregarProductosController {
         ubiPCb.getItems().addAll(ubicaciones);
     }
 
-
-    /**@FXML
-    private void handleGuardarProducto() {
-        System.out.println("Validando datos");
-
-        // Verificar si los campos están vacíos
-        if (IDP.getText().isEmpty() || NomP.getText().isEmpty() || DescP.getText().isEmpty() ||
-                CantP.getText().isEmpty() || PreP.getText().isEmpty() ||
-                CatP.getText().isEmpty() || UbiP.getText().isEmpty()) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Campos Vacíos");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, complete todos los campos antes de guardar el producto.");
-            alert.showAndWait();
-            return;
-        }
-
-        try {
-            System.out.println("Recogiendo datos del producto");
-            // Recoger los datos del formulario
-            int productoId = Integer.parseInt(IDP.getText());
-            String productoNombre = NomP.getText();
-            String productoDescripcion = DescP.getText();
-            int productoCantidad = Integer.parseInt(CantP.getText());
-            double productoPrecio = Double.parseDouble(PreP.getText());
-            String productoUbicacion = UbiP.getText();
-            String productoCategoria = CatP.getText();
-
-
-            // Intentar agregar el producto a la base de datos
-            boolean success = baseDatos.agregarProducto(productoId, productoNombre, productoDescripcion, productoCantidad, productoPrecio, productoCategoria, productoUbicacion);
-
-            // Mostrar una alerta con el resultado
-            Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-            alert.setTitle("Agregar Producto");
-            alert.setHeaderText(null);
-            alert.setContentText(success ? "Producto agregado exitosamente." : "Error al agregar el producto.");
-            alert.showAndWait();
-
-            // Si la operación fue exitosa, limpiar los campos
-            if (success) {
-                System.out.println("si limpia los campos");
-                limpiarCampos();
-                if (productosController != null) {
-                    System.out.println("si actualiza la tabla");
-                    productosController.actualizarTabla(); // <<--- actualizamos la tabla de la otra pantalla
-                    // Código para cerrar la ventana actual
-                    Stage stage = (Stage) GuardarP.getScene().getWindow();
-                    stage.close();
-
-                }
-                 // Llamamos a actualizar la tabla
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error en el formato de los datos");
-            // Si hay un error de formato en los números, mostrar una alerta
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error de Formato");
-            alert.setHeaderText(null);
-            alert.setContentText("El ID, cantidad y precio deben ser números válidos.");
-            alert.showAndWait();
-        }
-    }*/
     @FXML
     private void handleGuardarProducto() {
         System.out.println("Validando datos");

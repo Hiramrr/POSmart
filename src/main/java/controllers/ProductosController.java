@@ -84,30 +84,6 @@ public class ProductosController {
 
     }
 
-    /**@FXML
-    private void agregarProducto(ActionEvent event) {
-        System.out.println("Clic en 'Agregar Producto'");
-        try {
-            System.out.println("carga el archivo");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AgregarProductos.fxml"));
-            AnchorPane root = loader.load();
-            System.out.println("carga el contenido del archivo");
-
-            System.out.println("Error en el archivo");
-            AgregarProductosController controller = loader.getController();
-            //controller.setProductosController(this);
-            System.out.println("crea una nueva ventana");
-            System.out.println("stage para la ventana");
-            Stage stage = new Stage();
-            stage.setTitle("Agregar Producto");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("Error en el archivo");
-            e.printStackTrace();
-        }
-    }*/
     @FXML
     private void agregarProducto(ActionEvent event) {
         System.out.println("Clic en 'Agregar Producto'");
