@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `Categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Categoria` (
-                             `id_Categoria` int NOT NULL,
-                             `Nombre` varchar(50) NOT NULL,
-                             `Descripcion` varchar(70) NOT NULL,
-                             PRIMARY KEY (`id_Categoria`)
+  `id_Categoria` int NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `Descripcion` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`id_Categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -36,6 +36,7 @@ CREATE TABLE `Categoria` (
 
 LOCK TABLES `Categoria` WRITE;
 /*!40000 ALTER TABLE `Categoria` DISABLE KEYS */;
+INSERT INTO `Categoria` VALUES (1,'Gatos','Aqui se agregaran todos los productos de gatos');
 /*!40000 ALTER TABLE `Categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,16 +48,16 @@ DROP TABLE IF EXISTS `Compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Compra` (
-                          `id_compra` int NOT NULL,
-                          `fecha_compra` date NOT NULL,
-                          `total` int NOT NULL,
-                          `id_Proveedor` int NOT NULL,
-                          `id_Usuario` int NOT NULL,
-                          PRIMARY KEY (`id_compra`),
-                          KEY `id_Proveedor` (`id_Proveedor`),
-                          KEY `id_Usuario` (`id_Usuario`),
-                          CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-                          CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `Usuario` (`id_Usuario`)
+  `id_compra` int NOT NULL,
+  `fecha_compra` date NOT NULL,
+  `total` int NOT NULL,
+  `id_Proveedor` int NOT NULL,
+  `id_Usuario` int NOT NULL,
+  PRIMARY KEY (`id_compra`),
+  KEY `id_Proveedor` (`id_Proveedor`),
+  KEY `id_Usuario` (`id_Usuario`),
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
+  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `Usuario` (`id_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,16 +78,16 @@ DROP TABLE IF EXISTS `Detalle_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Detalle_compra` (
-                                  `id_Detalle` int NOT NULL,
-                                  `id_Producto` int NOT NULL,
-                                  `id_Compra` int NOT NULL,
-                                  `Cantidad` int NOT NULL,
-                                  `Monto_final` int NOT NULL,
-                                  PRIMARY KEY (`id_Detalle`),
-                                  KEY `id_Producto` (`id_Producto`),
-                                  KEY `id_Compra` (`id_Compra`),
-                                  CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`),
-                                  CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `Compra` (`id_compra`)
+  `id_Detalle` int NOT NULL,
+  `id_Producto` int NOT NULL,
+  `id_Compra` int NOT NULL,
+  `Cantidad` int NOT NULL,
+  `Monto_final` int NOT NULL,
+  PRIMARY KEY (`id_Detalle`),
+  KEY `id_Producto` (`id_Producto`),
+  KEY `id_Compra` (`id_Compra`),
+  CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`),
+  CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `Compra` (`id_compra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,12 +108,12 @@ DROP TABLE IF EXISTS `Producto_Proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Producto_Proveedor` (
-                                      `id_Proveedor` int NOT NULL,
-                                      `id_Producto` int NOT NULL,
-                                      KEY `id_Proveedor` (`id_Proveedor`),
-                                      KEY `id_Producto` (`id_Producto`),
-                                      CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-                                      CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
+  `id_Proveedor` int NOT NULL,
+  `id_Producto` int NOT NULL,
+  KEY `id_Proveedor` (`id_Proveedor`),
+  KEY `id_Producto` (`id_Producto`),
+  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
+  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,19 +134,19 @@ DROP TABLE IF EXISTS `Productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Productos` (
-                             `id_Producto` int NOT NULL,
-                             `Nombre` varchar(100) NOT NULL,
-                             `Descripcion` varchar(200) DEFAULT NULL,
-                             `Cantidad_stock` int NOT NULL,
-                             `Precio_compra` int NOT NULL,
-                             `Precio_venta` int NOT NULL,
-                             `id_categoria` int NOT NULL,
-                             `id_ubicacion` int NOT NULL,
-                             PRIMARY KEY (`id_Producto`),
-                             KEY `id_categoria` (`id_categoria`),
-                             KEY `id_ubicacion` (`id_ubicacion`),
-                             CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `Categoria` (`id_Categoria`),
-                             CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_ubicacion`) REFERENCES `Ubicacion` (`id_Ubicacion`)
+  `id_Producto` int NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Descripcion` varchar(200) DEFAULT NULL,
+  `Cantidad_stock` int NOT NULL,
+  `Precio_compra` int NOT NULL,
+  `Precio_venta` int NOT NULL,
+  `id_categoria` int NOT NULL,
+  `id_ubicacion` int NOT NULL,
+  PRIMARY KEY (`id_Producto`),
+  KEY `id_categoria` (`id_categoria`),
+  KEY `id_ubicacion` (`id_ubicacion`),
+  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `Categoria` (`id_Categoria`),
+  CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_ubicacion`) REFERENCES `Ubicacion` (`id_Ubicacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -166,12 +167,12 @@ DROP TABLE IF EXISTS `Proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Proveedor` (
-                             `id_Proveedor` int NOT NULL,
-                             `Nombre` varchar(100) NOT NULL,
-                             `Telefono` varchar(30) NOT NULL,
-                             `Correo` varchar(70) DEFAULT NULL,
-                             `Direccion` varchar(70) NOT NULL,
-                             PRIMARY KEY (`id_Proveedor`)
+  `id_Proveedor` int NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Telefono` varchar(30) NOT NULL,
+  `Correo` varchar(70) DEFAULT NULL,
+  `Direccion` varchar(70) NOT NULL,
+  PRIMARY KEY (`id_Proveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -192,10 +193,10 @@ DROP TABLE IF EXISTS `Ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Ubicacion` (
-                             `id_Ubicacion` int NOT NULL,
-                             `Nombre` varchar(50) NOT NULL,
-                             `Descripcion` varchar(70) NOT NULL,
-                             PRIMARY KEY (`id_Ubicacion`)
+  `id_Ubicacion` int NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `Descripcion` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`id_Ubicacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,6 +206,7 @@ CREATE TABLE `Ubicacion` (
 
 LOCK TABLES `Ubicacion` WRITE;
 /*!40000 ALTER TABLE `Ubicacion` DISABLE KEYS */;
+INSERT INTO `Ubicacion` VALUES (1,'Estanteria #5','Es la estanteria que esta a la derecha de la entrada');
 /*!40000 ALTER TABLE `Ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,15 +218,15 @@ DROP TABLE IF EXISTS `Usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Usuario` (
-                           `id_Usuario` int NOT NULL,
-                           `Nombre_usuario` varchar(50) NOT NULL,
-                           `Contraseña` varchar(100) NOT NULL,
-                           `Nombre_completo` varchar(100) NOT NULL,
-                           `Rol` varchar(50) NOT NULL,
-                           `Telefono` varchar(20) NOT NULL,
-                           `Ciudad` varchar(50) NOT NULL,
-                           `Direccion` varchar(150) NOT NULL,
-                           PRIMARY KEY (`id_Usuario`)
+  `id_Usuario` int NOT NULL,
+  `Nombre_usuario` varchar(50) NOT NULL,
+  `Contraseña` varchar(100) NOT NULL,
+  `Nombre_completo` varchar(100) NOT NULL,
+  `Rol` varchar(50) NOT NULL,
+  `Telefono` varchar(20) NOT NULL,
+  `Ciudad` varchar(50) NOT NULL,
+  `Direccion` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -245,6 +247,94 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'PoSmart'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `agregar_Categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_Categoria`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    INSERT INTO Categoria (id_Categoria, Nombre, Descripcion)
+    VALUES (p_id, p_nombre, p_descripcion);
+
+    SELECT id_Categoria AS Categoria_agregada
+    FROM Categoria
+    WHERE id_Categoria = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregar_proveedor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_proveedor`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_telefono VARCHAR(30),
+    IN p_correo VARCHAR(70),
+    IN p_direccion VARCHAR(255)
+)
+BEGIN
+    -- Insert a new provider into the Proveedor table
+    INSERT INTO Proveedor (id_Proveedor, Nombre, Telefono, Correo, Direccion)
+    VALUES (p_id, p_nombre, p_telefono, p_correo, p_direccion);
+
+    -- Return the ID of the newly added provider
+    SELECT id_Proveedor AS Proveedor_Agregado
+    FROM Proveedor
+    WHERE id_Proveedor = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregar_Ubicacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_Ubicacion`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    INSERT INTO Ubicacion (id_Ubicacion, Nombre, Descripcion)
+    VALUES (p_id, p_nombre, p_descripcion);
+
+    SELECT id_Ubicacion AS Ubicacion_agregada
+    FROM Ubicacion
+    WHERE id_Ubicacion = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `agregar_usuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -258,12 +348,12 @@ DELIMITER ;;
 CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_usuario`(p_id int, p_Nombre_usuario VARCHAR(20), p_Contraseña VARCHAR(50), p_Nombre_completo VARCHAR(50), p_Rol VARCHAR(20), p_Telefono VARCHAR(15), p_Ciudad VARCHAR(30), p_Direccion VARCHAR(100)
 )
 BEGIN
-INSERT INTO Usuario (id_usuario, Nombre_usuario, Contraseña, Nombre_completo, Rol, Telefono, Ciudad, Direccion)
-VALUES (p_id, p_Nombre_usuario, p_Contraseña, p_Nombre_completo, p_Rol, p_Telefono, p_Ciudad, p_Direccion);
-
-SELECT id_usuario
-FROM Usuario
-WHERE id_usuario = p_id;
+    INSERT INTO Usuario (id_usuario, Nombre_usuario, Contraseña, Nombre_completo, Rol, Telefono, Ciudad, Direccion)
+    VALUES (p_id, p_Nombre_usuario, p_Contraseña, p_Nombre_completo, p_Rol, p_Telefono, p_Ciudad, p_Direccion);
+    
+    SELECT id_usuario
+    FROM Usuario
+    WHERE id_usuario = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -295,6 +385,63 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `eliminar_Categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `eliminar_Categoria`(IN id INT)
+BEGIN
+    DELETE FROM Categoria WHERE id_Categoria = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `eliminar_proveedor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `eliminar_proveedor`(IN id INT)
+BEGIN
+    DELETE FROM Proveedor WHERE id_Proveedor = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `eliminar_Ubicacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `eliminar_Ubicacion`(IN id INT)
+BEGIN
+    DELETE FROM Ubicacion WHERE id_Ubicacion = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `existe_usuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -310,6 +457,88 @@ BEGIN
 SELECT Nombre_completo
 FROM Usuario
 WHERE Nombre_completo = Nombre_Com;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `modificar_Categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `modificar_Categoria`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    UPDATE Categoria
+    SET Nombre = p_nombre,
+        Descripcion = p_descripcion
+    WHERE id_Categoria = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `modificar_proveedor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `modificar_proveedor`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_telefono VARCHAR(50),
+    IN p_correo VARCHAR(255),
+    IN p_direccion VARCHAR(255)
+)
+BEGIN
+    UPDATE Proveedor
+    SET Nombre = p_nombre,
+        Telefono = p_telefono,
+        Correo = p_correo,
+        Direccion = p_direccion
+    WHERE id_Proveedor = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `modificar_Ubicacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `modificar_Ubicacion`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+    IN p_descripcion VARCHAR(3000)
+)
+BEGIN
+    UPDATE Ubicacion
+    SET Nombre = p_nombre,
+        Descripcion = p_descripcion
+    WHERE id_Ubicacion = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -348,6 +577,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-25 13:53:40
-
-
+-- Dump completed on 2025-05-04 22:04:02
