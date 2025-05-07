@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Productos">
+   <children>
+      <GridPane alignment="TOP_CENTER" layoutX="-1.0" prefHeight="469.0" prefWidth="671.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="122.00003051757812" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.3333028157551" minWidth="10.0" prefWidth="549.3333028157551" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="102.66666666666666" minHeight="10.0" prefHeight="47.66667175292969" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="428.0" minHeight="10.0" prefHeight="421.3333282470703" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="466.0" prefWidth="123.0" style="-fx-background-color: #293540;" GridPane.rowIndex="1">
+               <children>
+                  <Button layoutX="26.0" layoutY="21.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="26.0" layoutY="63.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="26.0" layoutY="103.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="26.0" layoutY="138.0" mnemonicParsing="false" text="Button" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1ba67e;">
+               <children>
+                  <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #dae4ea;" GridPane.columnIndex="1">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2b85b" height="48.0" layoutX="132.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="283.0" />
+                  <Circle fill="#575757" layoutX="520.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text layoutX="251.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Productos" />
+                  <Text layoutX="30.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia" />
+                  <Text layoutX="28.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora" />
+                  <Text layoutX="438.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO" />
+               </children>
+            </Pane>
+            <Pane prefHeight="346.0" prefWidth="537.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TableView id="TProductos" layoutX="9.0" layoutY="100.0" prefHeight="307.0" prefWidth="378.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="ID" />
+                      <TableColumn prefWidth="75.0" text="Nombre" />
+                        <TableColumn prefWidth="75.0" text="Descripción" />
+                        <TableColumn prefWidth="75.0" text="Cantidad" />
+                        <TableColumn prefWidth="75.0" text="Precio" />
+                    </columns>
+                  </TableView>
+                  <Button id="OpAgregar" layoutX="433.0" layoutY="241.0" mnemonicParsing="false" text="Agregar" />
+                  <Button id="OpEliminar" layoutX="433.0" layoutY="271.0" mnemonicParsing="false" text="Eliminar" />
+                  <Button id="OpEditar" layoutX="438.0" layoutY="302.0" mnemonicParsing="false" text="Editar" />
+                  <Button id="OpListar" layoutX="440.0" layoutY="340.0" mnemonicParsing="false" text="Listar" />
+                  <Button id="OpConsultar" layoutX="403.0" layoutY="373.0" mnemonicParsing="false" text="Consultar Producto" />
+                  <ImageView id="ImgProducto" fitHeight="119.0" fitWidth="134.0" layoutX="395.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
