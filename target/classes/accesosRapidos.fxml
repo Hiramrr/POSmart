@@ -16,7 +16,7 @@
                      <children>
                         <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
                            <children>
-                              <Button id="Empleado" fx:id="buttonProveedores" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Empleado" stylesheets="@styles_accesorapido.css" text="Empleado" />
+                              <Button id="Empleado" fx:id="buttonEmpleado" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonEmpleado" prefHeight="143.0" prefWidth="143.0" styleClass="Empleado" stylesheets="@styles_accesorapido.css" text="Empleado" />
                            </children>
                         </Pane>
                         <Pane prefHeight="62.0" prefWidth="312.0" />

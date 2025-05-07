@@ -27,7 +27,51 @@ public class AccesosRapidosController {
         }
     }
 
+    @FXML
+    private void handleButtonEmpleado(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarEmpleados.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void handleAgregarProductos(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AgregarProductos.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void handleButtonUbicaciones(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarUbicacion.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void handleButtonCategoria(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarCategoria.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
