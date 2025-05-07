@@ -40,6 +40,8 @@ public class AgregarEmpleadosController implements Initializable {
     @FXML
     private TextField direccion;
 
+    AlertPOSmart alerta;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> rol = FXCollections.observableArrayList("Empleado", "Administrador");
@@ -84,18 +86,10 @@ public class AgregarEmpleadosController implements Initializable {
         boolean seAñadio = mBD.agregarEmpleado(nuevoid, nuevoNombre, nuevoContraseña, nuevoNombreCom, nuevoRol, nuevoTelefono, nuevoCiudad, nuevoDireccion);
 
         if (seAñadio) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Exito");
-            alert.setHeaderText(null);
-            alert.setContentText("Se agrego con exito al empleado " + nuevoNombre);
-            alert.showAndWait();
+            alerta = new AlertPOSmart(Alert.AlertType.INFORMATION,"Exito", "Se agrego con exito al empleado " + nuevoNombre );
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fallo");
-        alert.setHeaderText(null);
-        alert.setContentText("Algo salio mal al intentar agregar al empleado " + nuevoNombre);
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Fallo", "Algo salio mal al intentar agregar al empleado " + nuevoNombre );
     }
 }

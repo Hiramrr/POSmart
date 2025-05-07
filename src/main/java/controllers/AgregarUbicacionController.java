@@ -36,6 +36,7 @@ public class AgregarUbicacionController {
 
     private BaseDatos baseDatos;
 
+    AlertPOSmart alerta;
 
 
     public AgregarUbicacionController() {
@@ -138,35 +139,20 @@ public class AgregarUbicacionController {
 
 
     public void mensajeWarning(String titulo, String mensaje){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
     }
 
     public void mensajeError(String titulo, String mensaje){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.ERROR, titulo, mensaje);
     }
 
     public void mensajeBueno(String titulo, String mensaje){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, titulo, mensaje);
     }
 
     private boolean confirmarEliminacion(String titulo, String mensaje) {
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle(titulo);
-        confirmacion.setHeaderText(null);
-        confirmacion.setContentText(mensaje);
-        return confirmacion.showAndWait().orElse(null) == ButtonType.OK;
+        alerta = new AlertPOSmart(Alert.AlertType.CONFIRMATION, titulo, mensaje);
+        return alerta.showAndWait().orElse(null) == ButtonType.OK;
     }
 
     public void limpiarCampos(){

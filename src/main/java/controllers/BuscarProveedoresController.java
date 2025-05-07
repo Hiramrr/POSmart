@@ -42,6 +42,8 @@ public class BuscarProveedoresController {
 
     private ObservableList<Proveedor> proveedoresList;
 
+    AlertPOSmart alerta;
+
     @FXML
     public void initialize() {
         // Configurar las columnas
@@ -85,11 +87,7 @@ public class BuscarProveedoresController {
         Proveedor proveedorSeleccionado = tableProveedores.getSelectionModel().getSelectedItem();
 
         if (proveedorSeleccionado == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Proveedor no seleccionado");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un proveedor de la tabla.");
-            alert.showAndWait();
+            alerta = new AlertPOSmart(Alert.AlertType.WARNING,"Proveedor no seleccionado", "Por favor, seleccione un proveedor de la tabla.");
             return;
         }
 

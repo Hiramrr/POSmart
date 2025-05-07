@@ -32,7 +32,7 @@ public class AgregarProveedoresController {
     @FXML
     private TableColumn<Proveedor, String> direccionProveedor;
 
-
+    AlertPOSmart alerta;
     private BaseDatos baseDatos;
 
 
@@ -77,12 +77,8 @@ public class AgregarProveedoresController {
         // Verificar que los campos no estén vacíos
         if (id.getText().isEmpty() || nombre.getText().isEmpty() || telefono.getText().isEmpty() ||
                 correo.getText().isEmpty() || direccion.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Campos Vacíos");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, complete todos los campos antes de agregar un proveedor.");
-            alert.showAndWait();
-            return; // Salir del método si hay campos vacíos
+            mensajeWarning("Campos Vacíos", "Por favor, complete todos los campos antes de agregar un proveedor.");
+            return;
         }
 
         try {
@@ -94,22 +90,15 @@ public class AgregarProveedoresController {
 
             boolean success = baseDatos.agregarProveedor(proveedorId, proveedorNombre, proveedorTelefono, proveedorCorreo, proveedorDireccion);
 
-            Alert alert = new Alert(success ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-            alert.setTitle("Agregar Proveedor");
-            alert.setHeaderText(null);
-            alert.setContentText(success ? "Proveedor agregado exitosamente." : "Error al agregar el proveedor.");
-            alert.showAndWait();
-
             if (success) {
                 cargarProveedores(); // Actualiza la tabla con los datos más recientes
                 limpiarCampos(); // Limpia los campos después de agregar
+                mensajeBueno("Agregar Proveedor", "Proveedor agregado exitosamente.");
+                return;
             }
+            mensajeError("Agregar Proveedor", "Error al agregar el proveedor.");
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de Formato");
-            alert.setHeaderText(null);
-            alert.setContentText("El ID debe ser un número.");
-            alert.showAndWait();
+            mensajeError("Error de Formato", "El ID debe ser un número.");
         }
     }
 
@@ -118,11 +107,7 @@ public class AgregarProveedoresController {
         // Verificar que los campos no estén vacíos
         if (id.getText().isEmpty() || nombre.getText().isEmpty() || telefono.getText().isEmpty() ||
                 correo.getText().isEmpty() || direccion.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Campos Vacíos");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, complete todos los campos antes de modificar un proveedor.");
-            alert.showAndWait();
+            mensajeWarning("Campos Vacíos","Por favor, complete todos los campos antes de modificar un proveedor.");
             return;
         }
 
@@ -135,22 +120,15 @@ public class AgregarProveedoresController {
 
             boolean success = baseDatos.modificarProveedor(proveedorId, proveedorNombre, proveedorTelefono, proveedorCorreo, proveedorDireccion);
 
-            Alert alert = new Alert(success ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-            alert.setTitle("Modificar Proveedor");
-            alert.setHeaderText(null);
-            alert.setContentText(success ? "Proveedor modificado exitosamente." : "Error al modificar el proveedor.");
-            alert.showAndWait();
-
             if (success) {
                 cargarProveedores(); // Recargar la tabla con los datos actualizados
                 limpiarCampos(); // Limpiar los campos después de modificar
+                mensajeBueno("Modificar Proveedor", "Proveedor modificado exitosamente.");
+                return;
             }
+            mensajeError("Modificar Proveedor","Error al modificar el proveedor." );
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de Formato");
-            alert.setHeaderText(null);
-            alert.setContentText("El ID debe ser un número.");
-            alert.showAndWait();
+            mensajeError("Error de Formato", "El ID debe ser un número.");
         }
     }
 
@@ -161,37 +139,41 @@ public class AgregarProveedoresController {
 
         if (proveedorSeleccionado == null) {
             // Mostrar alerta si no se seleccionó ningún proveedor
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Proveedor no seleccionado");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un proveedor de la tabla para eliminar.");
-            alert.showAndWait();
+            mensajeWarning("Proveedor no seleccionado", "Por favor, seleccione un proveedor de la tabla para eliminar.");
             return;
         }
-
         // Confirmar la eliminación
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar eliminación");
-        confirmacion.setHeaderText(null);
-        confirmacion.setContentText("¿Está seguro de que desea eliminar al proveedor seleccionado?");
-        if (confirmacion.showAndWait().orElse(null) != ButtonType.OK) {
+        if (!confirmarEliminacion("Confirmar eliminación", "¿Está seguro de que desea eliminar al proveedor seleccionado?")) {
             return; // Salir si el usuario cancela
         }
 
         // Intentar eliminar el proveedor de la base de datos
         boolean success = baseDatos.eliminarProveedor(proveedorSeleccionado.getId());
 
-        // Mostrar mensaje según el resultado
-        Alert alert = new Alert(success ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-        alert.setTitle("Eliminar Proveedor");
-        alert.setHeaderText(null);
-        alert.setContentText(success ? "Proveedor eliminado exitosamente." : "Error al eliminar el proveedor.");
-        alert.showAndWait();
-
         if (success) {
             cargarProveedores(); // Actualizar la tabla
             limpiarCampos(); // Limpiar los campos después de eliminar
+            mensajeBueno("Eliminar Proveedor","Proveedor eliminado exitosamente." );
+            return;
         }
+        mensajeError("Eliminar Proveedor", "Error al eliminar el proveedor.");
+    }
+
+    public void mensajeWarning(String titulo, String mensaje){
+        alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
+    }
+
+    public void mensajeError(String titulo, String mensaje){
+        alerta = new AlertPOSmart(Alert.AlertType.ERROR, titulo, mensaje);
+    }
+
+    public void mensajeBueno(String titulo, String mensaje){
+        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, titulo, mensaje);
+    }
+
+    private boolean confirmarEliminacion(String titulo, String mensaje) {
+        alerta = new AlertPOSmart(Alert.AlertType.CONFIRMATION, titulo, mensaje);
+        return alerta.showAndWait().orElse(null) == ButtonType.OK;
     }
 
     private void limpiarCampos() {

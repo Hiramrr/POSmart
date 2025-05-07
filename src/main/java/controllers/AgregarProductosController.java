@@ -34,6 +34,8 @@ public class AgregarProductosController {
 
     private BaseDatos baseDatos;
 
+    AlertPOSmart alerta;
+
     private ProductosController productosController;
 
     // Constructor de la clase
@@ -90,11 +92,7 @@ public class AgregarProductosController {
         if (IDP.getText().isEmpty() || NomP.getText().isEmpty() || DescP.getText().isEmpty() ||
                 CantP.getText().isEmpty() || PreP.getText().isEmpty() ||
                 catPCb.getValue() == null || ubiPCb.getValue() == null) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Campos Vacíos");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, complete todos los campos antes de guardar el producto.");
-            alert.showAndWait();
+            alerta = new AlertPOSmart(AlertType.WARNING, "Campos Vacíos","Por favor, complete todos los campos antes de guardar el producto." );
             return;
         }
 
@@ -117,11 +115,11 @@ public class AgregarProductosController {
                     productoPrecioVenta, productoCategoria, productoUbicacion);
 
             // Mostrar una alerta con el resultado
-            Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-            alert.setTitle("Agregar Producto");
-            alert.setHeaderText(null);
-            alert.setContentText(success ? "Producto agregado exitosamente." : "Error al agregar el producto.");
-            alert.showAndWait();
+            if(success){
+                alerta = new AlertPOSmart(AlertType.INFORMATION, "Agregar Producto", "Producto agregado exitosamente.");
+            } else {
+                alerta = new AlertPOSmart(AlertType.ERROR, "Agregar Producto", "Error al agregar el producto.");
+            }
 
             // Si la operación fue exitosa, limpiar los campos
             if (success) {
@@ -138,11 +136,7 @@ public class AgregarProductosController {
         } catch (NumberFormatException e) {
             System.out.println("Error en el formato de los datos");
             // Si hay un error de formato en los números, mostrar una alerta
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error de Formato");
-            alert.setHeaderText(null);
-            alert.setContentText("El ID, cantidad y precios deben ser números válidos.");
-            alert.showAndWait();
+            alerta = new AlertPOSmart(AlertType.ERROR,"Error de Formato", "El ID, cantidad y precios deben ser números válidos." );
         }
     }
 
