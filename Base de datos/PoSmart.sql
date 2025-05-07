@@ -31,13 +31,13 @@ CREATE TABLE Producto_Proveedor (
 CREATE TABLE Categoria (
                            id_Categoria int PRIMARY KEY,
                            Nombre VARCHAR(50) NOT NULL,
-                           Descripcion VARCHAR(70) NOT NULL
+                           Descripcion VARCHAR(3000) NOT NULL
 );
 
 CREATE TABLE Ubicacion(
                           id_Ubicacion int PRIMARY KEY,
                           Nombre VARCHAR(50) NOT NULL,
-                          Descripcion VARCHAR (70) NOT NULL
+                          Descripcion VARCHAR (3000) NOT NULL
 );
 
 CREATE TABLE Usuario (
@@ -73,3 +73,14 @@ CREATE TABLE Detalle_compra (
 );
 
 
+CREATE TABLE productos (
+                           id_producto INT PRIMARY KEY,
+                           nombre VARCHAR(255) NOT NULL,
+                           descripcion TEXT,
+                           cantidad INT NOT NULL,
+                           precio DOUBLE NOT NULL,
+                           ubicacion VARCHAR(255),
+                           categoria VARCHAR(255)
+);
+
+SELECT * from Usuario;

@@ -32,7 +32,7 @@
          </font>
       </Text>
       <PasswordField fx:id="txtPassword" layoutX="522.0" layoutY="334.0" prefHeight="26.0" prefWidth="221.0" promptText="Contraseña" />
-      <Button id="iniciarBoton" fx:id="iniciarBoton" layoutX="588.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleLogin" text="Iniciar Sesión" />
+      <Button id="iniciarBoton" fx:id="iniciarBoton" layoutX="588.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleLogin" stylesheets="@styles_login.css" text="Iniciar Sesión" />
       <CheckBox fx:id="recordarDatos" layoutX="522.0" layoutY="371.0" mnemonicParsing="false" text="Recordar mis datos" textFill="WHITE" />
       <Hyperlink fx:id="olvidarDatos" layoutX="571.0" layoutY="514.0" onAction="#handleOlvidarDatos" text="Olvide mi contraseña" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f0f2" height="615.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="423.0" />

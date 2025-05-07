@@ -1,93 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PrincipalController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="569.34033203125" minWidth="10.0" prefWidth="224.6848907470703" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="991.9328918457031" minWidth="10.0" prefWidth="931.3151092529297" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#293540" height="805.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="226.0" />
-        <VBox prefHeight="200.0" prefWidth="100.0">
-            <children>
-                <Pane id="Pane" prefHeight="77.0" prefWidth="225.0" styleClass="Pane" stylesheets="@styles_principal.css">
-                    <children>
-                        <Button id="Configuracion" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" styleClass="Configuracion">
-                            <graphic>
-                                <ImageView fitHeight="23.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/configuracion.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </children>
-                </Pane>
-                <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="43.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Principal" />
-                <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="48.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Producto" />
-                <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Proveedor" />
-                <Button id="buttonOpciones" fx:id="agregarEmpleado" mnemonicParsing="false" onAction="#handleAgregarEmpleado" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Agregar Empleado" />
-                <Pane prefHeight="536.0" prefWidth="225.0">
-                    <children>
-                        <Button id="CerrarSesion" fx:id="cerrarSesion" layoutX="65.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesion" />
-                    </children>
-                </Pane>
-            </children>
-        </VBox>
-        <Pane prefHeight="200.0" prefWidth="932.0" GridPane.columnIndex="1">
-            <children>
-                <Pane id="Barra" layoutY="-3.0" prefHeight="82.0" prefWidth="933.0" styleClass="Pane2" stylesheets="@styles_principal.css">
-                    <children>
-                        <Circle fill="#293540" layoutX="876.0" layoutY="39.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Text layoutX="752.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                        </Text>
-                        <Text fx:id="dia" layoutX="104.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia" textAlignment="CENTER" wrappingWidth="101.81422103461318" />
-                        <Text fx:id="hora" layoutX="107.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora" textAlignment="CENTER" wrappingWidth="101.81422103461318" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2b85b" height="82.0" layoutX="250.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="474.0" />
-                  <Text layoutX="447.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar Productos" textAlignment="CENTER" />
-                    </children>
-                </Pane>
-                <Pane fx:id="contenedor" layoutX="252.0" layoutY="110.0" prefHeight="706.0" prefWidth="474.0">
-               <children>
-                  <Text layoutX="83.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-                  <Text layoutX="83.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
-                  <Text layoutX="83.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" />
-                  <Text layoutX="81.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad" />
-                  <Text layoutX="83.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
-                  <Text layoutX="83.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ubicación" />
-                  <Text layoutX="83.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" />
-                  <TextField id="idProducto" layoutX="164.0" layoutY="55.0" />
-                  <TextField id="NomProducto" layoutX="164.0" layoutY="99.0" />
-                  <TextArea id="DescProducto" layoutX="164.0" layoutY="135.0" prefHeight="56.0" prefWidth="149.0" />
-                  <TextField id="CantProducto" layoutX="164.0" layoutY="199.0" />
-                  <TextField id="PrecioProducto" layoutX="164.0" layoutY="237.0" />
-                  <TextField id="UbicProducto" layoutX="164.0" layoutY="292.0" />
-                  <TextField id="CatgProducto" layoutX="164.0" layoutY="349.0" />
-                  <Button id="CancelarProducto" layoutX="90.0" layoutY="452.0" mnemonicParsing="false" text="Cancelar" />
-                  <Button id="GuardarProducto" layoutX="326.0" layoutY="452.0" mnemonicParsing="false" text="Guardar" />
-               </children>
-            </Pane>
-            </children>
-        </Pane>
-    </children>
-</GridPane>
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AgregarProductosController">
+   <children>
+      <TextField id="IDP" fx:id="IDP" layoutX="184.0" layoutY="84.0" />
+      <TextField id="NomP" fx:id="NomP" layoutX="184.0" layoutY="120.0" />
+      <TextArea id="DescP" fx:id="DescP" layoutX="184.0" layoutY="157.0" prefHeight="71.0" prefWidth="149.0" />
+      <TextField id="CantP" fx:id="CantP" layoutX="183.0" layoutY="241.0" />
+      <TextField id="PreP" fx:id="PreP" layoutX="491.0" layoutY="116.0" />
+      <Button id="GuardarP" fx:id="GuardarP" layoutX="442.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleGuardarProducto" style="-fx-background-color: #f2b85b;" text="Guardar" />
+      <Button id="CancelarP" fx:id="CancelarP" layoutX="272.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCancelarProducto" style="-fx-background-color: #f2b85b;" text="Cancelar" />
+      <Label layoutX="138.0" layoutY="88.0" text="ID" />
+      <Label layoutX="122.0" layoutY="124.0" text="Nombre" />
+      <Label layoutX="113.0" layoutY="184.0" text="Descripción" />
+      <Label layoutX="120.0" layoutY="245.0" text="Cantidad" />
+      <Label layoutX="390.0" layoutY="120.0" text="Precio de venta" />
+      <Label layoutX="426.0" layoutY="161.0" text="Categoría" />
+      <Label layoutX="425.0" layoutY="200.0" text="Ubicación" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2b85b" height="57.0" layoutY="-2.0" stroke="#f2b85b" strokeType="INSIDE" width="750.0" />
+      <Text layoutX="289.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar Productos">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Label layoutX="384.0" layoutY="84.0" text="Precio de compra" />
+      <TextField fx:id="PreCompraP" layoutX="491.0" layoutY="80.0" />
+      <ComboBox fx:id="catPCb" layoutX="490.0" layoutY="157.0" prefWidth="150.0" />
+      <ComboBox fx:id="ubiPCb" layoutX="490.0" layoutY="196.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
