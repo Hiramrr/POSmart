@@ -27,6 +27,18 @@ public class AccesosRapidosController {
         }
     }
 
+    @FXML
+    private void handleButtonEmpleado(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditarEmpleado.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

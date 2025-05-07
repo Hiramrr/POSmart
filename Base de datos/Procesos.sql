@@ -61,6 +61,37 @@ DELIMITER ;
 
 DROP PROCEDURE agregar_usuario;
 
+/*Permite editar datos de un usuario*/
+DELIMITER //
+CREATE PROCEDURE editar_usuario(
+    IN p_id INT,
+    IN p_nombre_usuario VARCHAR(20),
+    IN p_contraseña VARCHAR(50),
+    IN p_nombre_completo VARCHAR(50),
+    IN p_rol VARCHAR(20),
+    IN p_telefono VARCHAR(15),
+    IN p_ciudad VARCHAR(30),
+    IN p_direccion VARCHAR(100)
+)
+BEGIN
+    UPDATE Usuario
+    SET Nombre_usuario = p_nombre_usuario,
+        Contraseña = p_contraseña,
+        Nombre_completo = p_nombre_completo,
+        Rol = p_rol,
+        Telefono = p_telefono,
+        Ciudad = p_ciudad,
+        Direccion = p_direccion
+    WHERE id_Usuario = p_id;
+
+    SELECT id_Usuario
+    FROM Usuario
+    WHERE id_Usuario = p_id;
+END$$
+
+DELIMITER ;
+
+
 /*Agregar Proveedor*/
 DELIMITER //
 
