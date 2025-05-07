@@ -6,22 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductosController">
-   <children>
-      <TableView id="TProductos" fx:id="TProductos" layoutX="24.0" layoutY="24.0" prefHeight="427.0" prefWidth="876.0">
-         <columns>
-            <TableColumn fx:id="IDCol" prefWidth="106.39999961853027" text="ID" />
-            <TableColumn fx:id="NomCol" prefWidth="207.19998168945312" text="Nombre" />
-            <TableColumn fx:id="DesCol" prefWidth="220.79995727539062" text="Descripción" />
-            <TableColumn fx:id="CantCol" minWidth="7.33331298828125" prefWidth="192.0" text="Cantidad" />
-            <TableColumn fx:id="PrecioCol" minWidth="7.20001220703125" prefWidth="139.2000732421875" text="Precio" />
-         </columns>
-      </TableView>
-      <Button id="OpAgregar" layoutX="232.0" layoutY="543.0" mnemonicParsing="false" onAction="#agregarProducto" style="-fx-background-color: F2B85BFF;" text="Agregar" />
-      <Button id="OpEliminar" fx:id="OpEliminar" layoutX="416.0" layoutY="543.0" mnemonicParsing="false" onAction="#eliminarProducto" style="-fx-background-color: F2B85BFF;" text="Eliminar" />
-      <Button id="OpEditar" fx:id="OpEditar" layoutX="325.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleEditarProducto" style="-fx-background-color: F2B85BFF;" text="Editar" />
-      <Button id="OpListar" layoutX="508.0" layoutY="543.0" mnemonicParsing="false" style="-fx-background-color: F2B85BFF;" text="Listar" />
-      <Button id="OpConsultar" layoutX="592.0" layoutY="543.0" mnemonicParsing="false" style="-fx-background-color: F2B85BFF;" text="Consultar Producto" />
-      <ImageView id="ImgProducto" fitHeight="119.0" fitWidth="134.0" layoutX="405.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+         <children>
+                    <columns>
+                    </columns>
+                  </TableView>
    </children>
 </AnchorPane>
