@@ -42,7 +42,7 @@ public class AccesosRapidosController {
     @FXML
     private void handleAgregarProductos(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AgregarProductos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Productos.fxml"));
             Parent root = loader.load();
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);

@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f0304c9-2270-4ec7-a16f-21d0e9e55ddd" name="Changes" comment="Agregar empleado y editar" />
+    <list default="true" id="4f0304c9-2270-4ec7-a16f-21d0e9e55ddd" name="Changes" comment="Agregar empleado y editar">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/mostrarProductoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mostrarProducto.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ultimaSesion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.ultimaSesion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AccesosRapidosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AccesosRapidosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ProductosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ProductosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Productos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Productos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AgregarProductos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AgregarProductos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Productos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Productos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/AccesosRapidosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/AccesosRapidosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/AgregarUbicacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/AgregarUbicacionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/BuscarProveedoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/BuscarProveedoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/ProductosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/ProductosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/principal.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +31,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -20,18 +39,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "SarahBaez"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SarahBaez&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Hiramrr/POSmart",
-    "accountId": "e68e1e33-b995-46c4-b418-fde34d40959d"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Hiramrr/POSmart.git&quot;,
+    &quot;accountId&quot;: &quot;64a1b04a-fec8-449e-a45c-ea243891f765&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -41,17 +60,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/miche/OneDrive/Escritorio/POSmart",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sarij\IdeaProjects\POSmart\src\main\java\controllers" />
@@ -59,15 +87,24 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="application.App" />
       <module name="HolaJavaFx" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\sarij\Downloads\openjfx-23.0.2_windows-x64_bin-sdk\javafx-sdk-23.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\javafx-sdk-23.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4f0304c9-2270-4ec7-a16f-21d0e9e55ddd" name="Changes" comment="" />
@@ -75,6 +112,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1745849295052</updated>
+      <workItem from="1746627873797" duration="180000" />
+      <workItem from="1746638457635" duration="46000" />
+      <workItem from="1746660884737" duration="3650000" />
     </task>
     <task id="LOCAL-00001" summary="Agregar empleado y editar">
       <option name="closed" value="true" />
@@ -102,6 +142,9 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
