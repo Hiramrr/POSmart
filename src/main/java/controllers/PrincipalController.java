@@ -23,6 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class PrincipalController {
+    private String rol;
+
     @FXML
     private Text dia;
 
@@ -40,6 +42,7 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
+        System.out.println("Rol: " + rol);
         obtenerDia();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/accesosRapidos.fxml"));

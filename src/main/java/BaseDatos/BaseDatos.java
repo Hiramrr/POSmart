@@ -28,6 +28,19 @@ public class BaseDatos {
         }
     }
 
+    public String saberRol(String username, String password) {
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("CALL obtener_rol('" + username + "', '" + password + "')");
+            if (resultado.next()) {
+                return resultado.getString("Rol"); // Devuelve el valor de la columna Rol
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener rol: " + e.getMessage());
+        }
+        return null;
+    }
+
     public boolean seConecto() {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/POSMart", "Hiram", "coco123");
