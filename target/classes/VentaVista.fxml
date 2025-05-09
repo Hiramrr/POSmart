@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VentaVistaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="914.0" stylesheets="@styles_ventas.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VentaVistaController">
    <children>
       <TextField layoutX="126.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" promptText="Buscr Producto....                                               🔍" />
       <ScrollPane layoutX="14.0" layoutY="98.0" prefHeight="608.0" prefWidth="533.0">

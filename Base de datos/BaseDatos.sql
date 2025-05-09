@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.41, for macos15 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: PoSmart
+-- Host: localhost    Database: posmart
 -- ------------------------------------------------------
--- Server version	9.2.0
+-- Server version	9.0.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Categoria`
+-- Table structure for table `categoria`
 --
 
-DROP TABLE IF EXISTS `Categoria`;
+DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Categoria` (
+CREATE TABLE `categoria` (
   `id_Categoria` int NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Descripcion` varchar(3000) DEFAULT NULL,
@@ -31,23 +31,23 @@ CREATE TABLE `Categoria` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Categoria`
+-- Dumping data for table `categoria`
 --
 
-LOCK TABLES `Categoria` WRITE;
-/*!40000 ALTER TABLE `Categoria` DISABLE KEYS */;
-INSERT INTO `Categoria` VALUES (1,'Gatos','Aqui se agregaran todos los productos de gatos');
-/*!40000 ALTER TABLE `Categoria` ENABLE KEYS */;
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Gatos','Aqui se agregaran todos los productos de gatos'),(2,'Bebidas','Productos líquidos como jugos, refrescos, aguas y otras bebidas.'),(3,'Comida Rápida','Productos listos para consumir como hamburguesas, papas fritas, y snacks.'),(4,'Postres','Dulces y productos de repostería como pasteles, helados y galletas.');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Compra`
+-- Table structure for table `compra`
 --
 
-DROP TABLE IF EXISTS `Compra`;
+DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Compra` (
+CREATE TABLE `compra` (
   `id_compra` int NOT NULL,
   `fecha_compra` date NOT NULL,
   `total` int NOT NULL,
@@ -56,28 +56,28 @@ CREATE TABLE `Compra` (
   PRIMARY KEY (`id_compra`),
   KEY `id_Proveedor` (`id_Proveedor`),
   KEY `id_Usuario` (`id_Usuario`),
-  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `Usuario` (`id_Usuario`)
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
+  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `usuario` (`id_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Compra`
+-- Dumping data for table `compra`
 --
 
-LOCK TABLES `Compra` WRITE;
-/*!40000 ALTER TABLE `Compra` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Compra` ENABLE KEYS */;
+LOCK TABLES `compra` WRITE;
+/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Detalle_compra`
+-- Table structure for table `detalle_compra`
 --
 
-DROP TABLE IF EXISTS `Detalle_compra`;
+DROP TABLE IF EXISTS `detalle_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Detalle_compra` (
+CREATE TABLE `detalle_compra` (
   `id_Detalle` int NOT NULL,
   `id_Producto` int NOT NULL,
   `id_Compra` int NOT NULL,
@@ -86,54 +86,54 @@ CREATE TABLE `Detalle_compra` (
   PRIMARY KEY (`id_Detalle`),
   KEY `id_Producto` (`id_Producto`),
   KEY `id_Compra` (`id_Compra`),
-  CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`),
-  CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `Compra` (`id_compra`)
+  CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`),
+  CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `compra` (`id_compra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Detalle_compra`
+-- Dumping data for table `detalle_compra`
 --
 
-LOCK TABLES `Detalle_compra` WRITE;
-/*!40000 ALTER TABLE `Detalle_compra` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Detalle_compra` ENABLE KEYS */;
+LOCK TABLES `detalle_compra` WRITE;
+/*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Producto_Proveedor`
+-- Table structure for table `producto_proveedor`
 --
 
-DROP TABLE IF EXISTS `Producto_Proveedor`;
+DROP TABLE IF EXISTS `producto_proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Producto_Proveedor` (
+CREATE TABLE `producto_proveedor` (
   `id_Proveedor` int NOT NULL,
   `id_Producto` int NOT NULL,
   KEY `id_Proveedor` (`id_Proveedor`),
   KEY `id_Producto` (`id_Producto`),
-  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
+  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
+  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Producto_Proveedor`
+-- Dumping data for table `producto_proveedor`
 --
 
-LOCK TABLES `Producto_Proveedor` WRITE;
-/*!40000 ALTER TABLE `Producto_Proveedor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Producto_Proveedor` ENABLE KEYS */;
+LOCK TABLES `producto_proveedor` WRITE;
+/*!40000 ALTER TABLE `producto_proveedor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `producto_proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Productos`
+-- Table structure for table `productos`
 --
 
-DROP TABLE IF EXISTS `Productos`;
+DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Productos` (
+CREATE TABLE `productos` (
   `id_Producto` int NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Descripcion` varchar(200) DEFAULT NULL,
@@ -145,28 +145,29 @@ CREATE TABLE `Productos` (
   PRIMARY KEY (`id_Producto`),
   KEY `id_categoria` (`id_categoria`),
   KEY `id_ubicacion` (`id_ubicacion`),
-  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `Categoria` (`id_Categoria`),
-  CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_ubicacion`) REFERENCES `Ubicacion` (`id_Ubicacion`)
+  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_Categoria`),
+  CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_ubicacion`) REFERENCES `ubicacion` (`id_Ubicacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Productos`
+-- Dumping data for table `productos`
 --
 
-LOCK TABLES `Productos` WRITE;
-/*!40000 ALTER TABLE `Productos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Productos` ENABLE KEYS */;
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',120,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',80,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',100,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',60,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',50,12,20,3,1);
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Proveedor`
+-- Table structure for table `proveedor`
 --
 
-DROP TABLE IF EXISTS `Proveedor`;
+DROP TABLE IF EXISTS `proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Proveedor` (
+CREATE TABLE `proveedor` (
   `id_Proveedor` int NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Telefono` varchar(30) NOT NULL,
@@ -177,22 +178,22 @@ CREATE TABLE `Proveedor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Proveedor`
+-- Dumping data for table `proveedor`
 --
 
-LOCK TABLES `Proveedor` WRITE;
-/*!40000 ALTER TABLE `Proveedor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Proveedor` ENABLE KEYS */;
+LOCK TABLES `proveedor` WRITE;
+/*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Ubicacion`
+-- Table structure for table `ubicacion`
 --
 
-DROP TABLE IF EXISTS `Ubicacion`;
+DROP TABLE IF EXISTS `ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Ubicacion` (
+CREATE TABLE `ubicacion` (
   `id_Ubicacion` int NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Descripcion` varchar(3000) DEFAULT NULL,
@@ -201,23 +202,23 @@ CREATE TABLE `Ubicacion` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Ubicacion`
+-- Dumping data for table `ubicacion`
 --
 
-LOCK TABLES `Ubicacion` WRITE;
-/*!40000 ALTER TABLE `Ubicacion` DISABLE KEYS */;
-INSERT INTO `Ubicacion` VALUES (1,'Estanteria #5','Es la estanteria que esta a la derecha de la entrada');
-/*!40000 ALTER TABLE `Ubicacion` ENABLE KEYS */;
+LOCK TABLES `ubicacion` WRITE;
+/*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
+INSERT INTO `ubicacion` VALUES (1,'Estanteria #5','Es la estanteria que esta a la derecha de la entrada'),(2,'Almacén Principal','Ubicación principal de almacenamiento de productos antes de ser exhibidos.'),(3,'Mostrador','Zona frontal donde se exhiben los productos listos para la venta.'),(4,'Cámara Fría','Área refrigerada destinada a conservar productos perecederos.');
+/*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Usuario`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `Usuario`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Usuario` (
+CREATE TABLE `usuario` (
   `id_Usuario` int NOT NULL,
   `Nombre_usuario` varchar(50) NOT NULL,
   `Contraseña` varchar(100) NOT NULL,
@@ -231,21 +232,21 @@ CREATE TABLE `Usuario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Usuario`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `Usuario` WRITE;
-/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'Miyu','123','Miyu Maldonado','Administrador','2284246692','Xalapa','Los lagos #1'),(2,'Coco','Manzana123','Coco Maldonado','Empleado','2283256672','Xalapa','FEI'),(3,'Prueba','123','Prueba de agregar','Administrador','23214312312','Ninguna','calle');
-/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Miyu','123','Miyu Maldonado','Administrador','2284246692','Xalapa','Los lagos #1'),(2,'Coco','Manzana123','Coco Maldonado','Empleado','2283256672','Xalapa','FEI'),(3,'Prueba','123','Prueba de agregar','Administrador','23214312312','Ninguna','calle');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'PoSmart'
+-- Dumping events for database 'posmart'
 --
 
 --
--- Dumping routines for database 'PoSmart'
+-- Dumping routines for database 'posmart'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `agregar_Categoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -545,6 +546,31 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_rol` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`localhost` PROCEDURE `obtener_rol`(
+    IN nombre_user VARCHAR(50),
+    IN contraseña_user VARCHAR(100)
+)
+BEGIN
+    SELECT Rol
+    FROM Usuario
+    WHERE Nombre_usuario = nombre_user
+      AND Contraseña = contraseña_user;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `validacion_usuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -577,4 +603,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-04 22:04:02
+-- Dump completed on 2025-05-09 11:57:53
