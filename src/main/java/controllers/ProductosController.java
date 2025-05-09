@@ -169,16 +169,32 @@ public class ProductosController {
     @FXML
     private void consultarProducto(ActionEvent event) {
         System.out.println("Consultar Producto");
+
+        Producto productoSeleccionado = TProductos.getSelectionModel().getSelectedItem();
+
+            if (productoSeleccionado == null) {
+            mostrarAlerta("Sin selección", "Por favor, selecciona un producto para consultar.");
+            return;
+            }
+
+            try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mostrarProducto.fxml"));
+            Parent root = loader.load();
+
+            mostrarProductoController controller = loader.getController();
+            controller.setProducto(productoSeleccionado);
+
+            Stage stage = new Stage();
+            stage.setTitle("Detalles del Producto");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de detalles.");
+        }
     }
 
-    private void llenarCampos(Producto producto) {
-        IDCol.setText(String.valueOf(producto.getId()));
-        NomCol.setText(producto.getNombre());
-        DesCol.setText(producto.getDescripcion());
-        CantCol.setText(String.valueOf(producto.getCantidad()));
-        PrecioCol.setText(String.valueOf(producto.getPrecioVenta()));  // Asegúrate que esto sea "precio venta"
-          // Nuevo campo
-    }
 
 
 
@@ -206,9 +222,11 @@ public class ProductosController {
                 e.printStackTrace();
             }
         } else {
-            // Mostrar alerta: No se ha seleccionado un producto
+            mostrarAlerta("Sin selección", "No se ha seleccionado un producto");
         }
     }
+
+
 
 }
 

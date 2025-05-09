@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,13 +13,16 @@
 
 <AnchorPane prefHeight="800" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditarEmpleadoController">
     <children>
-        <TableView fx:id="tablaEmpleados" layoutX="50.0" layoutY="428.0" prefHeight="200" prefWidth="900">
+        <TableView fx:id="tablaEmpleados" layoutX="34.0" layoutY="427.0" prefHeight="200" prefWidth="929.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="50" text="ID" />
-                <TableColumn fx:id="colNombre" prefWidth="150" text="Nombre" />
-                <TableColumn fx:id="colNombreCompleto" prefWidth="200" text="Nombre Completo" />
-                <TableColumn fx:id="colRol" prefWidth="150" text="Rol" />
-                <TableColumn fx:id="colTelefono" prefWidth="150" text="Teléfono" />
+                <TableColumn fx:id="colNombre" prefWidth="110.6666488647461" text="Nombre" />
+                <TableColumn fx:id="colContraseña" prefWidth="150.00001525878906" text="Contrasena" />
+                <TableColumn fx:id="colNombreCompleto" prefWidth="120.66668701171875" text="Nombre completo" />
+                <TableColumn fx:id="colTelefono" prefWidth="126.66677856445312" text="Teléfono" />
+            <TableColumn fx:id="colCiudad" prefWidth="122.6666259765625" text="Ciudad" />
+            <TableColumn fx:id="colDireccion" prefWidth="116.66668701171875" text="Direccion" />
+            <TableColumn fx:id="colRol" prefWidth="130.6666259765625" text="Rol" />
             </columns>
         </TableView>
 
@@ -40,5 +44,17 @@
             <Font size="27.0" />
          </font>
       </Text>
+      <VBox layoutX="202.0" layoutY="122.0" prefHeight="275.0" prefWidth="137.0">
+         <children>
+            <Label prefHeight="63.0" prefWidth="206.0" text="id:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Nombre:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Contraseña:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Nombre completo:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Teléfono:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Ciudad:" />
+            <Label prefHeight="63.0" prefWidth="206.0" text="Dirección:" />
+            <Label prefHeight="63.0" prefWidth="203.0" text="Rol:" />
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

@@ -10,8 +10,8 @@ public class Empleado {
     private String ciudad;
     private String direccion;
 
-    // Constructor
-    public Empleado(int id, String nombre, String contraseña, String nombreCompleto, String rol, String telefono, String ciudad, String direccion) {
+    public Empleado(int id, String nombre, String contraseña, String nombreCompleto,
+                    String rol, String telefono, String ciudad, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
@@ -22,7 +22,6 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    // Getters
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public String getContraseña() { return contraseña; }
@@ -32,4 +31,3 @@ public class Empleado {
     public String getCiudad() { return ciudad; }
     public String getDireccion() { return direccion; }
 }
-
