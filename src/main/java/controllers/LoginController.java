@@ -44,6 +44,8 @@ public class LoginController implements Initializable {
     @FXML
     private Text titulo;
 
+    AlertPOSmart alerta;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!mBD.seConecto()){
@@ -85,11 +87,7 @@ public class LoginController implements Initializable {
         Boolean exito = mBD.validarUsuario(username, password);
 
         if (!exito) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta de Login");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuario o contraseña inválidos");
-            alert.showAndWait();
+            alerta = new AlertPOSmart(AlertType.ERROR, "Alerta de Login", "Usuario o contraseña inválidos");
             return;
         }
 
@@ -100,11 +98,7 @@ public class LoginController implements Initializable {
         String rol = mBD.saberRol(username, password);
 
         if (rol == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("No se pudo determinar el rol del usuario.");
-            alert.showAndWait();
+            alerta = new AlertPOSmart(AlertType.ERROR, "Error", "No se pudo determinar el rol del usuario.");
             return;
         }
 

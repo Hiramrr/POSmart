@@ -30,7 +30,7 @@ public class AccesosRapidosController {
     @FXML
     private void handleButtonEmpleado(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditarEmpleado.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionEmpleado.fxml"));
             Parent root = loader.load();
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);
@@ -54,7 +54,7 @@ public class AccesosRapidosController {
     @FXML
     private void handleButtonUbicaciones(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarUbicacion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gestionarUbicacion.fxml"));
             Parent root = loader.load();
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);
@@ -66,7 +66,7 @@ public class AccesosRapidosController {
     @FXML
     private void handleButtonCategoria(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarCategoria.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gestionarCategoria.fxml"));
             Parent root = loader.load();
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);

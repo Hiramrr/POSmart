@@ -116,7 +116,7 @@ public class PrincipalController {
     @FXML
     void handleAgregarProovedor(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/agregarProveedores.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gestionarProveedores.fxml"));
             Parent root = loader.load();
             contenedor.getChildren().clear();
             contenedor.getChildren().add(root);

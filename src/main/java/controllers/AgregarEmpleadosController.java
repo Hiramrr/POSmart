@@ -1,6 +1,6 @@
 package controllers;
 
-import BaseDatos.BaseDatos;
+import BaseDatos.AgregarEmpleado_DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AgregarEmpleadosController implements Initializable {
-    BaseDatos mBD = new BaseDatos();
+    AgregarEmpleado_DAO mBD = new AgregarEmpleado_DAO();
 
     @FXML
     private ComboBox<String> rolOpciones;
@@ -44,6 +44,9 @@ public class AgregarEmpleadosController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(!mBD.conexion()){
+            AlertPOSmart alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Alerta de base de datos", "No se encontro la conexion con la base de datos, contacta a un administrador");
+        }
         ObservableList<String> rol = FXCollections.observableArrayList("Empleado", "Administrador");
         rolOpciones.setItems(rol);
 

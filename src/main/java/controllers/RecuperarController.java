@@ -1,9 +1,10 @@
 package controllers;
 
-import BaseDatos.BaseDatos;
+import BaseDatos.Recuperar_DAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,9 +17,11 @@ import jdk.jfr.Event;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class RecuperarController {
-    BaseDatos mBD = new BaseDatos();
+public class RecuperarController implements Initializable {
+    Recuperar_DAO mBD = new Recuperar_DAO();
 
     @FXML
     private TextField nombre_completo;
@@ -33,6 +36,13 @@ public class RecuperarController {
     private Button cambiar;
 
     AlertPOSmart alerta;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(!mBD.conexion()){
+            AlertPOSmart alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Alerta de base de datos", "No se encontro la conexion con la base de datos, contacta a un administrador");
+        }
+    }
 
     @FXML
     void handleCambiar(ActionEvent event){
