@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
@@ -21,29 +23,27 @@ public class VentaVistaController {
 
     private double total = 0.0;
 
+    @FXML
+    private TextField busquedaField;
+
+    private List<Producto> todosLosProductos;
+
     public void initialize() {
         BaseDatos bd = new BaseDatos();
-        List<Producto> productos = bd.obtenerProductos(); // Llama a tu DAO o DB aquí
-        for (Producto producto : productos) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/CartasProductos.fxml"));
-                Node card = loader.load();
-                FlowPane.setMargin(card, new Insets(10));
-                CartaProductoController controller = loader.getController();
-                controller.setProducto(producto);
+        todosLosProductos = bd.obtenerProductos();
+        mostrarProductos(todosLosProductos);
+        busquedaField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String filtro = newValue.trim().toLowerCase(); // Elimina espacios extras y pasa a minúsculas
 
-                // Detectar doble clic
-                card.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2) {
-                        agregarProductoACesta(producto);
-                    }
-                });
+            List<Producto> filtrados = todosLosProductos.stream()
+                    .filter(p -> p.getNombre().toLowerCase().contains(filtro) ||
+                            p.getCategoria().toLowerCase().contains(filtro) ||
+                            p.getDescripcion().toLowerCase().contains(filtro) ||
+                            p.getUbicacion().toLowerCase().contains(filtro))
+                    .toList();
 
-                flowPaneProductos.getChildren().add(card);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+            mostrarProductos(filtrados);
+        });
     }
 
     private void agregarProductoACesta(Producto producto) {
@@ -110,6 +110,66 @@ public class VentaVistaController {
         totalLabel.setText("$" + String.format("%.2f", total));
     }
 
+    private void mostrarProductos(List<Producto> productos) {
+        flowPaneProductos.getChildren().clear();
+
+        for (Producto producto : productos) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/CartasProductos.fxml"));
+                Node card = loader.load();
+                FlowPane.setMargin(card, new Insets(10));
+                CartaProductoController controller = loader.getController();
+                controller.setProducto(producto);
+
+                card.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2) {
+                        agregarProductoACesta(producto);
+                    }
+                });
+                flowPaneProductos.getChildren().add(card);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void finalizarCompra() {
+        if (AlertaUtil.confirmar("Confirmar Compra", "¿Estás seguro de finalizar la compra?")) {
+            BaseDatos bd = new BaseDatos();
+
+            for (Node node : vboxVenta.getChildren()) {
+                if (node instanceof HBox hbox) {
+                    String nombreProducto = (String) hbox.getUserData();
+                    Label cantidadLabel = (Label) hbox.lookup(".cart-qty");
+                    int cantidadVendida = Integer.parseInt(cantidadLabel.getText());
+
+                    Producto productoOriginal = todosLosProductos.stream()
+                            .filter(p -> p.getNombre().equals(nombreProducto))
+                            .findFirst()
+                            .orElse(null);
+
+                    if (productoOriginal != null) {
+                        int nuevoStock = productoOriginal.getCantidad() - cantidadVendida;
+                        productoOriginal.setCantidad(nuevoStock);
+
+                        if (nuevoStock <= 0) {
+                            bd.eliminarProductoDeBaseDeDatos(productoOriginal.getId());
+                        } else {
+                            bd.actualizarProductoEnBaseDeDatos(productoOriginal);
+                        }
+                    }
+                }
+            }
+
+            vboxVenta.getChildren().clear();
+            total = 0.0;
+            totalLabel.setText("$0.00");
+            todosLosProductos = bd.obtenerProductos();
+            mostrarProductos(todosLosProductos);
+
+            AlertaUtil.mostrarInfo("Compra Finalizada", "La compra se realizó con éxito.");
+        }
+    }
 
 
 }
