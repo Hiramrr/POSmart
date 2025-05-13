@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="706.0" prefWidth="914.0" stylesheets="styles_AgregarProveedor.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MostrarubicacionesController">
+   <children>
+      <Label layoutX="386.0" layoutY="23.0" text="Ubicaciones">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableUbicacion" fixedCellSize="50.0" layoutX="38.0" layoutY="82.0" prefHeight="585.0" prefWidth="845.0">
+         <columns>
+            <TableColumn fx:id="idUbicacion" prefWidth="79.0" text="Id" />
+            <TableColumn fx:id="nombreUbicacion" prefWidth="348.0" text="Nombre Ubicación" />
+            <TableColumn fx:id="descripcionUbicacion" prefWidth="417.0" text="Descripción" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

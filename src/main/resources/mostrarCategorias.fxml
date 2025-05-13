@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="706.0" prefWidth="914.0" stylesheets="styles_AgregarProveedor.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MostrarCategoriasController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="394.0" layoutY="22.0" text="Categorias">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaCategoria" fixedCellSize="50.0" layoutX="50.0" layoutY="83.0" prefHeight="554.0" prefWidth="816.0">
+         <columns>
+            <TableColumn fx:id="idCategoria" prefWidth="81.0" text="Id" />
+            <TableColumn fx:id="nombreCategoria" prefWidth="324.0" text="Nombre" />
+            <TableColumn fx:id="descripcionCategoria" prefWidth="409.0" text="Descripción" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

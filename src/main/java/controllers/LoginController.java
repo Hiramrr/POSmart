@@ -55,6 +55,7 @@ public class LoginController implements Initializable {
             alert.setContentText("No se encontro la conexion con la base de datos, contacta a un administrador");
             alert.showAndWait();
         }
+        leerUltimaSesion();
     }
 
     @FXML
@@ -91,10 +92,6 @@ public class LoginController implements Initializable {
             return;
         }
 
-        if (recordarDatos.isSelected()) {
-            guardarDatos();
-        }
-
         String rol = mBD.saberRol(username, password);
 
         if (rol == null) {
@@ -102,19 +99,27 @@ public class LoginController implements Initializable {
             return;
         }
 
+        if (recordarDatos.isSelected()) {
+            guardarDatos(rol);
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bienvenido");
         alert.setHeaderText(null);
-        alert.setContentText("Bienvenido de vuelta " + txtUser.getText() + " (" + rol + ")!");
+        alert.setContentText("Bienvenido de vuelta " + username + " (" + rol + ")!");
         alert.showAndWait();
 
+        // Cargar la vista adecuada según el rol
+        cargarVistaPorRol(rol);
+    }
+
+    private void cargarVistaPorRol(String rol) {
         if (rol.equalsIgnoreCase("administrador")) {
             cargarVentantaPrincipal();
         } else {
             cargarVistaCajero();
         }
     }
-
 
     public void cargarVentantaPrincipal(){
         try {
@@ -136,10 +141,10 @@ public class LoginController implements Initializable {
     public void cargarVistaCajero() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/VistaCajero.fxml"));
-            Parent pane = loader.load(); // Cambié AnchorPane a Parent
+            Parent pane = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Cajero - POSmart");
-            stage.setScene(new Scene(pane)); // Se usa Parent aquí
+            stage.setScene(new Scene(pane));
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
             Stage currentStage = (Stage) this.txtUser.getScene().getWindow();
             currentStage.close();
@@ -149,11 +154,64 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void guardarDatos() {
+    public void guardarDatos(String rol) {
         try (BufferedWriter datos = new BufferedWriter(new FileWriter(".ultimaSesion.txt"))) {
-            datos.write(txtUser.getText() + "\n" + txtPassword.getText() );
+            datos.write(txtUser.getText() + "\n" + txtPassword.getText() + "\n" + rol);
         } catch (IOException e) {
             System.err.println("ojala no pase esto: " + e.getMessage());
+        }
+    }
+
+    public void leerUltimaSesion() {
+        File archivoSesion = new File(".ultimaSesion.txt");
+
+        if (archivoSesion.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(archivoSesion))) {
+                String usuarioGuardado = br.readLine();
+                String passwordGuardado = br.readLine();
+                String rolGuardado = br.readLine();
+                System.out.println("Rol guardado: " + rolGuardado);
+
+                // Si los datos están en el archivo, los ponemos en los campos
+                if (usuarioGuardado != null && passwordGuardado != null && rolGuardado != null) {
+                    txtUser.setText(usuarioGuardado);
+                    txtPassword.setText(passwordGuardado);
+                    recordarDatos.setSelected(true);
+
+                    // Validamos las credenciales automáticamente
+                    Boolean exito = mBD.validarUsuario(usuarioGuardado, passwordGuardado);
+
+                    if (exito) {
+                        // Si las credenciales son correctas, verificamos el rol actual
+                        String rolActual = mBD.saberRol(usuarioGuardado, passwordGuardado);
+
+                        // Si el rol obtenido de la base de datos coincide con el rol guardado
+                        if (rolActual != null && rolActual.equalsIgnoreCase(rolGuardado)) {
+                            // Realizamos el login automáticamente
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Bienvenido");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Bienvenido de vuelta " + usuarioGuardado + " (" + rolGuardado + ")!");
+                            alert.showAndWait();
+
+                            // Cargar la vista según el rol guardado
+                            cargarVistaPorRol(rolGuardado);
+                        } else {
+                            // Si los roles no coinciden, mostrar error
+                            System.out.println("Rol actual: " + rolActual + ", Rol guardado: " + rolGuardado);
+                            alerta = new AlertPOSmart(AlertType.ERROR, "Error",
+                                    "El rol del usuario ha cambiado desde la última sesión.");
+                            alerta.showAndWait();
+                        }
+                    } else {
+                        alerta = new AlertPOSmart(AlertType.ERROR, "Alerta de Login",
+                                "Usuario o contraseña guardados ya no son válidos.");
+                        alerta.showAndWait();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox fx:id="productCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="150.0" styleClass="product-card" stylesheets="@style_TarjetasProductos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CartaProductoController">
+   <children>
+      <ImageView fx:id="imagen" fitHeight="150.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="cartaNombre" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="product-name" text="Nombre del producto" textAlignment="CENTER" />
+      <Label fx:id="cartaPrecio" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="product-price" text="Precio$$$$$$$" textAlignment="CENTER" />
+   </children>
+</VBox>
