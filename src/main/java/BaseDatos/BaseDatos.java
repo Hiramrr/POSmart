@@ -220,4 +220,30 @@ public class BaseDatos {
         }
     }
 
+    public int obtenerIdUsuario(String username) {
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("SELECT id_Usuario FROM Usuario WHERE Nombre_usuario = '" + username + "'");
+            if (resultado.next()) {
+                return resultado.getInt("id_Usuario");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el id del usuario: " + e.getMessage());
+        }
+        return -1;  // Retorna -1 si no encuentra el usuario
+    }
+
+    public int obtenerIdProveedor(String nombreProveedor) {
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("SELECT id_Proveedor FROM Proveedor WHERE Nombre = '" + nombreProveedor + "'");
+            if (resultado.next()) {
+                return resultado.getInt("id_Proveedor");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el id del proveedor: " + e.getMessage());
+        }
+        return -1;  // Retorna -1 si no encuentra el proveedor
+    }
+
 }

@@ -4,16 +4,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
-public class VentaVistaController {
+import BaseDatos.Compras_DAO;
 
+
+public class VentaVistaController {
     @FXML
     private FlowPane flowPaneProductos;
     @FXML
@@ -27,9 +28,10 @@ public class VentaVistaController {
     private TextField busquedaField;
 
     private List<Producto> todosLosProductos;
+    private BaseDatos bd = new BaseDatos();
+
 
     public void initialize() {
-        BaseDatos bd = new BaseDatos();
         todosLosProductos = bd.obtenerProductos();
         mostrarProductos(todosLosProductos);
         busquedaField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -135,8 +137,44 @@ public class VentaVistaController {
 
     public void finalizarCompra() {
         if (AlertaUtil.confirmar("Confirmar Compra", "¿Estás seguro de finalizar la compra?")) {
-            BaseDatos bd = new BaseDatos();
+            // Crear una nueva instancia de CompraDAO
+            Compras_DAO comprasDAO = new Compras_DAO();
 
+            // Obtener el nombre de usuario (esto es solo un ejemplo, deberías tener el nombre del usuario logeado)
+            String username = "nombreDeUsuario";  // Asegúrate de obtener el usuario logeado correctamente
+            int idUsuario = bd.obtenerIdUsuario(username);
+
+            // Si no se pudo obtener el id del usuario
+            if (idUsuario == -1) {
+                AlertaUtil.mostrarError("Error", "No se pudo obtener el id del usuario.");
+                return;
+            }
+
+            // Obtener el id del proveedor (puedes obtenerlo de alguna lógica, por ejemplo, por nombre)
+            String nombreProveedor = "Proveedor A";  // Aquí deberías obtener el proveedor seleccionado
+            int idProveedor = bd.obtenerIdProveedor(nombreProveedor);
+
+            // Si no se pudo obtener el id del proveedor
+            if (idProveedor == -1) {
+                AlertaUtil.mostrarError("Error", "No se pudo obtener el id del proveedor.");
+                return;
+            }
+
+            // Obtener la fecha actual y el total de la compra
+            String fechaActual = LocalDate.now().toString(); // Suponiendo que usas LocalDate para obtener la fecha
+            double totalCompra = total; // Usar la variable total de la compra (ya es un double)
+
+            // Agregar la compra a la base de datos
+            boolean compraExitosa = comprasDAO.agregarCompra(fechaActual, totalCompra, idProveedor, idUsuario);
+            if (!compraExitosa) {
+                AlertaUtil.mostrarError("Error", "No se pudo registrar la compra.");
+                return;
+            }
+
+            // Obtener el id de la compra insertada
+            int idCompra = comprasDAO.obtenerUltimoIdCompra(); // Debes crear un método para obtener el último id insertado.
+
+            // Insertar los detalles de la compra
             for (Node node : vboxVenta.getChildren()) {
                 if (node instanceof HBox hbox) {
                     String nombreProducto = (String) hbox.getUserData();
@@ -152,24 +190,36 @@ public class VentaVistaController {
                         int nuevoStock = productoOriginal.getCantidad() - cantidadVendida;
                         productoOriginal.setCantidad(nuevoStock);
 
+                        // Actualizar el stock del producto en la base de datos
                         if (nuevoStock <= 0) {
                             bd.eliminarProductoDeBaseDeDatos(productoOriginal.getId());
                         } else {
                             bd.actualizarProductoEnBaseDeDatos(productoOriginal);
                         }
+
+                        // Agregar el detalle de la compra
+                        double montoFinal = cantidadVendida * productoOriginal.getPrecioVenta();
+                        boolean detalleExitoso = comprasDAO.agregarDetalleCompra(productoOriginal.getId(), idCompra, cantidadVendida, montoFinal);
+                        if (!detalleExitoso) {
+                            AlertaUtil.mostrarError("Error", "No se pudo registrar el detalle de la compra.");
+                            return;
+                        }
                     }
                 }
             }
 
+            // Limpiar la vista después de finalizar la compra
             vboxVenta.getChildren().clear();
             total = 0.0;
             totalLabel.setText("$0.00");
             todosLosProductos = bd.obtenerProductos();
             mostrarProductos(todosLosProductos);
 
+            // Mostrar mensaje de éxito
             AlertaUtil.mostrarInfo("Compra Finalizada", "La compra se realizó con éxito.");
         }
     }
+
 
 
 }

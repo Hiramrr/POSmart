@@ -31,7 +31,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <Button id="btnFinalizarCompra" fx:id="btnFinalizarCompra" onAction="#finalizarCompra" layoutX="83.0" layoutY="55.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="204.0" text="🛒 Finalizar Compra" />
+            <Button id="btnFinalizarCompra" fx:id="btnFinalizarCompra" layoutX="83.0" layoutY="55.0" mnemonicParsing="false" onAction="#finalizarCompra" prefHeight="40.0" prefWidth="204.0" text="🛒 Finalizar Compra" />
          </children>
       </Pane>
    </children>

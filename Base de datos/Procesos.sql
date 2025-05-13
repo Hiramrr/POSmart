@@ -317,3 +317,32 @@ END$$
 
 DELIMITER ;
 
+--Agregar compra
+DELIMITER //
+CREATE PROCEDURE agregar_Compra(
+    IN pfecha DATE,
+    IN ptotal DOUBLE,
+    IN pid_proveedor INT,
+    IN pid_usuario INT
+)
+BEGIN
+    INSERT INTO Compra (fecha_compra, total, id_Proveedor, id_Usuario)
+    VALUES (pfecha, ptotal, pid_proveedor, pid_usuario);
+END //
+DELIMITER ;
+
+
+--Agregar detalle de compra
+CREATE PROCEDURE agregar_DetalleCompra(
+    IN pid_producto INT,
+    IN pid_compra INT,
+    IN pcantidad INT,
+    IN pmonto_final DOUBLE
+)
+BEGIN
+    INSERT INTO Detalle_compra (id_Producto, id_Compra, Cantidad, Monto_final)
+    VALUES (pid_producto, pid_compra, pcantidad, pmonto_final);
+END //
+
+DELIMITER ;
+

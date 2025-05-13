@@ -53,23 +53,24 @@ CREATE TABLE Usuario (
 
 
 CREATE TABLE Compra (
-                        id_compra int PRIMARY KEY,
-                        fecha_compra date NOT NULL,
-                        total int NOT NULL,
-                        id_Proveedor int NOT NULL,
-                        id_Usuario int NOT NULL,
-                        FOREIGN KEY (id_Proveedor) REFERENCES Proveedor(id_Proveedor),
-                        FOREIGN KEY (id_Usuario) REFERENCES Usuario(id_Usuario)
+    id_compra INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_compra DATE NOT NULL,
+    total DOUBLE NOT NULL,
+    id_Proveedor INT NOT NULL,
+    id_Usuario INT NOT NULL,
+    FOREIGN KEY (id_Proveedor) REFERENCES Proveedor(id_Proveedor),
+    FOREIGN KEY (id_Usuario) REFERENCES Usuario(id_Usuario)
 );
 
+
 CREATE TABLE Detalle_compra (
-                                id_Detalle int PRIMARY KEY,
-                                id_Producto int NOT NULL,
-                                id_Compra int NOT NULL,
-                                Cantidad int NOT NULL,
-                                Monto_final int NOT NULL,
-                                FOREIGN KEY (id_Producto) REFERENCES Productos(id_Producto),
-                                FOREIGN KEY (id_Compra) REFERENCES Compra(id_Compra)
+    id_Detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_Producto INT NOT NULL,
+    id_Compra INT NOT NULL,
+    Cantidad INT NOT NULL,
+    Monto_final DOUBLE NOT NULL,
+    FOREIGN KEY (id_Producto) REFERENCES Productos(id_Producto),
+    FOREIGN KEY (id_Compra) REFERENCES Compra(id_Compra)
 );
 
 

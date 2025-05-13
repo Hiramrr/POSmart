@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: posmart
 -- ------------------------------------------------------
--- Server version	9.0.1
+-- Server version	8.0.42
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,9 +48,9 @@ DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `compra` (
-  `id_compra` int NOT NULL,
+  `id_compra` int NOT NULL AUTO_INCREMENT,
   `fecha_compra` date NOT NULL,
-  `total` int NOT NULL,
+  `total` double NOT NULL,
   `id_Proveedor` int NOT NULL,
   `id_Usuario` int NOT NULL,
   PRIMARY KEY (`id_compra`),
@@ -82,7 +82,7 @@ CREATE TABLE `detalle_compra` (
   `id_Producto` int NOT NULL,
   `id_Compra` int NOT NULL,
   `Cantidad` int NOT NULL,
-  `Monto_final` int NOT NULL,
+  `Monto_final` double NOT NULL,
   PRIMARY KEY (`id_Detalle`),
   KEY `id_Producto` (`id_Producto`),
   KEY `id_Compra` (`id_Compra`),
@@ -156,7 +156,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',120,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',80,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',100,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',60,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',50,12,20,3,1);
+INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',105,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',78,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',99,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',60,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',50,12,20,3,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,6 +183,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+INSERT INTO `proveedor` VALUES (1,'Proveedor A','555-1234','contacto@proveedora.com','Calle 123, Ciudad X'),(2,'Proveedor B','555-5678','contacto@proveedorb.com','Calle 456, Ciudad Y'),(3,'Proveedor C','555-8765','contacto@proveedorc.com','Calle 789, Ciudad Z');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,6 +271,56 @@ BEGIN
     SELECT id_Categoria AS Categoria_agregada
     FROM Categoria
     WHERE id_Categoria = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregar_Compra` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_Compra`(
+    IN pfecha DATE,
+    IN ptotal DOUBLE,
+    IN pid_proveedor INT,
+    IN pid_usuario INT
+)
+BEGIN
+    INSERT INTO Compra (fecha_compra, total, id_Proveedor, id_Usuario)
+    VALUES (pfecha, ptotal, pid_proveedor, pid_usuario);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregar_DetalleCompra` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_DetalleCompra`(
+    IN pid_producto INT,
+    IN pid_compra INT,
+    IN pcantidad INT,
+    IN pmonto_final DOUBLE
+)
+BEGIN
+    INSERT INTO Detalle_compra (id_Producto, id_Compra, Cantidad, Monto_final)
+    VALUES (pid_producto, pid_compra, pcantidad, pmonto_final);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -603,4 +654,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09 11:57:53
+-- Dump completed on 2025-05-13 15:07:42
