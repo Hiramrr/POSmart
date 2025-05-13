@@ -54,7 +54,7 @@
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button id="buttonOpciones" fx:id="agregarEmpleado1" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Historial de Ventas">
+            <Button id="buttonOpciones" fx:id="agregarEmpleado1" mnemonicParsing="false" onAction="#handlerHistorialVentas" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Historial de Ventas">
                <font>
                   <Font size="20.0" />
                </font>

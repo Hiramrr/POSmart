@@ -140,5 +140,17 @@ public class VistaCajeroController {
                 e.printStackTrace();
             }
         }
+
+        public void handlerHistorialVentas(){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/HistorialVentas.fxml"));
+                Parent root = loader.load();
+                contenedor.getChildren().clear();
+                contenedor.getChildren().add(root);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 }
 

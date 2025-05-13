@@ -58,7 +58,7 @@ CREATE TABLE `compra` (
   KEY `id_Usuario` (`id_Usuario`),
   CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
   CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `usuario` (`id_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +67,7 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES (1,'2025-05-13',18,1,2),(2,'2025-05-13',18,1,2),(3,'2025-05-13',18,1,2),(4,'2025-05-13',18,1,2),(5,'2025-05-13',8,1,2),(6,'2025-05-13',88,1,2),(7,'2025-05-13',8,1,2);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +79,7 @@ DROP TABLE IF EXISTS `detalle_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalle_compra` (
-  `id_Detalle` int NOT NULL,
+  `id_Detalle` int NOT NULL AUTO_INCREMENT,
   `id_Producto` int NOT NULL,
   `id_Compra` int NOT NULL,
   `Cantidad` int NOT NULL,
@@ -88,7 +89,7 @@ CREATE TABLE `detalle_compra` (
   KEY `id_Compra` (`id_Compra`),
   CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`),
   CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `compra` (`id_compra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +98,7 @@ CREATE TABLE `detalle_compra` (
 
 LOCK TABLES `detalle_compra` WRITE;
 /*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
+INSERT INTO `detalle_compra` VALUES (1,3,4,1,18),(2,1,5,1,8),(3,1,6,1,8),(4,4,6,1,35),(5,2,6,1,25),(6,5,6,1,20),(7,1,7,1,8);
 /*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +158,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',105,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',78,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',99,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',60,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',50,12,20,3,1);
+INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',102,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',77,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',96,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',59,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',49,12,20,3,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -654,4 +656,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-13 15:07:42
+-- Dump completed on 2025-05-13 17:15:37

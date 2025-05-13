@@ -103,13 +103,17 @@ public class LoginController implements Initializable {
             guardarDatos(rol);
         }
 
+        Sesion sesion = Sesion.getInstancia();
+        sesion.setIdUsuario(mBD.obtenerIdUsuario(username));
+        sesion.setRol(rol);
+        sesion.setNombreUsuario(username);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bienvenido");
         alert.setHeaderText(null);
         alert.setContentText("Bienvenido de vuelta " + username + " (" + rol + ")!");
         alert.showAndWait();
 
-        // Cargar la vista adecuada según el rol
         cargarVistaPorRol(rol);
     }
 

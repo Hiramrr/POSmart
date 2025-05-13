@@ -10,8 +10,8 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import controllers.Empleado;
-
+import controllers.Compra;
+import controllers.DetalleCompra;
 
 public class BaseDatos {
     private static Connection con;
@@ -244,6 +244,55 @@ public class BaseDatos {
             System.out.println("Error al obtener el id del proveedor: " + e.getMessage());
         }
         return -1;  // Retorna -1 si no encuentra el proveedor
+    }
+
+
+    public List<Compra> obtenerCompras() {
+        List<Compra> compras = new ArrayList<>();
+        String query = "SELECT c.id_compra, c.fecha_compra, c.total, p.Nombre AS proveedor, u.Nombre_completo AS usuario " +
+                "FROM Compra c " +
+                "JOIN Proveedor p ON c.id_Proveedor = p.id_Proveedor " +
+                "JOIN Usuario u ON c.id_Usuario = u.id_Usuario";
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                Compra compra = new Compra(
+                        rs.getInt("id_compra"),
+                        rs.getString("fecha_compra"),
+                        rs.getDouble("total"),
+                        rs.getString("proveedor"),
+                        rs.getString("usuario")
+                );
+                compras.add(compra);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return compras;
+    }
+
+    public List<DetalleCompra> obtenerDetallesCompra(int idCompra) {
+        List<DetalleCompra> detalles = new ArrayList<>();
+        String query = "SELECT p.Nombre AS producto, dc.Cantidad, p.Precio_venta, dc.Monto_final " +
+                "FROM Detalle_compra dc " +
+                "JOIN Productos p ON dc.id_Producto = p.id_Producto " +
+                "WHERE dc.id_Compra = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, idCompra);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    DetalleCompra detalle = new DetalleCompra(
+                            rs.getString("producto"),
+                            rs.getInt("Cantidad"),
+                            rs.getDouble("Precio_venta"),
+                            rs.getDouble("Monto_final")
+                    );
+                    detalles.add(detalle);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return detalles;
     }
 
 }

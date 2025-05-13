@@ -137,44 +137,38 @@ public class VentaVistaController {
 
     public void finalizarCompra() {
         if (AlertaUtil.confirmar("Confirmar Compra", "¿Estás seguro de finalizar la compra?")) {
-            // Crear una nueva instancia de CompraDAO
             Compras_DAO comprasDAO = new Compras_DAO();
+            comprasDAO.conexion();
 
-            // Obtener el nombre de usuario (esto es solo un ejemplo, deberías tener el nombre del usuario logeado)
-            String username = "nombreDeUsuario";  // Asegúrate de obtener el usuario logeado correctamente
+            // Obtener el username desde la sesión
+            String username = Sesion.getInstancia().getNombreUsuario();
             int idUsuario = bd.obtenerIdUsuario(username);
 
-            // Si no se pudo obtener el id del usuario
             if (idUsuario == -1) {
                 AlertaUtil.mostrarError("Error", "No se pudo obtener el id del usuario.");
                 return;
             }
 
-            // Obtener el id del proveedor (puedes obtenerlo de alguna lógica, por ejemplo, por nombre)
-            String nombreProveedor = "Proveedor A";  // Aquí deberías obtener el proveedor seleccionado
+            //Temporalmente por pruebas usar el mismo provedor para todos
+            String nombreProveedor = "Proveedor A";
             int idProveedor = bd.obtenerIdProveedor(nombreProveedor);
 
-            // Si no se pudo obtener el id del proveedor
             if (idProveedor == -1) {
                 AlertaUtil.mostrarError("Error", "No se pudo obtener el id del proveedor.");
                 return;
             }
 
-            // Obtener la fecha actual y el total de la compra
-            String fechaActual = LocalDate.now().toString(); // Suponiendo que usas LocalDate para obtener la fecha
-            double totalCompra = total; // Usar la variable total de la compra (ya es un double)
+            String fechaActual = LocalDate.now().toString();
+            double totalCompra = total;
 
-            // Agregar la compra a la base de datos
             boolean compraExitosa = comprasDAO.agregarCompra(fechaActual, totalCompra, idProveedor, idUsuario);
             if (!compraExitosa) {
                 AlertaUtil.mostrarError("Error", "No se pudo registrar la compra.");
                 return;
             }
 
-            // Obtener el id de la compra insertada
-            int idCompra = comprasDAO.obtenerUltimoIdCompra(); // Debes crear un método para obtener el último id insertado.
+            int idCompra = comprasDAO.obtenerUltimoIdCompra();
 
-            // Insertar los detalles de la compra
             for (Node node : vboxVenta.getChildren()) {
                 if (node instanceof HBox hbox) {
                     String nombreProducto = (String) hbox.getUserData();
@@ -190,14 +184,12 @@ public class VentaVistaController {
                         int nuevoStock = productoOriginal.getCantidad() - cantidadVendida;
                         productoOriginal.setCantidad(nuevoStock);
 
-                        // Actualizar el stock del producto en la base de datos
                         if (nuevoStock <= 0) {
                             bd.eliminarProductoDeBaseDeDatos(productoOriginal.getId());
                         } else {
                             bd.actualizarProductoEnBaseDeDatos(productoOriginal);
                         }
 
-                        // Agregar el detalle de la compra
                         double montoFinal = cantidadVendida * productoOriginal.getPrecioVenta();
                         boolean detalleExitoso = comprasDAO.agregarDetalleCompra(productoOriginal.getId(), idCompra, cantidadVendida, montoFinal);
                         if (!detalleExitoso) {
@@ -208,14 +200,12 @@ public class VentaVistaController {
                 }
             }
 
-            // Limpiar la vista después de finalizar la compra
             vboxVenta.getChildren().clear();
             total = 0.0;
             totalLabel.setText("$0.00");
             todosLosProductos = bd.obtenerProductos();
             mostrarProductos(todosLosProductos);
 
-            // Mostrar mensaje de éxito
             AlertaUtil.mostrarInfo("Compra Finalizada", "La compra se realizó con éxito.");
         }
     }

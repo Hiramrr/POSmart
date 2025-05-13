@@ -27,11 +27,9 @@ public class Compras_DAO implements GestionarCompras_DAO_Interface {
     public boolean agregarCompra(String fecha, double total, int idProveedor, int idUsuario) {
         try {
             consulta = con.createStatement();
-            String query = "CALL agregar_Compra(NULL, '" + fecha + "', '" + total + "', '" + idProveedor + "', '" + idUsuario + "')";
-            resultado = consulta.executeQuery(query);
-            if (resultado.next()) {
-                return true;
-            }
+            String query = "CALL agregar_Compra('" + fecha + "', " + total + ", " + idProveedor + ", " + idUsuario + ")";
+            int filasAfectadas = consulta.executeUpdate(query);
+            return filasAfectadas > 0;
         } catch (Exception e) {
             System.out.println("Error al insertar compra: " + e.getMessage());
         }
@@ -42,7 +40,7 @@ public class Compras_DAO implements GestionarCompras_DAO_Interface {
     public boolean agregarDetalleCompra(int idProducto, int idCompra, int cantidad, double montoFinal) {
         try {
             consulta = con.createStatement();
-            String query = "CALL agregar_DetalleCompra(NULL, '" + idProducto + "', '" + idCompra + "', '" + cantidad + "', '" + montoFinal + "')";
+            String query = "CALL agregar_DetalleCompra(" + idProducto + ", " + idCompra + ", " + cantidad + ", " + montoFinal + ")";
             int rowsAffected = consulta.executeUpdate(query);
             return rowsAffected > 0;
         } catch (Exception e) {
