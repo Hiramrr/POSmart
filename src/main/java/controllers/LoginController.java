@@ -1,6 +1,6 @@
 package controllers;
 
-import BaseDatos.BaseDatos;
+import BaseDatos.Login_DAO;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    BaseDatos mBD = new BaseDatos();
+    Login_DAO mBD = new Login_DAO();
 
     @FXML
     private TextField txtUser;
@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(!mBD.seConecto()){
+        if(!mBD.conexion()){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Alerta de base de datos");
             alert.setHeaderText(null);
@@ -108,11 +108,7 @@ public class LoginController implements Initializable {
         sesion.setRol(rol);
         sesion.setNombreUsuario(username);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Bienvenido");
-        alert.setHeaderText(null);
-        alert.setContentText("Bienvenido de vuelta " + username + " (" + rol + ")!");
-        alert.showAndWait();
+        alerta = new AlertPOSmart(AlertType.INFORMATION, "Bienvenido", "Bienvenido de vuelta " + username + " (" + rol + ")!");
 
         cargarVistaPorRol(rol);
     }
@@ -162,7 +158,7 @@ public class LoginController implements Initializable {
         try (BufferedWriter datos = new BufferedWriter(new FileWriter(".ultimaSesion.txt"))) {
             datos.write(txtUser.getText() + "\n" + txtPassword.getText() + "\n" + rol);
         } catch (IOException e) {
-            System.err.println("ojala no pase esto: " + e.getMessage());
+            alerta = new AlertPOSmart(AlertType.ERROR,"???", "Realmente no se como podria ocurrir este error, pero si ves este mensajen wow");
         }
     }
 
@@ -175,33 +171,18 @@ public class LoginController implements Initializable {
                 String passwordGuardado = br.readLine();
                 String rolGuardado = br.readLine();
                 System.out.println("Rol guardado: " + rolGuardado);
-
-                // Si los datos están en el archivo, los ponemos en los campos
                 if (usuarioGuardado != null && passwordGuardado != null && rolGuardado != null) {
                     txtUser.setText(usuarioGuardado);
                     txtPassword.setText(passwordGuardado);
                     recordarDatos.setSelected(true);
-
-                    // Validamos las credenciales automáticamente
                     Boolean exito = mBD.validarUsuario(usuarioGuardado, passwordGuardado);
 
                     if (exito) {
-                        // Si las credenciales son correctas, verificamos el rol actual
                         String rolActual = mBD.saberRol(usuarioGuardado, passwordGuardado);
-
-                        // Si el rol obtenido de la base de datos coincide con el rol guardado
                         if (rolActual != null && rolActual.equalsIgnoreCase(rolGuardado)) {
-                            // Realizamos el login automáticamente
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Bienvenido");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Bienvenido de vuelta " + usuarioGuardado + " (" + rolGuardado + ")!");
-                            alert.showAndWait();
-
-                            // Cargar la vista según el rol guardado
+                            alerta = new AlertPOSmart(AlertType.INFORMATION, "Bienvenido", "Bienvenido de vuelta " + usuarioGuardado + " (" + rolGuardado + ")!");
                             cargarVistaPorRol(rolGuardado);
                         } else {
-                            // Si los roles no coinciden, mostrar error
                             System.out.println("Rol actual: " + rolActual + ", Rol guardado: " + rolGuardado);
                             alerta = new AlertPOSmart(AlertType.ERROR, "Error",
                                     "El rol del usuario ha cambiado desde la última sesión.");
@@ -214,7 +195,7 @@ public class LoginController implements Initializable {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                alerta = new AlertPOSmart(AlertType.ERROR, "Error IO", e.toString());
             }
         }
     }

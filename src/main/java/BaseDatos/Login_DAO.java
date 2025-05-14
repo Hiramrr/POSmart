@@ -50,4 +50,17 @@ public class Login_DAO implements Login_DAO_Interface {
         }
         return false;
     }
+
+    public int obtenerIdUsuario(String username) {
+        try {
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery("SELECT id_Usuario FROM Usuario WHERE Nombre_usuario = '" + username + "'");
+            if (resultado.next()) {
+                return resultado.getInt("id_Usuario");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el id del usuario: " + e.getMessage());
+        }
+        return -1;
+    }
 }
