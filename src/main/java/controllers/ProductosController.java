@@ -35,6 +35,7 @@ public class ProductosController {
     @FXML private ImageView ImgProducto;
     @FXML private Text textDia;
     @FXML private Text textHora;
+    AlertPOSmart alerta;
 
     private BaseDatos baseDatos;
 
@@ -158,11 +159,7 @@ public class ProductosController {
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, titulo, mensaje);
     }
 
     public void ocultarBotonesParaCajero() {

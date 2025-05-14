@@ -2,6 +2,7 @@ package controllers;
 
 import BaseDatos.GestionarCategoria_DAO;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,11 +23,12 @@ public class MostrarCategoriasController {
     private TableColumn<Categoria, String> descripcionCategoria;
 
     private final GestionarCategoria_DAO dao = new GestionarCategoria_DAO();
+    AlertPOSmart alerta;
 
     @FXML
     private void initialize() {
         if (!dao.conexion()) {
-            System.err.println("Error: No se pudo conectar a la base de datos.");
+            alerta = new AlertPOSmart(Alert.AlertType.ERROR, "No hay conexion", "No hay conexion con la base de datos por favor contacta a un administrador");
             return;
         }
 

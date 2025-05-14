@@ -26,11 +26,9 @@ public class mostrarProductoController {
 
     private Producto producto;
 
-    // Método que se llama para inicializar el controlador con el producto
     public void setProducto(Producto producto) {
         this.producto = producto;
 
-        // Actualiza las etiquetas con la información del producto
         lblIdProducto.setText("ID: " + producto.getId());
         lblNombre.setText("Nombre: " + producto.getNombre());
         lblDescripcion.setText("Descripción: " + producto.getDescripcion());
@@ -41,7 +39,6 @@ public class mostrarProductoController {
         lblUbicacion.setText("Ubicación: " + producto.getUbicacion());
     }
 
-    // Método para cerrar la ventana de detalles
     @FXML
     private void cerrarVentana() {
         Stage stage = (Stage) lblNombre.getScene().getWindow();

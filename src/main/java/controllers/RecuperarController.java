@@ -40,7 +40,7 @@ public class RecuperarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!mBD.conexion()){
-            AlertPOSmart alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Alerta de base de datos", "No se encontro la conexion con la base de datos, contacta a un administrador");
+            alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Alerta de base de datos", "No se encontro la conexion con la base de datos, contacta a un administrador");
         }
     }
 

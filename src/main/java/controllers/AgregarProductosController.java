@@ -143,8 +143,7 @@ public class AgregarProductosController {
 
     @FXML
     private void handleCancelarProducto() {
-        System.out.println("Cancelando...");
-        limpiarCampos(); // Limpiar los campos
+        limpiarCampos();
         Stage stage = (Stage) CancelarP.getScene().getWindow();
         stage.close();
     }
@@ -161,7 +160,6 @@ public class AgregarProductosController {
         ubiPCb.getSelectionModel().clearSelection();
     }
 
-    //----------------------------------------------------------
     public void setProductosController(ProductosController productosController) {
         this.productosController = productosController;
     }

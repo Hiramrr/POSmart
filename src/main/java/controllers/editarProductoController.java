@@ -3,13 +3,11 @@ package controllers;
 import BaseDatos.BaseDatos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import controllers.Producto;
 
+import javax.management.ValueExp;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,6 +24,7 @@ public class editarProductoController {
 
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
+    AlertPOSmart alerta;
 
     // Método para recibir el producto seleccionado
     public void setProducto(Producto producto) {
@@ -137,11 +136,7 @@ public class editarProductoController {
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
     }
 
 }

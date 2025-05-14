@@ -30,6 +30,7 @@ public class GestionEmpleadoController implements Initializable {
     @FXML private TextField id, nombre, contraseña, nombre_completo, telefono, ciudad, direccion;
 
     ObservableList<Empleado> empleados = FXCollections.observableArrayList();
+    AlertPOSmart alerta;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -131,10 +132,6 @@ public class GestionEmpleadoController implements Initializable {
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION,titulo, mensaje);
     }
 }
