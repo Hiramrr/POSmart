@@ -124,7 +124,7 @@ public class VentaVistaController {
                 controller.setProducto(producto);
 
                 card.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2) {
+                    if (event.getClickCount() == 1) {
                         agregarProductoACesta(producto);
                     }
                 });
