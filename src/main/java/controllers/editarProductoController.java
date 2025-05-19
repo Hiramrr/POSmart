@@ -3,13 +3,16 @@ package controllers;
 import BaseDatos.BaseDatos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import controllers.Producto;
 
-import javax.management.ValueExp;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class editarProductoController {
     @FXML private TextField nomEditP;
@@ -21,10 +24,17 @@ public class editarProductoController {
     @FXML private TextField ubiEditP;
     @FXML private Button GuardarEdicionP;
     @FXML private Button CancelEdicionP;
+    @FXML private ComboBox<String> CatP;
+    @FXML private ComboBox<String> UbiP;
 
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
-    AlertPOSmart alerta;
+
+    @FXML
+    public void initialize() {
+        cargarCategorias();
+        cargarUbicaciones();
+    }
 
     // Método para recibir el producto seleccionado
     public void setProducto(Producto producto) {
@@ -36,8 +46,11 @@ public class editarProductoController {
         cantEditP.setText(String.valueOf(producto.getCantidad()));
         precioCompraEditP.setText(String.valueOf(producto.getPrecioCompra()));
         precioVentaEditP.setText(String.valueOf(producto.getPrecioVenta()));
-        catEditP.setText(String.valueOf(producto.getCategoria())); // ID de categoría
-        ubiEditP.setText(String.valueOf(producto.getUbicacion())); // ID de ubicación
+        //catEditP.setText(String.valueOf(producto.getCategoria())); // ID de categoría
+        //ubiEditP.setText(String.valueOf(producto.getUbicacion())); // ID de ubicación
+
+        CatP.setValue(producto.getCategoria());
+        UbiP.setValue(producto.getUbicacion());
     }
 
     @FXML
@@ -66,8 +79,8 @@ public class editarProductoController {
         String cantidadStr = cantEditP.getText();
         String precioCompraStr = precioCompraEditP.getText();
         String precioVentaStr = precioVentaEditP.getText();
-        String categoria = catEditP.getText();
-        String ubicacion = ubiEditP.getText();
+        String categoria = CatP.getValue();
+        String ubicacion = UbiP.getValue();
 
         // Validar campos vacíos
         if (nombre.isEmpty() || descripcion.isEmpty() || cantidadStr.isEmpty() ||
@@ -136,7 +149,24 @@ public class editarProductoController {
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
+        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    private void cargarCategorias() {
+        List<String> categorias = baseController.obtenerNombresCategorias();
+        CatP.getItems().clear();
+        CatP.getItems().addAll(categorias);
+    }
+
+    private void cargarUbicaciones() {
+        List<String> ubicaciones = baseController.obtenerNombresUbicaciones();
+        UbiP.getItems().clear();
+        UbiP.getItems().addAll(ubicaciones);
     }
 
 }
+

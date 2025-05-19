@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="706.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductosController">
    <children>
-      <TableView fx:id="TProductos" layoutX="19.0" layoutY="69.0" prefHeight="519.0" prefWidth="876.0">
+      <TableView fx:id="TProductos" layoutX="19.0" layoutY="69.0" prefHeight="317.0" prefWidth="876.0">
          <columns>
             <TableColumn fx:id="IDCol" prefWidth="106.4" text="ID" />
             <TableColumn fx:id="NomCol" prefWidth="207.2" text="Nombre" />
@@ -19,11 +19,11 @@
             <TableColumn fx:id="PrecioCol" prefWidth="139.2" text="Precio" />
          </columns>
       </TableView>
-      <Button fx:id="OpAgregar" layoutX="237.0" layoutY="627.0" onAction="#agregarProducto" style="-fx-background-color: #F2B85B;" text="Agregar" />
-      <Button fx:id="OpEditar" layoutX="330.0" layoutY="627.0" onAction="#handleEditarProducto" style="-fx-background-color: #F2B85B;" text="Editar" />
-      <Button fx:id="OpEliminar" layoutX="421.0" layoutY="627.0" onAction="#eliminarProducto" style="-fx-background-color: #F2B85B;" text="Eliminar" />
-      <Button fx:id="OpListar" layoutX="513.0" layoutY="627.0" style="-fx-background-color: #F2B85B;" text="Listar" />
-      <Button fx:id="OpConsultar" layoutX="597.0" layoutY="627.0" onAction="#consultarProducto" style="-fx-background-color: #F2B85B;" text="Consultar Producto" />
+      <Button fx:id="OpAgregar" layoutX="224.0" layoutY="440.0" onAction="#agregarProducto" style="-fx-background-color: #F2B85B;" text="Agregar" />
+      <Button fx:id="OpEditar" layoutX="313.0" layoutY="440.0" onAction="#handleEditarProducto" style="-fx-background-color: #F2B85B;" text="Editar" />
+      <Button fx:id="OpEliminar" layoutX="386.0" layoutY="440.0" onAction="#eliminarProducto" style="-fx-background-color: #F2B85B;" text="Dar de Baja" />
+      <Button fx:id="OpListar" layoutX="495.0" layoutY="440.0" style="-fx-background-color: #F2B85B;" text="Listar" />
+      <Button fx:id="OpConsultar" layoutX="569.0" layoutY="440.0" onAction="#consultarProducto" style="-fx-background-color: #F2B85B;" text="Consultar Producto" />
       <ImageView fx:id="ImgProducto" fitHeight="119.0" fitWidth="134.0" layoutX="405.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
       <Label contentDisplay="CENTER" layoutX="416.0" layoutY="22.0" text="Productos">
          <font>

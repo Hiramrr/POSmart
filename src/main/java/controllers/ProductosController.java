@@ -35,7 +35,6 @@ public class ProductosController {
     @FXML private ImageView ImgProducto;
     @FXML private Text textDia;
     @FXML private Text textHora;
-    AlertPOSmart alerta;
 
     private BaseDatos baseDatos;
 
@@ -48,7 +47,7 @@ public class ProductosController {
         PrecioCol.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
 
         baseDatos = new BaseDatos();
-        TProductos.setItems(baseDatos.obtenerProductos());
+        TProductos.setItems(baseDatos.obtenerProductosActivos());
     }
 
     @FXML
@@ -155,11 +154,17 @@ public class ProductosController {
         if (baseDatos == null) {
             baseDatos = new BaseDatos();
         }
-        TProductos.setItems(baseDatos.obtenerProductos());
+
+        TProductos.setItems(baseDatos.obtenerProductosActivos());
+
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, titulo, mensaje);
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
     public void ocultarBotonesParaCajero() {

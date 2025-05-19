@@ -184,7 +184,7 @@ public class BaseDatos {
 
     //------Eliminar producto------------------------------------------
     public boolean eliminarProductoDeBaseDeDatos(int idProducto) {
-        String query = "DELETE FROM Productos WHERE id_Producto = ?";
+        String query = "UPDATE Productos SET estado = 0 WHERE id_Producto = ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, idProducto);
             int filas = stmt.executeUpdate();
@@ -270,5 +270,36 @@ public class BaseDatos {
         }
         return detalles;
     }
+
+    public ObservableList<Producto> obtenerProductosActivos() {
+        ObservableList<Producto> productos = FXCollections.observableArrayList();
+        String query = "SELECT * FROM productos WHERE estado = TRUE";
+
+        try (PreparedStatement stmt = con.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Producto p = new Producto(
+                        rs.getInt("id_Producto"),
+                        rs.getString("Nombre"),
+                        rs.getString("Descripcion"),
+                        rs.getInt("Cantidad_stock"),
+                        rs.getDouble("Precio_compra"),
+                        rs.getDouble("Precio_venta"),
+                        rs.getString("id_categoria"),
+                        rs.getString("id_ubicacion"),
+                        rs.getBoolean("estado")
+                );
+                productos.add(p);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return productos;
+    }
+
+
 
 }
