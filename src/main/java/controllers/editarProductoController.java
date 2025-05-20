@@ -10,8 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import controllers.Producto;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class editarProductoController {
@@ -29,6 +28,16 @@ public class editarProductoController {
 
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
+    private static Connection con;
+
+    public editarProductoController() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/POSMart", "Hiram", "coco123");
+            System.out.println("Si ves esto es que se conecto la base");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     @FXML
     public void initialize() {
@@ -46,12 +55,19 @@ public class editarProductoController {
         cantEditP.setText(String.valueOf(producto.getCantidad()));
         precioCompraEditP.setText(String.valueOf(producto.getPrecioCompra()));
         precioVentaEditP.setText(String.valueOf(producto.getPrecioVenta()));
-        //catEditP.setText(String.valueOf(producto.getCategoria())); // ID de categoría
+         // ID de categoría
         //ubiEditP.setText(String.valueOf(producto.getUbicacion())); // ID de ubicación
 
-        CatP.setValue(producto.getCategoria());
-        UbiP.setValue(producto.getUbicacion());
+        int idcat = Integer.parseInt(producto.getCategoria());
+        Categoria c = baseController.obtenerCategoriaPorId(idcat);
+        CatP.setValue(String.valueOf(c.getNombre()));
+//        CatP.setValue(producto.getCategoria());
+        int idubi = Integer.parseInt(producto.getUbicacion());
+        Ubicacion u = baseController.obtenerUbicacionPorId(idubi);
+        UbiP.setValue(String.valueOf(u.getNombre()));
     }
+
+
 
     @FXML
     private void guardarProductoEditado() {

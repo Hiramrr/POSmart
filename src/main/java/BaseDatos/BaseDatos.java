@@ -301,5 +301,37 @@ public class BaseDatos {
     }
 
 
+    public Categoria obtenerCategoriaPorId(int id) {
+        Categoria cat = null;
+        String sql = "SELECT id_Categoria, Nombre FROM Categoria WHERE id_Categoria = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                cat = new Categoria(rs.getInt("id_Categoria"), rs.getString("Nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cat;
+    }
+
+    public Ubicacion obtenerUbicacionPorId(int id) {
+        Ubicacion ubi = null;
+        String sql = "SELECT id_Ubicacion, Nombre FROM Ubicacion WHERE id_Ubicacion = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, id);  // Asignar el ID a la consulta
+            ResultSet rs = stmt.executeQuery();  // Ejecutar consulta
+            if (rs.next()) {
+                // Crear objeto Ubicacion con el resultado
+                ubi = new Ubicacion(rs.getInt("id_Ubicacion"), rs.getString("Nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ubi; // Devuelve la ubicación o null si no se encontró
+    }
+
+
 
 }

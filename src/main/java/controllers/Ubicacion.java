@@ -11,6 +11,12 @@ public class Ubicacion {
         this.descripcion = descripcion;
     }
 
+    public Ubicacion(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+
+    }
+
     public int getId() {
         return id;
     }
