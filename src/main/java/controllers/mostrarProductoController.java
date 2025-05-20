@@ -1,5 +1,6 @@
 package controllers;
 
+import BaseDatos.BaseDatos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -25,6 +26,7 @@ public class mostrarProductoController {
     private Label lblUbicacion;
 
     private Producto producto;
+    private BaseDatos baseController = new BaseDatos();
 
     public void setProducto(Producto producto) {
         this.producto = producto;
@@ -35,8 +37,17 @@ public class mostrarProductoController {
         lblCantidad.setText("Cantidad en stock: " + producto.getCantidad());
         lblPrecioCompra.setText("Precio de compra: " + producto.getPrecioCompra());
         lblPrecioVenta.setText("Precio de venta: " + producto.getPrecioVenta());
-        lblCategoria.setText("Categoría: " + producto.getCategoria());
-        lblUbicacion.setText("Ubicación: " + producto.getUbicacion());
+//        lblCategoria.setText("Categoría: " + producto.getCategoria());
+//        lblUbicacion.setText("Ubicación: " + producto.getUbicacion());
+
+        int idcat = Integer.parseInt(producto.getCategoria());
+        Categoria c = baseController.obtenerCategoriaPorId(idcat);
+        lblCategoria.setText("Categoría: " + c.getNombre());
+
+        int idubi = Integer.parseInt(producto.getUbicacion());
+        Ubicacion u = baseController.obtenerUbicacionPorId(idubi);
+        lblUbicacion.setText("Ubicación: " + u.getNombre());
+
     }
 
     @FXML
