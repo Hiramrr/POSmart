@@ -3,10 +3,7 @@ package controllers;
 import BaseDatos.BaseDatos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import controllers.Producto;
 
@@ -29,6 +26,7 @@ public class editarProductoController {
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
     private static Connection con;
+    AlertPOSmart alerta;
 
     public editarProductoController() {
         try {
@@ -101,7 +99,7 @@ public class editarProductoController {
         // Validar campos vacíos
         if (nombre.isEmpty() || descripcion.isEmpty() || cantidadStr.isEmpty() ||
                 precioCompraStr.isEmpty() || precioVentaStr.isEmpty() || categoria.isEmpty() || ubicacion.isEmpty()) {
-            mostrarAlerta("Campos vacíos", "Por favor, completa todos los campos.");
+            alerta = new AlertPOSmart(Alert.AlertType.WARNING,"Campos vacíos", "Por favor, completa todos los campos.");
             return;
         }
 
@@ -112,7 +110,7 @@ public class editarProductoController {
         try {
             cantidad = Integer.parseInt(cantidadStr);
         } catch (NumberFormatException e) {
-            mostrarAlerta("Formato inválido", "El campo 'Cantidad' debe ser un número entero válido.");
+            alerta = new AlertPOSmart(Alert.AlertType.WARNING, "Formato inválido", "El campo 'Cantidad' debe ser un número entero válido.");
             return;
         }
 
@@ -120,7 +118,7 @@ public class editarProductoController {
         try {
             precioCompra = Double.parseDouble(precioCompraStr);
         } catch (NumberFormatException e) {
-            mostrarAlerta("Formato inválido", "El campo 'Precio de Compra' debe ser un número decimal válido.");
+            alerta = new AlertPOSmart(Alert.AlertType.WARNING, "Formato inválido", "El campo 'Precio de Compra' debe ser un número decimal válido.");
             return;
         }
 
@@ -128,7 +126,7 @@ public class editarProductoController {
         try {
             precioVenta = Double.parseDouble(precioVentaStr);
         } catch (NumberFormatException e) {
-            mostrarAlerta("Formato inválido", "El campo 'Precio de Venta' debe ser un número decimal válido.");
+            alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Formato inválido", "El campo 'Precio de Venta' debe ser un número decimal válido.");
             return;
         }
 
@@ -146,11 +144,11 @@ public class editarProductoController {
 
         // Actualizar en la base de datos
         if (baseController.actualizarProductoEnBaseDeDatos(productoActualizado)) {
-            mostrarAlerta("Éxito", "Producto actualizado con éxito.");
+            alerta = new AlertPOSmart(Alert.AlertType.INFORMATION,"Éxito", "Producto actualizado con éxito.");
             Stage stage = (Stage) GuardarEdicionP.getScene().getWindow();
             stage.close();
         } else {
-            mostrarAlerta("Error", "Hubo un error al actualizar el producto.");
+            alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Error", "Hubo un error al actualizar el producto.");
         }
     }
 
@@ -159,18 +157,18 @@ public class editarProductoController {
 
 
     public void handleCancelEdicionP() {
-        mostrarAlerta("Cancelar","Cancelando edicion del producto");
+        alerta = new AlertPOSmart(Alert.AlertType.WARNING,"Cancelar","Cancelando edicion del producto");
         Stage stage = (Stage) CancelEdicionP.getScene().getWindow();
         stage.close();
     }
 
-    private void mostrarAlerta(String titulo, String mensaje) {
-        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
+//    private void mostrarAlerta(String titulo, String mensaje) {
+//        javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+//        alerta.setTitle(titulo);
+//        alerta.setHeaderText(null);
+//        alerta.setContentText(mensaje);
+//        alerta.showAndWait();
+//    }
 
     private void cargarCategorias() {
         List<String> categorias = baseController.obtenerNombresCategorias();
