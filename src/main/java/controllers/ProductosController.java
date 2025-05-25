@@ -1,6 +1,6 @@
 package controllers;
 
-import BaseDatos.BaseDatos;
+import BaseDatos.Productos_DAO;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +36,9 @@ public class ProductosController {
     @FXML private Text textDia;
     @FXML private Text textHora;
 
-    private BaseDatos baseDatos;
+    @FXML TextField cantidad;
+
+    Productos_DAO baseDatos;
 
     @FXML
     private void initialize() {
@@ -46,8 +48,30 @@ public class ProductosController {
         CantCol.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         PrecioCol.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
 
-        baseDatos = new BaseDatos();
-        TProductos.setItems(baseDatos.obtenerProductosActivos());
+        baseDatos = new Productos_DAO();
+        baseDatos.conexion();
+        cargarProductos();
+        cantidad.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                cantidad.setText(oldValue);
+            }
+        });
+        TProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                cantidad.setText(String.valueOf(newValue.getCantidad()));
+            } else {
+                cantidad.clear();
+            }
+        });
+    }
+
+    public void cargarProductos(){
+        ObservableList<Producto> productos = baseDatos.obtenerProductos();
+        if(productos.size() == 0){
+            mostrarAlertaError("No hay productos", "No hay productos en el sistema");
+            return;
+        }
+        TProductos.setItems(productos);
     }
 
     @FXML
@@ -152,19 +176,18 @@ public class ProductosController {
 
     public void actualizarTabla() {
         if (baseDatos == null) {
-            baseDatos = new BaseDatos();
+            baseDatos = new Productos_DAO();
         }
 
-        TProductos.setItems(baseDatos.obtenerProductosActivos());
-
+        cargarProductos();
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
+        AlertPOSmart alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, titulo, mensaje);
+    }
+
+    private void mostrarAlertaError(String titulo, String mensaje) {
+        AlertPOSmart alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
     }
 
     public void ocultarBotonesParaCajero() {
@@ -173,5 +196,31 @@ public class ProductosController {
         OpEditar.setVisible(false); OpEditar.setManaged(false);
         OpListar.setVisible(false); OpListar.setManaged(false);
         OpConsultar.setVisible(false); OpConsultar.setManaged(false);
+    }
+
+    @FXML
+    void handleAgregarStock(ActionEvent event) {
+        Producto producto = TProductos.getSelectionModel().getSelectedItem();
+
+        if (producto == null) {
+            mostrarAlerta("Sin selección", "Por favor, selecciona un producto para agregar Stock.");
+            return;
+        }
+        if (cantidad.getText() == null || cantidad.getText().trim().isEmpty()) {
+            mostrarAlertaError("Llena el campo por favor", "Por favor llena el campo de la nueva cantidad!");
+            return;
+        }
+        int cantidadNueva = Integer.parseInt(cantidad.getText());
+        int cantidadAnterior = producto.getCantidad();
+        if(cantidadNueva < cantidadAnterior){
+            mostrarAlerta("No puedes disminuir la cantidad!", "No puedes disminuir la cantidad del producto!");
+            return;
+        }
+        if(!baseDatos.agregarStock(producto.getId(), cantidadNueva)){
+            mostrarAlertaError("Introduce algo valido!", "por favor introduce algo valido en el campo de cantidad");
+            return;
+        }
+        actualizarTabla();
+        mostrarAlerta("Se actualizo el stock con exito", "Se actualizo el stock del producto " + producto.getNombre() + " con exito!");
     }
 }

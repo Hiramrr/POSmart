@@ -35,17 +35,24 @@ public class VentaVistaController {
         todosLosProductos = bd.obtenerProductos();
         mostrarProductos(todosLosProductos);
         busquedaField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String filtro = newValue.trim().toLowerCase(); // Elimina espacios extras y pasa a minúsculas
-
-            List<Producto> filtrados = todosLosProductos.stream()
-                    .filter(p -> p.getNombre().toLowerCase().contains(filtro) ||
-                            p.getCategoria().toLowerCase().contains(filtro) ||
-                            p.getDescripcion().toLowerCase().contains(filtro) ||
-                            p.getUbicacion().toLowerCase().contains(filtro))
-                    .toList();
-
-            mostrarProductos(filtrados);
+            buscarProducto(newValue);
         });
+    }
+
+    private void buscarProducto(String busqueda) {
+        String filtro = busqueda.trim().toLowerCase();
+
+        List<Producto> filtrados = todosLosProductos.stream()
+                .filter(p -> p.getNombre().toLowerCase().contains(filtro) ||
+                        p.getCategoria().toLowerCase().contains(filtro) ||
+                        p.getDescripcion().toLowerCase().contains(filtro) ||
+                        p.getUbicacion().toLowerCase().contains(filtro))
+                .toList();
+        if (filtrados.isEmpty()) {
+            AlertaUtil.mostrarInfo("Sin resultados", "No se encontraron productos que coincidan con la búsqueda.");
+        }
+
+        mostrarProductos(filtrados);
     }
 
     private void agregarProductoACesta(Producto producto) {

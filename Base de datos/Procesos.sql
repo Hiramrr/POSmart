@@ -346,3 +346,11 @@ END //
 
 DELIMITER ;
 
+CREATE VIEW vista_productos AS
+SELECT p.id_Producto, p.Nombre, p.Descripcion, p.Cantidad_stock,
+       p.Precio_compra, p.Precio_venta,
+       c.Nombre AS categoria, u.Nombre AS ubicacion
+FROM Productos p
+         JOIN Categoria c ON p.id_categoria = c.id_categoria
+         JOIN Ubicacion u ON p.id_ubicacion = u.id_ubicacion;
+

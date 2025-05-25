@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -30,5 +31,8 @@
             <Font size="27.0" />
          </font>
       </Label>
+      <TextField fx:id="cantidad" alignment="CENTER_RIGHT" layoutX="656.0" layoutY="25.0" prefHeight="26.0" prefWidth="96.0" promptText="..." />
+      <Button fx:id="actualizarStock" layoutX="803.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleAgregarStock" prefHeight="26.0" prefWidth="96.0" text="Agregar Stock" />
+      <Button fx:id="mas" layoutX="766.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleAgregarStock" prefHeight="26.0" prefWidth="23.0" text="+" />
    </children>
 </AnchorPane>
