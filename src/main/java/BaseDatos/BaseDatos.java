@@ -332,6 +332,17 @@ public class BaseDatos {
         return ubi; // Devuelve la ubicación o null si no se encontró
     }
 
-
+    public boolean agregarProductoProveedor(int idProducto, int idProveedor) {
+        try {
+            consulta = con.createStatement();
+            String query = "INSERT INTO Producto_Proveedor (id_Proveedor, id_Producto) VALUES (" + 
+                         idProveedor + ", " + idProducto + ")";
+            consulta.executeUpdate(query);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al agregar relación producto-proveedor: " + e.getMessage());
+            return false;
+        }
+    }
 
 }

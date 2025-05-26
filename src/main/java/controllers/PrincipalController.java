@@ -152,4 +152,16 @@ public class PrincipalController {
         }
     }
 
+    @FXML
+    void handlerRealizarPedido(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/RealizarPedido.fxml"));
+            Parent root = loader.load();
+            contenedor.getChildren().clear();
+            contenedor.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

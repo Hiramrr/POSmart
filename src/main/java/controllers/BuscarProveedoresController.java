@@ -95,11 +95,9 @@ public class BuscarProveedoresController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetallesProveedor.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador de la ventana de detalles
             DetallesProveedorController detallesController = loader.getController();
             detallesController.setProveedor(proveedorSeleccionado);
 
-            // Crear y mostrar la nueva ventana
             Stage stage = new Stage();
             stage.setTitle("Detalles del Proveedor");
             stage.setScene(new Scene(root));

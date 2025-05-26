@@ -223,4 +223,11 @@ public class ProductosController {
         actualizarTabla();
         mostrarAlerta("Se actualizo el stock con exito", "Se actualizo el stock del producto " + producto.getNombre() + " con exito!");
     }
+
+    @FXML
+    void handleSumar(ActionEvent event) {
+        int cantidadActual = Integer.parseInt(cantidad.getText());
+        int cantidadNueva = cantidadActual + 1;
+        cantidad.setText(String.valueOf(cantidadNueva));
+    }
 }

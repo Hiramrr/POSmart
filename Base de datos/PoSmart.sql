@@ -21,12 +21,27 @@ CREATE TABLE Proveedor(
                           Direccion VARCHAR(70) NOT NULL
 );
 
+CREATE TABLE PEDIDO (
+        id_Producto int NOT NULL,
+        nombre_Producto VARCHAR(100) NOT NULL,
+        cantidad int NOT NULL,
+        id_proveedor int NOT NULL,
+        nombre_Proveedor VARCHAR(100) NOT NULL,
+        total int NOT NULL,
+        FOREIGN KEY (id_Proveedor) REFERENCES Proveedor(id_Proveedor),
+        FOREIGN KEY (id_Producto) REFERENCES Productos(id_Producto)
+);
+
+
+DROP TABLE IF EXISTS Producto_Proveedor;
 CREATE TABLE Producto_Proveedor (
                                     id_Proveedor int NOT NULL,
                                     id_Producto int NOT NULL,
                                     FOREIGN KEY (id_Proveedor) REFERENCES Proveedor(id_Proveedor),
                                     FOREIGN KEY (id_Producto) REFERENCES Productos(id_Producto)
 );
+
+select * from Productos;
 
 CREATE TABLE Categoria (
                            id_Categoria int PRIMARY KEY,

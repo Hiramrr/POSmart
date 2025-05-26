@@ -113,29 +113,77 @@ INSERT INTO `detalle_compra` VALUES (1,3,4,1,18),(2,1,5,1,8),(3,1,6,1,8),(4,4,6,
 UNLOCK TABLES;
 
 --
--- Table structure for table `producto_proveedor`
+-- Table structure for table `PEDIDO`
 --
 
-DROP TABLE IF EXISTS `producto_proveedor`;
+DROP TABLE IF EXISTS `PEDIDO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `producto_proveedor` (
-  `id_Proveedor` int NOT NULL,
+CREATE TABLE `PEDIDO` (
   `id_Producto` int NOT NULL,
-  KEY `id_Proveedor` (`id_Proveedor`),
+  `nombre_Producto` varchar(100) NOT NULL,
+  `cantidad` int NOT NULL,
+  `id_proveedor` int NOT NULL,
+  `nombre_Proveedor` varchar(100) NOT NULL,
+  `total` int NOT NULL,
+  KEY `id_proveedor` (`id_proveedor`),
   KEY `id_Producto` (`id_Producto`),
-  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
-  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`)
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
+  CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `producto_proveedor`
+-- Dumping data for table `PEDIDO`
 --
 
-LOCK TABLES `producto_proveedor` WRITE;
-/*!40000 ALTER TABLE `producto_proveedor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `producto_proveedor` ENABLE KEYS */;
+LOCK TABLES `PEDIDO` WRITE;
+/*!40000 ALTER TABLE `PEDIDO` DISABLE KEYS */;
+INSERT INTO `PEDIDO` VALUES (7,'Maruchan',5,1,'Proveedor A',70),(7,'Maruchan',50,1,'Proveedor A',700),(3,'Pasta de Dientes',50,2,'Proveedor B',500);
+/*!40000 ALTER TABLE `PEDIDO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `pedidos`
+--
+
+DROP TABLE IF EXISTS `pedidos`;
+/*!50001 DROP VIEW IF EXISTS `pedidos`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `pedidos` AS SELECT 
+ 1 AS `id_Producto`,
+ 1 AS `nombre_Producto`,
+ 1 AS `cantidad`,
+ 1 AS `nombre_Proveedor`,
+ 1 AS `total`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `Producto_Proveedor`
+--
+
+DROP TABLE IF EXISTS `Producto_Proveedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Producto_Proveedor` (
+  `id_Proveedor` int NOT NULL,
+  `id_Producto` int NOT NULL,
+  KEY `id_Proveedor` (`id_Proveedor`),
+  KEY `id_Producto` (`id_Producto`),
+  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
+  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Producto_Proveedor`
+--
+
+LOCK TABLES `Producto_Proveedor` WRITE;
+/*!40000 ALTER TABLE `Producto_Proveedor` DISABLE KEYS */;
+INSERT INTO `Producto_Proveedor` VALUES (1,7),(1,1),(2,2),(2,3),(3,4),(3,5),(3,6);
+/*!40000 ALTER TABLE `Producto_Proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -168,7 +216,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',103,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',154,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',95,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',68,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',53,12,20,3,1);
+INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',105,5,8,1,3),(2,'Jabón Líquido','Jabón antibacterial para manos',154,15,25,2,2),(3,'Pasta de Dientes','Con flúor y protección anticaries',95,10,18,2,2),(4,'Queso Fresco','Producto lácteo refrigerado',68,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',53,12,20,3,1),(6,'Miyu','Miyu es un gato sordo',500,432123,3216321,1,3),(7,'Maruchan','maruchan',99,14,19,3,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -695,6 +743,24 @@ DELIMITER ;
 USE `PoSmart`;
 
 --
+-- Final view structure for view `pedidos`
+--
+
+/*!50001 DROP VIEW IF EXISTS `pedidos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`Hiram`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `pedidos` AS select `pedido`.`id_Producto` AS `id_Producto`,`pedido`.`nombre_Producto` AS `nombre_Producto`,`pedido`.`cantidad` AS `cantidad`,`pedido`.`nombre_Proveedor` AS `nombre_Proveedor`,`pedido`.`total` AS `total` from `pedido` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vista_productos`
 --
 
@@ -721,4 +787,4 @@ USE `PoSmart`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-25 17:08:50
+-- Dump completed on 2025-05-26 17:11:03

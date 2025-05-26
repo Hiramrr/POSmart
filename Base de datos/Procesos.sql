@@ -354,3 +354,11 @@ FROM Productos p
          JOIN Categoria c ON p.id_categoria = c.id_categoria
          JOIN Ubicacion u ON p.id_ubicacion = u.id_ubicacion;
 
+CREATE VIEW PEDIDOS AS
+    SELECT PEDIDO.id_Producto, PEDIDO.nombre_Producto, PEDIDO.cantidad, PEDIDO.nombre_Proveedor,
+            PEDIDO.total
+    FROM PEDIDO;
+
+select * from PEDIDOS;
+
+
