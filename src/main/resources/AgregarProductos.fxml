@@ -36,5 +36,7 @@
       <TextField fx:id="PreCompraP" layoutX="491.0" layoutY="80.0" />
       <ComboBox fx:id="catPCb" layoutX="490.0" layoutY="157.0" prefWidth="150.0" />
       <ComboBox fx:id="ubiPCb" layoutX="490.0" layoutY="196.0" prefWidth="150.0" />
+      <Label layoutX="425.0" layoutY="253.0" text="Proveedor" />
+      <ComboBox fx:id="proveedorCb" layoutX="490.0" layoutY="249.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

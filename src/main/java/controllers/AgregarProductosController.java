@@ -5,6 +5,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import BaseDatos.BaseDatos;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.util.StringConverter;
 
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class AgregarProductosController {
     @FXML
     private ComboBox<String> ubiPCb;
     @FXML
+    private ComboBox<Proveedor> proveedorCb;
+    @FXML
     private Button GuardarP;
     @FXML
     private Button CancelarP;
@@ -38,14 +43,16 @@ public class AgregarProductosController {
 
     private ProductosController productosController;
 
-    // Constructor de la clase
     public AgregarProductosController() {
-        baseDatos = new BaseDatos(); // Asegúrate de que tu clase BaseDatos tenga métodos para interactuar con la DB.
+        baseDatos = new BaseDatos();
     }
 
-    // Método de inicialización llamado automáticamente al cargar el FXML
     @FXML
-    private void initialize() {
+    public void initialize() {
+        cargarProveedores();
+        cargarCategorias();
+        cargarUbicaciones();
+
         // Verificar que los componentes estén correctamente inicializados
         if (GuardarP != null) {
             System.out.println("Botón GuardarP inicializado correctamente");
@@ -65,11 +72,24 @@ public class AgregarProductosController {
         } else {
             System.out.println("IDP es null");
         }
+    }
 
-        cargarCategorias();
-        cargarUbicaciones();
+    private void cargarProveedores() {
+        List<Proveedor> proveedores = baseDatos.obtenerProveedores();
+        ObservableList<Proveedor> proveedoresObs = FXCollections.observableArrayList(proveedores);
+        proveedorCb.setItems(proveedoresObs);
+        
+        proveedorCb.setConverter(new StringConverter<Proveedor>() {
+            @Override
+            public String toString(Proveedor proveedor) {
+                return proveedor != null ? proveedor.getNombre() : "";
+            }
 
-
+            @Override
+            public Proveedor fromString(String string) {
+                return null;
+            }
+        });
     }
 
     private void cargarCategorias() {
@@ -91,7 +111,7 @@ public class AgregarProductosController {
         // Verificar si los campos están vacíos
         if (IDP.getText().isEmpty() || NomP.getText().isEmpty() || DescP.getText().isEmpty() ||
                 CantP.getText().isEmpty() || PreP.getText().isEmpty() ||
-                catPCb.getValue() == null || ubiPCb.getValue() == null) {
+                catPCb.getValue() == null || ubiPCb.getValue() == null || proveedorCb.getValue() == null) {
             alerta = new AlertPOSmart(AlertType.WARNING, "Campos Vacíos","Por favor, complete todos los campos antes de guardar el producto." );
             return;
         }
@@ -108,15 +128,27 @@ public class AgregarProductosController {
             Double productoPrecioVenta = Double.parseDouble(PreP.getText());
             String productoCategoria = catPCb.getValue(); // Obtener la categoría seleccionada
             String productoUbicacion = ubiPCb.getValue(); // Obtener la ubicación seleccionada
+            Proveedor proveedorSeleccionado = proveedorCb.getValue();
 
             // Intentar agregar el producto a la base de datos
             boolean success = baseDatos.agregarProducto(productoId, productoNombre, productoDescripcion,
                     productoCantidad, productoPrecioCompra,
                     productoPrecioVenta, productoCategoria, productoUbicacion);
 
-            // Mostrar una alerta con el resultado
-            if(success){
-                alerta = new AlertPOSmart(AlertType.INFORMATION, "Agregar Producto", "Producto agregado exitosamente.");
+            if(success) {
+                // Si el producto se guardó correctamente, guardar la relación con el proveedor
+                boolean relacionExitosa = baseDatos.agregarProductoProveedor(
+                    productoId, 
+                    proveedorSeleccionado.getId()
+                );
+
+                if(relacionExitosa) {
+                    alerta = new AlertPOSmart(AlertType.INFORMATION, "Agregar Producto", 
+                        "Producto y su relación con proveedor agregados exitosamente.");
+                } else {
+                    alerta = new AlertPOSmart(AlertType.WARNING, "Agregar Producto", 
+                        "Producto agregado pero hubo un error al relacionarlo con el proveedor.");
+                }
             } else {
                 alerta = new AlertPOSmart(AlertType.ERROR, "Agregar Producto", "Error al agregar el producto.");
             }
@@ -156,8 +188,9 @@ public class AgregarProductosController {
         CantP.clear();
         PreP.clear();
         PreCompraP.clear();
-        catPCb.getSelectionModel().clearSelection();
-        ubiPCb.getSelectionModel().clearSelection();
+        catPCb.setValue(null);
+        ubiPCb.setValue(null);
+        proveedorCb.setValue(null);
     }
 
     public void setProductosController(ProductosController productosController) {
