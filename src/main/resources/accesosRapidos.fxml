@@ -28,7 +28,7 @@
                         <Pane prefHeight="62.0" prefWidth="312.0" />
                         <Pane id="fondo_boton" prefHeight="140.0" prefWidth="300.0" styleClass="fondo_boton" stylesheets="@styles_accesorapido.css">
                            <children>
-                              <Button id="Historial" fx:id="buttonProveedores11" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonProveedores" prefHeight="143.0" prefWidth="143.0" styleClass="Historial" stylesheets="@styles_accesorapido.css" text="Historial" />
+                              <Button id="Historial" fx:id="buttonProveedores11" layoutX="-3.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleButtonHistorial" prefHeight="143.0" prefWidth="143.0" styleClass="Historial" stylesheets="@styles_accesorapido.css" text="Historial" />
                            </children>
                         </Pane>
                      </children>

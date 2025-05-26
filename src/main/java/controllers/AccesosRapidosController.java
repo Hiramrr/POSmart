@@ -74,4 +74,16 @@ public class AccesosRapidosController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void handleButtonHistorial(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/historialVentas.fxml"));
+            Parent root = loader.load();
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
