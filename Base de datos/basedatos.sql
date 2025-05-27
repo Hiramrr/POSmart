@@ -1,29 +1,19 @@
--- MySQL dump 10.13  Distrib 8.0.41, for macos15 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: localhost    Database: PoSmart
+-- Host: localhost    Database: posmart
 -- ------------------------------------------------------
--- Server version	9.2.0
+-- Server version	8.0.42
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `PoSmart`
---
-
-/*!40000 DROP DATABASE IF EXISTS `PoSmart`*/;
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `PoSmart` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `PoSmart`;
 
 --
 -- Table structure for table `categoria`
@@ -68,7 +58,7 @@ CREATE TABLE `compra` (
   KEY `id_Usuario` (`id_Usuario`),
   CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
   CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `usuario` (`id_Usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +67,7 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
-INSERT INTO `compra` VALUES (1,'2025-05-13',18,1,2),(2,'2025-05-13',18,1,2),(3,'2025-05-13',18,1,2),(4,'2025-05-13',18,1,2),(5,'2025-05-13',8,1,2),(6,'2025-05-13',88,1,2),(7,'2025-05-13',8,1,2),(8,'2025-05-14',98,1,2);
+INSERT INTO `compra` VALUES (1,'2025-05-13',18,1,2),(2,'2025-05-13',18,1,2),(3,'2025-05-13',18,1,2),(4,'2025-05-13',18,1,2),(5,'2025-05-13',8,1,2),(6,'2025-05-13',88,1,2),(7,'2025-05-13',8,1,2),(8,'2025-05-14',98,1,2),(9,'2025-05-26',51,1,2),(10,'2025-05-26',9999999,1,2),(11,'2025-05-26',9999999,1,2),(13,'2025-05-26',9999999,1,2),(14,'2025-05-26',19,1,2),(15,'2025-05-26',19999998,1,2),(16,'2025-05-26',9999999,1,2);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +89,7 @@ CREATE TABLE `detalle_compra` (
   KEY `id_Compra` (`id_Compra`),
   CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`),
   CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_Compra`) REFERENCES `compra` (`id_compra`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,18 +98,18 @@ CREATE TABLE `detalle_compra` (
 
 LOCK TABLES `detalle_compra` WRITE;
 /*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
-INSERT INTO `detalle_compra` VALUES (1,3,4,1,18),(2,1,5,1,8),(3,1,6,1,8),(4,4,6,1,35),(5,2,6,1,25),(6,5,6,1,20),(7,1,7,1,8),(8,2,8,1,25),(9,3,8,1,18),(10,5,8,1,20),(11,4,8,1,35);
+INSERT INTO `detalle_compra` VALUES (1,3,4,1,18),(2,1,5,1,8),(3,1,6,1,8),(4,4,6,1,35),(5,2,6,1,25),(6,5,6,1,20),(7,1,7,1,8),(8,2,8,1,25),(9,3,8,1,18),(10,5,8,1,20),(11,4,8,1,35),(12,2,9,1,25),(13,1,9,1,8),(14,3,9,1,18),(15,10,10,1,9999999),(16,10,11,1,9999999),(17,10,13,1,9999999),(18,7,14,1,19),(19,10,15,2,19999998),(20,10,16,1,9999999);
 /*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `PEDIDO`
+-- Table structure for table `pedido`
 --
 
-DROP TABLE IF EXISTS `PEDIDO`;
+DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `PEDIDO` (
+CREATE TABLE `pedido` (
   `id_Producto` int NOT NULL,
   `nombre_Producto` varchar(100) NOT NULL,
   `cantidad` int NOT NULL,
@@ -128,19 +118,19 @@ CREATE TABLE `PEDIDO` (
   `total` int NOT NULL,
   KEY `id_proveedor` (`id_proveedor`),
   KEY `id_Producto` (`id_Producto`),
-  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-  CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
+  CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PEDIDO`
+-- Dumping data for table `pedido`
 --
 
-LOCK TABLES `PEDIDO` WRITE;
-/*!40000 ALTER TABLE `PEDIDO` DISABLE KEYS */;
-INSERT INTO `PEDIDO` VALUES (7,'Maruchan',5,1,'Proveedor A',70),(7,'Maruchan',50,1,'Proveedor A',700),(3,'Pasta de Dientes',50,2,'Proveedor B',500);
-/*!40000 ALTER TABLE `PEDIDO` ENABLE KEYS */;
+LOCK TABLES `pedido` WRITE;
+/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (7,'Maruchan',5,1,'Proveedor A',70),(7,'Maruchan',50,1,'Proveedor A',700),(3,'Pasta de Dientes',50,2,'Proveedor B',500),(7,'Maruchan',50,1,'Proveedor A',700),(3,'Pasta de Dientes',100,2,'Proveedor B',1000);
+/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -160,30 +150,30 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Table structure for table `Producto_Proveedor`
+-- Table structure for table `producto_proveedor`
 --
 
-DROP TABLE IF EXISTS `Producto_Proveedor`;
+DROP TABLE IF EXISTS `producto_proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Producto_Proveedor` (
+CREATE TABLE `producto_proveedor` (
   `id_Proveedor` int NOT NULL,
   `id_Producto` int NOT NULL,
   KEY `id_Proveedor` (`id_Proveedor`),
   KEY `id_Producto` (`id_Producto`),
-  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `Proveedor` (`id_Proveedor`),
-  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `Productos` (`id_Producto`)
+  CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`id_Proveedor`),
+  CONSTRAINT `producto_proveedor_ibfk_2` FOREIGN KEY (`id_Producto`) REFERENCES `productos` (`id_Producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Producto_Proveedor`
+-- Dumping data for table `producto_proveedor`
 --
 
-LOCK TABLES `Producto_Proveedor` WRITE;
-/*!40000 ALTER TABLE `Producto_Proveedor` DISABLE KEYS */;
-INSERT INTO `Producto_Proveedor` VALUES (1,7),(1,1),(2,2),(2,3),(3,4),(3,5),(3,6);
-/*!40000 ALTER TABLE `Producto_Proveedor` ENABLE KEYS */;
+LOCK TABLES `producto_proveedor` WRITE;
+/*!40000 ALTER TABLE `producto_proveedor` DISABLE KEYS */;
+INSERT INTO `producto_proveedor` VALUES (1,7),(1,1),(2,2),(2,3),(3,4),(3,5),(3,6),(1,10);
+/*!40000 ALTER TABLE `producto_proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -202,6 +192,7 @@ CREATE TABLE `productos` (
   `Precio_venta` int NOT NULL,
   `id_categoria` int NOT NULL,
   `id_ubicacion` int NOT NULL,
+  `Imagen` mediumblob,
   PRIMARY KEY (`id_Producto`),
   KEY `id_categoria` (`id_categoria`),
   KEY `id_ubicacion` (`id_ubicacion`),
@@ -216,7 +207,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',105,5,8,1,3),(2,'JabÃ³n LÃ­quido','JabÃ³n antibacterial para manos',154,15,25,2,2),(3,'Pasta de Dientes','Con flÃºor y protecciÃ³n anticaries',95,10,18,2,2),(4,'Queso Fresco','Producto lÃ¡cteo refrigerado',68,20,35,1,3),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',53,12,20,3,1),(6,'Miyu','Miyu es un gato sordo',500,432123,3216321,1,3),(7,'Maruchan','maruchan',99,14,19,3,1);
+INSERT INTO `productos` VALUES (1,'Manzana Roja','Fruta fresca y crujiente',104,5,8,1,3,NULL),(2,'JabÃ³n LÃ­quido','JabÃ³n antibacterial para manos',153,15,25,2,2,NULL),(3,'Pasta de Dientes','Con flÃºor y protecciÃ³n anticaries',194,10,18,2,2,NULL),(4,'Queso Fresco','Producto lÃ¡cteo refrigerado',68,20,35,1,3,NULL),(5,'Cuaderno Universitario','100 hojas rayadas, tapa dura',53,12,20,3,1,NULL),(6,'Miyu','Miyu es un gato sordo',500,432123,3216321,1,3,NULL),(7,'Maruchan','maruchan',98,14,19,3,1,NULL),(10,'Mapache','Un mapache se metio al almacen!!!!!!!!!!!!',1,1000000,9999999,1,4,_binary 'ÿ\Øÿ\à\0JFIF\0\0\0\0\0\0ÿ\Û\0„\0	( \Z%!1!%)+...383-7(-.+\n\n\n\r\Z-%%--------------------------------------------------ÿÀ\0\0·\"\0ÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0B\0\0\0\0\0!1AQa\"q‘2¡±Á\á\Ñğ#BRb‚ñr’¢\Â\â$3Cc²\Òÿ\Ä\0\0\0\0\0\0\0\0\0\0\0\0\0\0ÿ\Ä\0#\0\0\0\0\0\0\0\0\0!1AQ\"2aqÿ\Ú\0\0\0?\0\å£@‚£¨Àx­Ÿ¤î¶§…—\"•ğŠZ\ç&ø\\˜.·\Â\Ô4Âƒ6\ÎL@CyM\Ò¹KˆÚ½@-*\'4“Ñ¨\\nQ\Ú\áE\Ä:\Ğ-J0J“\í\Ñt€pP=ºM“\ì9¶	ß¿d\í*\Ó\Ú.ÎŠŒ\×LA\nšjÁ*\í—g\îu&´7½a\'`¹³,®Qp\'%+N%\0a^\ZL‚›\áòºÅ²\ZU³„\Ô\\cQ\Ô/\Ãir`üKi‚Öñ1\àÿ\03\æWmZ\éj²ˆ\ìıy˜·>\n/\Ø*0]¥_ŸŠ\ÔA°w E­&\ëz\Ôi	-¿ŸØ£ñFh\æ•\ÜG…¥rº\\²›É‹õ‹úE‚OŒÈ¢\â>¾ˆU¨H–\Ø:\Ï	/<Q\rËˆ28.i\åQmÚ¸\ZÜ±\Å\Ía¡óÌš2\ä\×	™8A-»R^\Ğguk8ğo ¸±¼®T}ˆ”€\æµ\r¥Ï¬V­\ÄW|q´>£\æ\0D)°™ix6„—\r!ÀğWL›U€´ÂI\Ï“¸•\Úx\Ò|ğQ\æY‰6VJøB«x\Ü™P%²’S•³FVK‡¨\êÔ‹H$Š†^ğ6º\è\Ù8\Ãû1¦„6s\ì¢\Âı—òªN)9>(ƒ±­\r¤\àû*·\Õ\ÕQ\ÚE¥1f/H\\U\á,C«+—\Ø>lF\Ê2Tƒwõi½§eë«–…v6ş\nY-\n&	^b\êšbAB\Ğ&e]…×…6”Z15<p Š\nz\0¸2¼Mq j\Øx¾\êJ8ò´k\ä#pLk\ìwO*¯\ØfşÁªbK¬¡©‡”\Ë‚Ó²T\àš-/\ê\r¾™GJ•bÒ¶\"V·~š\É\rBv½8S­°x\ĞŠ®…&%\Ä\Øx®y\ËV’·eg/v\Û+NY„@™ \ÉQ\àœ\Ö\0 ‚D8ø$|¢»[SK\"\İ\âã·º@ng\Åu®*.p\Ã€56\×\âf\çÔ\êP\Ô\éµÚ‹dØ€\ã\Æüü¦\İ”(\Z²O-\"L r\ë\â½ıŒ\0™‡SsÉ l±¨	\ÙsÁi¸ÀÛ \é\Í\Ü%F\îÀH\ânğ\Ïµ\n\î\ãs;\ì>º5:«¦L\Ì\ÏÛ§$l\Ô\ê\0\r$4:\æ0,·£E„-›¦\å\Ï\ÕÁ$±°`ºOæ‚«…qn¦“\â\r=\Ñk>•\'ºúX\è<< ª\æ1\Õ\ZHô#bµ†\Ï\Üx\î‹vTm\ÃY&\Æ\Ñğ6)g2ôYE2,‡	ª™\Ö$« Ê®o	V\Z\Ø\×\á\"\Äqü•˜¹\Õ¼ü\ÆÈ²I¿\ë+\èN3\n\İ\Ğg\0NÉ°x‚¦¦\Í>\nñ\É(ñ›f„§¥”\ãM\Ö\ÙkŒ\â‰\Êr\íCY\ÙVM8½‚Ú®‡b3—L-5¹\Æ\\\á	~.a.+Ó†/`x>Jz\Å.$†¾Ùƒg-]™A\Ò\ã*¸ú„(«<¹2Â™´-¤$l·ÁR:H„«!\Åu\Æ\Éûq4\éIq\İrN.3Ôœ“\\5£@º\Î\\\Û(\î÷T®\Ï)ƒ½”´s1P\Ãn78ôeÒ´\Úz7\æ­xl+\r0y…_\Ï\ë6cŠ=­\ÓÀ#,s\Ë$U§$‰¦\Ğ\â:¬K_ˆ.2x¬TX_\ØhT\\F\Êl(µÁiU`¯8º\ë¤\Æô¸Sx{A@V\ÊÃŒ 2¬g›:¤®i\'D©Å›\Ö\ìó´\ç\r“\àK§V‘\Òúoaş¦–\ï1¸\è}NÁ\ã¿d\ÂRs{u½ÿ\0Å¹\rh<\0š\Û\Új8¶: 6³\áÿ\0\Ã1³ˆ\îz®ˆbzş\Ìx¦rf\ÉN²\Ì#\È\ã~ŠÍv)´}‡\ÕR“¶k½\æ8n\×s\èz%Xl¿\î9Å¹&JŠ\Æ$ôğ­h—;S¬>şJ|=6j0vW\Üù]\ÌÃ¡ß«]6£†h7\Ê÷ºtV)\á(@÷„\É\Ê}\Ñ9ù\"¨‚æ¹Œ€\Äo\Ô\Øo\Õ.4\à\È 7q~$\îš\å:\Î\Z˜\0aóŒ\08\Ç_U5ÑšHYN{\Ëm\É&O\Â’÷HHh,\0o!\Ö\ä‹¦õ²2NªO§P˜\×\0\é\æ€\Ôz‰ø‚	0\á:šZ\Ògˆæš\Óğ—˜\Z°Æ·\ÚFÄ utVU¾šgp/\êDú5*\Ìp\rh=Ah\Ö\æ´h¦Lq\Ğ\Âè€“6Â‡¶Å­ñ\à’\á!½\Ùlñ\Ô>£ube\rS¹<ø\"~‰5¥®\ÒûoŸŒ0ª\ĞÓ¤\r·?¯Š¡vŸ u`Á\àB¼\àYDû\ãK¼#\åu®}–±Ô®\"û¸¢e„SªN.‚«CE—´j8L.y« Õ°\ÆaX\ãr\Ü#©6™\nŸNun´\Åƒ¹S–\'.X;ù	\Ï#]‘™ÁiaIZ\ÑT51\í…I\Ãô\Ô.< \ì\ë.k\ZŒo\r\æ­y\Í\"XD%)ÀQm\ë¨\á\Ìÿ\0¿AÎc[\ì\İ\0\ì \Å\ã\Ú\à®U0¸jÍ‘gK\Ç\Ğ\Ğò\ÔørG\'«¨1’`\ì¿\êRB=Q\r].Ÿ\Ä¬A{‰+l3ou>³†,\Ùk_\Õ×„Ñ«²\â±o\Æ\rGy¥‡!CB®(½\ÒQ\ÖGVTiT²òbF\ê\Z\Ê\Ñ?F£ \å,n/\n«¿KPwi:šv1}B§\Ô0õ\Úx‡zóV?\ÃZ5ZX\Ò\æ\0Cÿ\0—K„şWO{IÙ k¶.\Ø÷dXñ<Ó®*4y\Ã\\·7®_¥µ\0¦\à\ĞZw™™¡:!›	\Zm<\íş<ª(·xƒ™ş]¶)¾\ç2@\Ü\0x\Í\ÏVú©4U2µX±•š\Ù\'T\ÄsGU\Ğ\Óg\\GI‚¼\Ä\àub#NÍ\0\Ûõ©\Ç\ì\Ò\'„I#¬\ÄÁòB\Æ*˜j”i\Ö¸$È†I\ÒNò\è\áÓŠßµ½³}\"\Æ0n\Ğ@¸\0l ·\äšc2f¸KIq‰N\ÜeÄª–g\Öv-²\ÇT$\0\âI‘\Ê\0\Øt	¡è’ ¾\Ç\æ«V\0\È2\ì\0\ŞmÀ+j\Æ\n®ª_\ï9\ÇH0D™ßš!˜‡`¦\ĞÏ¾D€ğ¶Nü\ÊŞ¦YŞ¦@\ßP‚||œ¾\rü‰©º¹`#\0\Èõ\ß\É<\Ã\è‚Z\ã[‰)[ Cu8´Ü‹O¬š\àòÈ¨G©<¶?DÂ¨5ÎŸ\r\Û\×T.ƒo¨\È\æxz„Ò›¤Cl<?+¨‡¦f[X\êAú À…,£ü§P\Ş\äƒ\é\Å‡f¡¦\Ç\éc\0[…Š0’4ˆ?\ÍKı\nÁ9\çh0aµˆ÷û¥v]ûK‡%\Ä\é“\ÄÌƒ\ÍU^\'ª–^xB|½g€RÔ \çÁu=g1Í‰º;*h-!FS¥bl\äL¨{ó=\ßg}‰öq D\ã&\Ì\Í\"e²…Î³§¶r\äü™w\àŠR³\\Äš­¤G \n”\å-\0KÇ‚\\1B›\0m\Ï\Éûk¦\\JM&üğ\ÒC|\ê•\Z8rCÿ\0y\Â7Tj•KŒ\Ñ\Ø\ÚZ‰qqK—§üx(\Çı)HÆ…½B¼X\åv8^¤#1¤¥¦l‹­NQí‚…j\ÄQ`X­°\Ö\Å&¢µp#qQÊ\ìQSl˜@\ÇHü+\Ä\ZL«\ÂHşaÃ–\ÅY0!õ÷$ğ‹Ç¤ú$=Š\ÂE#¸$óö],Ã±­\Ô\ç\îş	}W\Ê$ûÃ€[nüvV\\».1Ş [”Iùªoø“‡\ÃUm6Ñ«RğK@\0o\ZA=\ïlšöc·tñxŠ´\Zb“\\®\Õ$<ˆ–Ûª4ƒ\Ğj4L\Î\Ö_–\äG¤z«^?+a?OX\ì\Ìş\Újw\0;n+‚*¯\ânz\ì¨\â=Of\Ğ\Ğ\\\ç;\Ä5²cT‰\è’)1\ä\Ø^#*!¦	ƒ$\Û\â\'e-iµ\â&Ä„\ï#\í&Ù£R\\7ckÇ‹J\Ì\Ï¢\í·Q –¹	¨[+}¯`\ÕM\Â‹	ƒ\æ9$´Hq‡\Ş:¼ƒµ–Ó›Ÿ?ªõ ECa^^¢Œı)\0°\Ä5\î\r2\'ˆƒ	§©\ÃvBo\Î%ˆ¦C\Éi?\Ø\ïúc\à˜jª2;pñº(\Ì`Ê»ñ6“\çù¯¸É<ız\æeûÇœŸ\ĞR	qş\î\â&È±@]w{\Æ< £0\á i’\î‡q\åG°\Zg¤[\Ä\"Ö°M¹ş.#\Ì-F±&uDë¸‰\Ãõ\â¨\Ù\Î´\ïe\Ñ3A7q\ë\×\Ô$OÀšs\â\ãiÿ\0+qª`j\Ê\æ%h3(Ñ“–]¦Š\Ô\ëP¨E\Û\â¥ı²«÷y\\91\Îı\á\Ë(´Ç§¦ø q¯! /iLI++\Ó3\"\Årë¬­™R0`\íp¡¯ƒh½\Ã\ã on\Èq–š;Eÿ\0‚²»\\\Ë\àˆÚ˜Q\n\ÓIŒwu\í(Z¹P3 \ÏE\Ùñªğm\ÑO¨ ­E\ÓLv‡\\AA{+®­\í»#i…\ë_(‡á¬´¦\"\Ä\"ºŒ=š\ÄKbÁbŒ(aS°-[†xİ¥o°V(mPˆº\×wˆ\0	\ßc\êd¡\à¸\Âg•Rax÷ \æw=Vf:\0û\ZlsD37ó&\ÉwjûZóL\Ñ\r-‘\Şt™# dûf˜\Ô\ÛG?´z%9GN `xCHñ´Gˆ ø¥HT\ÊV*¨®\Ğg½\0qø•dü2\Ê\ê7\íˆ=\Ñ{\ß;Š·dk±\à\Ò\ZÁ [\Ş\Æ±ù®Íe\r\Ãa\Ú\Í\ÌOEuA´A–a\\*{B/$ô‚#\î¸\Öw—V¥Š¨Xj1\Å\ï$¶f\æ}\àAâ¾‡Á\0@Š®ş!vwUV“uœ\Ğ.w¸?‘N=\Z\Ó9\Ïgó·\àš\\5á¹¼\æ<I2º\ŞI\Úz8¦\×\\‹´‚<A\\FŸf±#¸Gú\ÊÑ¨ø€ºdr÷\Ği†¸¹=\Ùş\Ş)›£Q`\Î]\0<şª¿N—“±\ç\Ë\à­>¢\ÍW³<9\áÀğóğR’1uZ ;Q¶òx’+‡’\\-ş\ï	­ğ´5n	\"ü`úl§‡kf:]DnH\r›2\Ûñ\ã`|ºX\ÔLôèˆ¤F\äğ\Ş/#š‘\Ğm\"x[\ÒÈŠh 8\Ç\"º‚¦Z`ú\Ï\ë¨R:›§Qú\çº±\äÁµ\ïÀ¬Jt\ZLù‰¿Q)U:l§\\\é36-<ù\Ï`¤lzÊ¯\æğ \È;óè•Œ€;I€¦ò]±\å*˜Á–\í\Å\\+c!‡»}¶•6/¥Rœ¥\Üx(\Íl<w\ÔT²\×\çp[cúH7JÙƒ^3\Å%\ê9$š»&\ë\İ%†Ò«N@*<Ò k\Í<\'\Ú•ğö\çJôfA„J‹\n\éX\ãô2H\'/72Pu_uB\Â\é)”ipz\Ã\×u#\ØÒ–±¤˜	¾\ÒV#¤	\ì×¨\ãbŸ\ä`Ø“i\0=¡/Î©S™¦Œ¥…§ ¤Ø@\İW­”‹°\'„Ë³´ª\ç”YbŠ\Ê\áT “\Ã\ë\Å]Î•„¥İƒ©Ç„€\0^V;Lt\îƒ\è-ñß—VX¦\ÛrlO=ø(±4ô™‰3s\Âv\Ì\Ä\ß\ì‰4\ÂrŒ\Å\Íp’Kg–\İwºk\Ú\Î\Òû8h=ú\Ò\Óh.\ã\Ğ[\Ô$5E\âg•¢\0\é÷U\Ìø:­-\Ş\á\Ô\ÓÈ›GŸ.‰”¾­»-8_\Ä\n´\Í! 9#\Ú.á³ˆ;Ÿ\Ét\ìVh\ÆS\ÖL‚% n\á#\Õ|Ù€\Ã>{\Õ$\0–¹\Òo¶\ĞGS´®²\ìK«RµûƒH\å\r0%›H41\Åf¡\í}÷Ll\Ä\rÅ¼<¾\Ü\ÕkÓ­‚ı\Ş\á]\×\ç\Ç\Õ>‚\Ó\ÒÇ‡¯\Í B˜\'\íÏ‰\è‘\ç\ØrL4m<¸\ã\'\Ù{\ÚL\Òü>\İR\ÌÚ™mYhŸ1\æ\É™\æ€`\È\ßióG\Òl‘k?0V\Øw˜\áÈ…5;|!-\Ñ\Ğ\Ó\ëò^:H\éÃ¡®+JgQ=Gøóû-^eº\\n	\Ã{m1\éê‰‰˜=P¸†ò\'c1öS\áñ\Â\Òfš™ô\É\Ø[‘ù…Œ\ên‹ªFp÷¹³#vø+^}˜\ZM¶¼Ç†\êN¨¨ò\ã˜JÆ‹£|²“on_®*\Æj±­‚\01\Õ\r…kK\Zy±	_hs/\àÜ‹uB„½-e{@Tª`\îV\Ø\î\Î;F¶‹ø§6Z rŸb\Ü)· ™\ä®,iœ\ê† \Ä8ABcXI“\è˜fUEJ‡E®š\åù¡ß¼\ì@$|üIu3\áiğ§\İEˆ©u\ÌûL7^§z[óU\\F^\Ğv*W\ãã‹QD*…enBj\ëôø¤Øœµ\Ì0Bªú\rR$Á¹G\Ô\Æ\0,—Šv^Ñ¢A7d\ÚL¦$\É^­_\0¯S\ÔF\rdÆ‘\Å/Å´‹\'Y]=Ry-†\0\\\í—4s(É¦*•)`œo²?óL\Ãw\ãş«K\Ün4\ão\à§\È2\İo‡6lÄ¦	…\Õ)ugA\ìø%‚@ñC\Ç\á\Ò\èœE9\ÒÁ¹’gx\æG\r\ç\É…§¡ ‹ıx[\Å%\Íñb›`©\î›Àş3\Ëef,Cq%ºx\0~ñøS\Ì\î\Ú/\ã\Ä|Ê¶\âi\Å2cq\á¿À•W\ÆaË¤òˆG„¢\\ğ\0\Ü\ß\ÃÇ€]7&H`>M\Õ*=\é\åúÛŠ»\á¥·¹ \Ï3°Û€\ä°63Á´>£\ÛiS\Û}SŠ¬LZ\Ò> üş\nµ—Usj\Ó\Ú`\ÉğˆŸAóV:?„§\Ğl+|–N°¦\Ü\nIc!\Òõõ¶ü•’†;‡Ğ®qÚ¼d8\Ä^\'ˆŸ\â‘·\Íf;ı½ºÁ‹‹ˆ#Àú…\æ8\×JG=1\ëõPÙ‰v“~±ş›\Ë$­x\àH?SóBŒ_j¼±­#ù~pµ\ÃVLÁ.2zÿ\0>Qu¥j ‚Ñ¾ÿ\0şEƒd9ôÍ¦\ã\ÃS ı|\Ğ0cf\ÛM\äm\ÑE\Âfm¿‡0Rút\İ!\Ã\Ş\â8/)G\áš\0\Ô\0\0‹G”–1N\íûI\'§\":*vi¶N\ã\äšöƒ0ı\ã©6d\İ7\äUg7k˜@<W#›\ÜG.–,v\ØsI± pG\æ¤\Â\Ñö\Î\Ô\àd\Õ8>!Z{=›µ„j6<Ê¯…£·a°ú\"ğb\İyªÿ\0hsC\Z6v\Ü\Ç\Ù:Í³6±²\ÛÏ»\ĞòT|n\'\Ú\Õ.6˜SP·\Ò\ÊF™N\ë’\É¤®‡”\Òc[b@>?T# [q[h¦G\ç\É\Û7€9¦\äªj\à#~#‚»\æÁ€mÂ¡c*·^\à‰KûøX{?˜—ˆ,‘\Çü-ûI’³[\Z;ı”y»N­´„\ã´m-¢\\NK‚MZ\é\Êñ‰(-L1l$Ê´\æÊ¬\ä±{œ±\ZppkAùeb\Ã\ÑÈœ[\Şdi²®) AmÂ“š[ˆ\æ¸î\Ë?\í]\ĞeZû(Êpozÿ\0\ÔI<|\0Q\ã1\r³€ig*‡\ÔlXOxñğ§V\ê\Årl¼»4K®\0ñõU\ï\ØMG‚Gtƒ¤n@L$\î>\é\Ş:¡q\rm‡\Ä\Ü!‚ğpˆkXù.¦Q*!Å²X\ßA·õ1\ã÷U\\}of;\ßò#\Õ]Ö‡0\"A¬¹om±dW‹‹^x\\\Ó>@2ƒfZ\æ\ê\Ô~\\\'ª»S`\Ä\Şd\ïÀùğ\\ó²7> q\rkF\ïu\Übğ\Ñ\ÇÀyºV2=Ÿt,\ÑÌ‰ğ\Øy\ÂT…^å•š÷´\ì{³± Æ‹\ìv#š³`®@p\ï“\ÎfşduIpøa\Ş`\ÚIõ‚\×­ú*Õ…¥\Ä\ïG6Æ»M29´>•Ç³:…\Î$—÷c\ÕtŒ\ç5oy€‰iñ%£\Êc\ÕPóª³€\Èñ\ë\å7óD\ÈP\êGo4~Z\áMÍ3\nzXM‡7i\ì\Ã\\9Ç‡$¬Ì·Š„¹¯‹§\Â\ä|‘xÚ¥•\Zÿ\0\å6¸‹u\0ª\æS˜ƒFOó1£\Ì8}>)ğx¨\Çş7Ç‹I1ò>e!,¹…³ÌµÛª“o4\Ãğ\ë›;Ã¯çº¯\á«gf— \Èú¦}m]ğl\á>b\Î¯æµŒP3Z!¸\Ç\Èò´˜hÀö\î>\ÙÒŠ\íx3#õúğC`±wvg¢òó\íl\\–¥e7O59ú`…g\Íòy—³nJŸš“0¯üy©¾\roƒ1™º£4“pA\nZtMœl\Zyƒu£„.‰\ÏRM2\ÜĞ€\à¬\ÕsM4õ:…Í¨bK_\ÒS^!\í´\ËHRs´o\Ê\ìwœ\ç\ì†\ïSš\\{yV~\É\âYÅ„\\“¶8gQ\Ä@\Ø\Ü-‹\'\í­t\Ë3r¦7À\ãCY ÁùôYŠ\Í\êTn‚d*ş6riHµ\Ş\ê¯º\ZY…Y•@\Ñ\Õ*§‰M³\Æ0¶™	\ãRV*¦1Â±-Ha\íJ!\ÂR|KM7‡V\"¹¦\è[CjX©A5ÿ\0	«AÔ±lsD«cğ\ÃÛ‚\r€&ûOù\\û\Ò\ÇY[;3˜;A-÷yA;ù&Ç‹öT\rk§S\Äa\Ép\"\0™\0“\ë1ı+lS@›‚\Ù3\Ì;W\Ä©/c3²ñQµ.a“ü§hª©Û®\ÖS¤cMPAC@·¬µ]ğ¨Wk{H)\â}“v›b\Üô\ê\ÔÂ¦f5MgûB\"\ß\ã\ê–Õ®\ê•‰’NşŠ\ÉJˆöb\Êy\'\\Nˆr¼\Õ\ri\r\Şy¹\r\Ñt\ìK¬Àİ†›q€\æ\Íùî¹¾]£DÀ\Ô	\ëºfU@\Ô\ïƒ ‚7‹	\Û\Îÿ\0\åm\ĞaÑ¾OHh\Ü\ê7\é<<\Çü\ŞŒ\Ã2m\É\"\Ç\è\éùD¯:\ÌÛ†¤\ã¨L#›‡y­ñ‘\Ø*\Äö†­k8\Û[O—{Pÿ\0˜§\ØfZñx¢\ìQ\Ã“\ĞDüAóPb}¶ 6\ã\Ê}RŠ8²A \Ü\ÔcIş‘\Ç\æ›`j:F\äjõ\"¡Y;\n\á\éˆyş©šG\Û\n\ã@\Çu\Ãÿ\0©õüµ\Ä4OP|t\Çı#\ÕQ»eˆŠ\í\Ù\Â\ëo±ÿ\0IQ\Ít²›f!Æ¡\å>\ëm\à\ÙW|£N“\æÂ°ıòr\äu\Éq\0\ÈB¹vs0V\Ì\èm\0:›m\æÕªŒ‹\ŞX\â\ï\Ú0\ä\\5ú:\î\Ò\ßFƒ\ê¤\È\ê\ZgA÷K ôs§Küºz€x¨0økƒü\í\Ù\í\Óo4\ÏúüT˜Œ15\\\ãî¹€ô1c< €|\Ï$¬¢)ı¬\Ìª\á\Èü÷UŒ>4´“Ä¢»@\ê9Ñ¤‚C„ñ\æ:\Ò\æ\ÓH¢Ÿ¤d•†?´5¶›%xúº\Ìñ*LU+ \ZøMQ‹´¾h¶9\Ï!¶\â€\ÂF\éw5¡,\×Ed\rpâš—‡R!\"J ctÀ\à’X¾€\Ñ?d±~\Ë$À&ƒ·\Ø¸¶¨\0ULm\r$<qù«VO\Úvš~Î¸›n§š2RXi¦¤Š\Ör6•2\á.¯\\\n®slÙ²-¹¨6W\íYšdxª\Î;„®»Ò®\Âd¨s:­u€Z´4`•\ê(PX¯Eh\Û;t¾B]y¬\ì\åw\ìúG»3©Ày7X{+Y\ÕQô\Ú\Ëw\ä$Ä›m(¨4„M%BBòwW>\Å\às­ÀGO¼¢N2ZN÷q\r³\\\âKa 4ñ’#†Ò¬•1NfS§Ş¦\Z)´ˆ\ßŞ—H\"L§Æ©‚IT}61\îat\ëkG\"Óªdùú•H\ÌD^ª\È\ê\İKÙ†Ë‰kÈ‘°\"|BS[\"Ä“™3\Â[?4%\Øx+Á^Ú¸­\Ò\Ú=Ä‡\é›rs5a¥\ÙQ‰Ÿ\å5¨Fò&\Ñ\ÕFx›`’@Upú€¹½\ĞA<-7ºêšªóHLA€\İ6\0O/ª \åYEV\Ô{M`Cˆ\Ú&b\ÓccóW\nÙ“)a^)ÚŒˆİ·\ry\ÄI\İZ0QzU»ašû\\C©ƒ,ap=^w‚\ã\ÕW‚\"\à-ğ\Øyy!Ú¼˜7\â|Ñ{YHp¿%Í¤¶±šm\àê¹ \Ú}\ã\æaZòŒ;€l\Ùö€^:>I~_‹£I¾Ñ´…BLN¹ƒ\á\Ã\Æl&bk;hq\á\Ç\Ìñäª \ép\ÔKlf÷#õñ\\§9Å¸\Ôx\á¨\ï\Â\æË¦\Õ\ÍN›¤™k}\İÌ­æ¹–j\ç¹Î†ñ\'c\Åg\Za±}&’ša*{6¸s‰ò2…\ÃĞ¨6c‰å¤¦´2Ê¤1¥„9\İ\ã¨ \ìoÁ	_À-5?mI®$‡\rù\Èc\È+}ªQ’H<g\Ğ\Ç/²¯e‚…*m`ª€$˜ L˜’\äŸ`ó6¶›\Úl4¼ˆ‹	;\Ê?fRtr¾\Ğ\Ğ}:\Ïa2Zo\ÔnŠR\ÌA(\ìó5±pp#T\Î-){€r•Ó 7\Óz˜B\Ô\ÍB\ã	†h{”È°\Ój¨†…(\âŒÆ€\æ¶û%-ªTÆ¤¬Ñ˜]\'\Ó•š\éO„,´­.µsOÚ\Ğ\Û,öcc¸J©8±\Ò8&•‡´\Ò\æù©J4+V\rXpÛ¢qt4(0\ÕgtWW\rA,0·qSS£\"\ÊÂ‰KSZ4\Ö¨9X©¸\Ö}ü†„ŠM\æLŸ(¾Û­1İ˜\Ã\Ôii¤\Ó X¹ã­ ğ,X½s‚\Ä`\à°a\Ø»‡½7\Z¸ó\á\ÑGS±˜3-\Ğ\æ\ØY¯{Zr_†û‹¤Ã³&ÁöZ‹¦µ\î\ï9ü\Ç?U)\ì¾\Z\ä‡Hğ´\ï\ãu‹¤k=‘¤\Ó\İsšfFÄˆ\ä}†ö«^1Rg3‰\Ù\ëÅ‰Z\ndùwfqTkj\ØğdÁ\é\Ò\\;ay\nb*°bZŒÿ\0\Ì5Â¡h:¥\ân\âG?\éX±+ŠÌˆşS-c\rw÷`ƒ\r’z˜^\ãš\ájÅ£i\Òò€>«!H;1c¿\rq,\Z¡\ìk\Å\Èh#U\İ\İ;#ù\"\ëşbA‘Šh\äC#½e‹\ÕfO—v\Z­\"ê†¸{\İ\İ.-‡7À\ŞóÇ¢r\Ş\ÏV<ZH\ÜLNı,F’ØÙ¼\ÅØms[Hw{®hxiBH\æ\ßR¶\Âvo\Úö\0Ö‚i\Ôk˜\\\\é»„ƒ³¢, ,X¶¨;\0\à2œYc}¥\r4‡8š%Ï=\ÇC[§H\ÈóL2Ü¦¤\ÃÀ\Ó €`\íÀ÷®±b?v3¡•\Ã,¥:ŒK~[))d¡\×4\è´h#p$‹ ¿³xw{\Ô(\ê<é·‚\Çö_\æ\é4(6–X±\Ó\ì>$\á¨u½x-ğ.\0™ı™€m»·ò+,cGö\ãƒx\Ø9\ãn@Cø{‚´Q={\î:]b\Äiş\à®=›\Ìñö†G®\ë\Ê‡4\îT¨\Ù;rÅ‰\\\"\Õ4`\\\Ãğİµ\"+‘ı \Û\Õÿ\0\nMôb}Yÿ\0rõb\Ñ\Ç¸ƒl–Ÿ\á­vûúgû\\c¿1«HŸ\î ğÁü\0L\ïÂ¬y>õ÷»ÿ\0\ÊÅ‹~(‡fÿ\Ù');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,11 +313,11 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping events for database 'PoSmart'
+-- Dumping events for database 'posmart'
 --
 
 --
--- Dumping routines for database 'PoSmart'
+-- Dumping routines for database 'posmart'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `agregar_Categoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -424,7 +415,8 @@ CREATE DEFINER=`Hiram`@`%` PROCEDURE `agregar_producto`(
     IN p_precio_compra INT,
     IN p_precio_venta INT,
     IN p_nombre_categoria VARCHAR(50),
-    IN p_nombre_ubicacion VARCHAR(50)
+    IN p_nombre_ubicacion VARCHAR(50),
+    IN p_imagen LONGBLOB  -- nuevo parÃ¡metro para la imagen
 )
 BEGIN
     DECLARE v_id_categoria INT;
@@ -454,14 +446,14 @@ BEGIN
         SET v_id_ubicacion = LAST_INSERT_ID();
     END IF;
 
-    -- Insertar el producto
+    -- Insertar el producto con la imagen
     INSERT INTO Productos (
         id_Producto, Nombre, Descripcion, Cantidad_stock,
-        Precio_compra, Precio_venta, id_Categoria, id_Ubicacion
+        Precio_compra, Precio_venta, id_Categoria, id_Ubicacion, Imagen
     ) VALUES (
-                 p_id_producto, p_nombre, p_descripcion, p_cantidad_stock,
-                 p_precio_compra, p_precio_venta, v_id_categoria, v_id_ubicacion
-             );
+        p_id_producto, p_nombre, p_descripcion, p_cantidad_stock,
+        p_precio_compra, p_precio_venta, v_id_categoria, v_id_ubicacion, p_imagen
+    );
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -737,12 +729,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Current Database: `PoSmart`
---
-
-USE `PoSmart`;
-
---
 -- Final view structure for view `pedidos`
 --
 
@@ -787,4 +773,4 @@ USE `PoSmart`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-26 17:11:03
+-- Dump completed on 2025-05-26 23:10:30
