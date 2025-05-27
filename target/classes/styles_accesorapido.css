@@ -1,0 +1,98 @@
+.Empleado {
+    -fx-background-color: #018c5c;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Empleado:hover {
+    -fx-background-color: #016b4a;
+}
+
+
+.Empleado:pressed {
+    -fx-background-color: #014d36;
+}
+
+.Proveedor {
+    -fx-background-color: #f27457;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Proveedor:hover {
+    -fx-background-color: #d9634a;
+}
+
+.Proveedor:pressed {
+    -fx-background-color: #b74f3b;
+}
+
+.Historial {
+    -fx-background-color: #ffcbc4;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Historial:hover {
+    -fx-background-color: #e6b5af;
+}
+
+.Historial:pressed {
+    -fx-background-color: #d19d98;
+}
+
+.Productos {
+    -fx-background-color: #f2bf5e;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Productos:hover {
+    -fx-background-color: #d9aa54;
+}
+
+.Productos:pressed {
+    -fx-background-color: #bf9346;
+}
+
+.Reportes {
+    -fx-background-color: #a7d2dd;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Reportes:hover {
+    -fx-background-color: #8cbbc8;
+}
+
+.Reportes:pressed {
+    -fx-background-color: #6fa3b2;
+}
+
+.Categorias {
+    -fx-background-color: #a1d765;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.Categorias:hover {
+    -fx-background-color: #8fc258;
+}
+
+.Categorias:pressed {
+    -fx-background-color: #8fc258;
+}
+
+.fondo{
+    -fx-background-color: #7aa94a;
+}
+
+.fondo_boton{
+    -fx-background-color: #f0f0f2;
+}

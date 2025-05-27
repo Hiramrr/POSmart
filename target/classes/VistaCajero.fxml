@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VistaCajeroController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="569.34033203125" minWidth="10.0" prefWidth="224.6848907470703" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="991.9328918457031" minWidth="10.0" prefWidth="931.3151092529297" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#293540" height="805.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="226.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Pane id="Pane" prefHeight="77.0" prefWidth="225.0" styleClass="Pane" stylesheets="@styles_principal.css">
+               <children>
+                  <Button id="Configuracion" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" styleClass="Configuracion">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/configuracion.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+            <Button id="buttonOpciones" mnemonicParsing="false" onAction="#handleHacerUnaVenta" prefHeight="43.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Realizar una venta">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="48.0" onAction="#handlerVerProductos" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Stock">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button id="buttonOpciones" mnemonicParsing="false" prefHeight="44.0" onAction="#handlerMostrarUbicaciones" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Ubicaciones">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button id="buttonOpciones" fx:id="agregarEmpleado" mnemonicParsing="false" onAction="#handlerMostrarCategorias" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Categorias">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button id="buttonOpciones" fx:id="agregarEmpleado1" mnemonicParsing="false" onAction="#handlerHistorialVentas" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Historial de Ventas">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="509.0" prefWidth="224.0">
+               <children>
+                  <Button id="CerrarSesion" fx:id="cerrarSesion" layoutX="62.0" layoutY="473.0" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesion" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+      <Pane prefHeight="200.0" prefWidth="932.0" GridPane.columnIndex="1">
+         <children>
+            <Pane id="Barra" layoutY="-3.0" prefHeight="82.0" prefWidth="933.0" styleClass="Pane2" stylesheets="@styles_principal.css">
+               <children>
+                  <Circle fill="#293540" layoutX="876.0" layoutY="39.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text layoutX="752.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="dia" layoutX="104.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia" textAlignment="CENTER" wrappingWidth="101.81422103461318" />
+                  <Text fx:id="hora" layoutX="107.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora" textAlignment="CENTER" wrappingWidth="101.81422103461318" />
+               </children>
+            </Pane>
+            <Pane fx:id="contenedor" layoutX="6.0" layoutY="82.0" prefHeight="706.0" prefWidth="914.0" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>

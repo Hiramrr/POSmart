@@ -26,6 +26,9 @@ public class Login_DAO implements Login_DAO_Interface {
     @Override
     public String saberRol(String username, String password) {
         try {
+            if (con == null || con.isClosed()) {
+                conexion(); // Asegura que haya conexión activa
+            }
             consulta = con.createStatement();
             resultado = consulta.executeQuery("CALL obtener_rol('" + username + "', '" + password + "')");
             if (resultado.next()) {

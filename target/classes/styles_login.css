@@ -1,0 +1,36 @@
+
+.button {
+    -fx-background-color: #018c5c;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #016b4a;
+}
+
+
+.button:pressed {
+    -fx-background-color: #014d36;
+}
+
+#registerButton {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+#registerButton:hover {
+    -fx-background-color: #005bb5;
+}
+
+#registerButton:pressed {
+    -fx-background-color: #004080;
+}
+
+.gradient-rectangle {
+    -fx-fill: linear-gradient(to bottom, #459f6a, #3CB371, #c7f5c7)
+}
+

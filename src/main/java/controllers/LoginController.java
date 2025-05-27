@@ -55,7 +55,9 @@ public class LoginController implements Initializable {
             alert.setContentText("No se encontro la conexion con la base de datos, contacta a un administrador");
             alert.showAndWait();
         }
-        leerUltimaSesion();
+        Platform.runLater(() -> {
+            leerUltimaSesion(); // Ya se puede acceder a scene
+        });
     }
 
     @FXML

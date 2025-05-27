@@ -1,0 +1,50 @@
+.buttonAgregarProveedor {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.buttonAgregarProveedor:hover {
+    -fx-background-color: #45a049; /* Darker green */
+}
+
+.buttonAgregarProveedor:pressed {
+    -fx-background-color: #3e8e41; /* Even darker green */
+}
+
+.buttonModificarProveedor {
+    -fx-background-color: #2196F3; /* Blue */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.buttonModificarProveedor:hover {
+    -fx-background-color: #1976D2; /* Darker blue */
+}
+
+.buttonModificarProveedor:pressed {
+    -fx-background-color: #1565C0; /* Even darker blue */
+}
+
+.buttonEliminarProveedor {
+    -fx-background-color: #F44336; /* Red */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.buttonEliminarProveedor:hover {
+    -fx-background-color: #E53935; /* Darker red */
+}
+
+.buttonEliminarProveedor:pressed {
+    -fx-background-color: #D32F2F; /* Even darker red */
+}

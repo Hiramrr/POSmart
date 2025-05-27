@@ -1,0 +1,26 @@
+.product-card {
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-pref-width: 150;
+    -fx-margin: 10; /* Esto no funciona directamente, lo veremos abajo */
+}
+
+.product-card:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 4);
+}
+
+.product-name {
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.product-price {
+    -fx-text-fill: #444444;
+    -fx-font-size: 14px;
+}
