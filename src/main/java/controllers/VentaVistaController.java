@@ -1,5 +1,5 @@
 package controllers;
-import BaseDatos.BaseDatos;
+import BaseDatos.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -143,11 +143,17 @@ public class VentaVistaController {
     }
 
     public void finalizarCompra() {
+        if (vboxVenta.getChildren().isEmpty()) {
+            AlertaUtil.mostrarError("Error", "No hay productos en el carrito.");
+            return;
+        }
+
         if (AlertaUtil.confirmar("Confirmar Compra", "¿Estás seguro de finalizar la compra?")) {
             Compras_DAO comprasDAO = new Compras_DAO();
+            RealizarPedido_DAO pedidoDAO = new RealizarPedido_DAO();
             comprasDAO.conexion();
+            pedidoDAO.conexion();
 
-            // Obtener el username desde la sesión
             String username = Sesion.getInstancia().getNombreUsuario();
             int idUsuario = bd.obtenerIdUsuario(username);
 
@@ -156,19 +162,33 @@ public class VentaVistaController {
                 return;
             }
 
-            //Temporalmente por pruebas usar el mismo provedor para todos
-            String nombreProveedor = "Proveedor A";
-            int idProveedor = bd.obtenerIdProveedor(nombreProveedor);
+            // 🔍 Tomamos el proveedor del primer producto del carrito
+            HBox primerProductoHBox = (HBox) vboxVenta.getChildren().get(0);
+            String nombreProducto = (String) primerProductoHBox.getUserData();
 
-            if (idProveedor == -1) {
-                AlertaUtil.mostrarError("Error", "No se pudo obtener el id del proveedor.");
+            Producto productoCarrito = todosLosProductos.stream()
+                    .filter(p -> p.getNombre().equals(nombreProducto))
+                    .findFirst()
+                    .orElse(null);
+
+            if (productoCarrito == null) {
+                AlertaUtil.mostrarError("Error", "No se encontró el producto en la lista original.");
                 return;
             }
 
-            String fechaActual = LocalDate.now().toString();
-            double totalCompra = total;
+            List<Proveedor> proveedores = pedidoDAO.obtenerProveedoresPorProducto(productoCarrito.getId());
 
-            boolean compraExitosa = comprasDAO.agregarCompra(fechaActual, totalCompra, idProveedor, idUsuario);
+            if (proveedores.isEmpty()) {
+                AlertaUtil.mostrarError("Error", "No se encontró proveedor para el producto: " + nombreProducto);
+                return;
+            }
+
+            Proveedor proveedorSeleccionado = proveedores.get(0); // 👈 Se usa este proveedor para la tabla Compra
+            int idProveedor = proveedorSeleccionado.getId();
+            String fechaActual = LocalDate.now().toString();
+
+            boolean compraExitosa = comprasDAO.agregarCompra(fechaActual, total, idProveedor, idUsuario);
+
             if (!compraExitosa) {
                 AlertaUtil.mostrarError("Error", "No se pudo registrar la compra.");
                 return;
@@ -178,27 +198,28 @@ public class VentaVistaController {
 
             for (Node node : vboxVenta.getChildren()) {
                 if (node instanceof HBox hbox) {
-                    String nombreProducto = (String) hbox.getUserData();
+                    String nombreProd = (String) hbox.getUserData();
                     Label cantidadLabel = (Label) hbox.lookup(".cart-qty");
                     int cantidadVendida = Integer.parseInt(cantidadLabel.getText());
 
-                    Producto productoOriginal = todosLosProductos.stream()
-                            .filter(p -> p.getNombre().equals(nombreProducto))
+                    Producto prod = todosLosProductos.stream()
+                            .filter(p -> p.getNombre().equals(nombreProd))
                             .findFirst()
                             .orElse(null);
 
-                    if (productoOriginal != null) {
-                        int nuevoStock = productoOriginal.getCantidad() - cantidadVendida;
-                        productoOriginal.setCantidad(nuevoStock);
+                    if (prod != null) {
+                        int nuevoStock = prod.getCantidad() - cantidadVendida;
+                        prod.setCantidad(nuevoStock);
 
                         if (nuevoStock <= 0) {
-                            bd.eliminarProductoDeBaseDeDatos(productoOriginal.getId());
+                            bd.eliminarProductoDeBaseDeDatos(prod.getId());
                         } else {
-                            bd.actualizarProductoEnBaseDeDatos(productoOriginal);
+                            bd.actualizarProductoEnBaseDeDatos(prod);
                         }
 
-                        double montoFinal = cantidadVendida * productoOriginal.getPrecioVenta();
-                        boolean detalleExitoso = comprasDAO.agregarDetalleCompra(productoOriginal.getId(), idCompra, cantidadVendida, montoFinal);
+                        double montoFinal = cantidadVendida * prod.getPrecioVenta();
+                        boolean detalleExitoso = comprasDAO.agregarDetalleCompra(prod.getId(), idCompra, cantidadVendida, montoFinal);
+
                         if (!detalleExitoso) {
                             AlertaUtil.mostrarError("Error", "No se pudo registrar el detalle de la compra.");
                             return;
@@ -216,6 +237,8 @@ public class VentaVistaController {
             AlertaUtil.mostrarInfo("Compra Finalizada", "La compra se realizó con éxito.");
         }
     }
+
+
 
 
 

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -17,8 +18,8 @@
       <TextArea id="DescP" fx:id="DescP" layoutX="184.0" layoutY="157.0" prefHeight="71.0" prefWidth="149.0" />
       <TextField id="CantP" fx:id="CantP" layoutX="183.0" layoutY="241.0" />
       <TextField id="PreP" fx:id="PreP" layoutX="491.0" layoutY="116.0" />
-      <Button id="GuardarP" fx:id="GuardarP" layoutX="442.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleGuardarProducto" style="-fx-background-color: #f2b85b;" text="Guardar" />
-      <Button id="CancelarP" fx:id="CancelarP" layoutX="272.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCancelarProducto" style="-fx-background-color: #f2b85b;" text="Cancelar" />
+      <Button id="GuardarP" fx:id="GuardarP" layoutX="451.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleGuardarProducto" style="-fx-background-color: #f2b85b;" text="Guardar" />
+      <Button id="CancelarP" fx:id="CancelarP" layoutX="301.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleCancelarProducto" style="-fx-background-color: #f2b85b;" text="Cancelar" />
       <Label layoutX="138.0" layoutY="88.0" text="ID" />
       <Label layoutX="122.0" layoutY="124.0" text="Nombre" />
       <Label layoutX="113.0" layoutY="184.0" text="Descripción" />
@@ -38,5 +39,9 @@
       <ComboBox fx:id="ubiPCb" layoutX="490.0" layoutY="196.0" prefWidth="150.0" />
       <Label layoutX="425.0" layoutY="253.0" text="Proveedor" />
       <ComboBox fx:id="proveedorCb" layoutX="490.0" layoutY="249.0" prefWidth="150.0" />
+      <Label layoutX="434.0" layoutY="297.0" text="Estado" />
+      <ComboBox fx:id="estadoCb" layoutX="490.0" layoutY="293.0" prefWidth="150.0" />
+      <Button id="CancelarP" fx:id="CancelarP1" layoutX="87.0" layoutY="302.0" mnemonicParsing="false" onAction="#handlerAgregarImagens" style="-fx-background-color: #88DC65;" text="Agregar imagen" />
+      <ImageView fx:id="imagen" fitHeight="153.0" fitWidth="217.0" layoutX="30.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

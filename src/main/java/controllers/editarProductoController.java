@@ -4,9 +4,13 @@ import BaseDatos.BaseDatos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import controllers.Producto;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
@@ -22,11 +26,15 @@ public class editarProductoController {
     @FXML private Button CancelEdicionP;
     @FXML private ComboBox<String> CatP;
     @FXML private ComboBox<String> UbiP;
+    @FXML private ComboBox<String> estadoCb;  // Asegúrate que el fx:id en el FXML sea "estadoCb" o actualízalo aquí
+
 
     private BaseDatos baseController = new BaseDatos();
     private Producto producto;
     private static Connection con;
     AlertPOSmart alerta;
+    private byte[] imagenSeleccionada; // Guardará la imagen actual o la nueva seleccionada
+
 
     public editarProductoController() {
         try {
@@ -41,28 +49,34 @@ public class editarProductoController {
     public void initialize() {
         cargarCategorias();
         cargarUbicaciones();
+        cargarEstados();
     }
 
     // Método para recibir el producto seleccionado
     public void setProducto(Producto producto) {
         this.producto = producto;
 
-        // Cargar datos en los campos
         nomEditP.setText(producto.getNombre());
         descEditP.setText(producto.getDescripcion());
         cantEditP.setText(String.valueOf(producto.getCantidad()));
         precioCompraEditP.setText(String.valueOf(producto.getPrecioCompra()));
         precioVentaEditP.setText(String.valueOf(producto.getPrecioVenta()));
-         // ID de categoría
-        //ubiEditP.setText(String.valueOf(producto.getUbicacion())); // ID de ubicación
 
-        int idcat = Integer.parseInt(producto.getCategoria());
-        Categoria c = baseController.obtenerCategoriaPorId(idcat);
-        CatP.setValue(String.valueOf(c.getNombre()));
-//        CatP.setValue(producto.getCategoria());
-        int idubi = Integer.parseInt(producto.getUbicacion());
-        Ubicacion u = baseController.obtenerUbicacionPorId(idubi);
-        UbiP.setValue(String.valueOf(u.getNombre()));
+        // Aquí asumimos que producto.getCategoria() ya es el nombre
+        CatP.setValue(producto.getCategoria());
+
+        // Igual para ubicación
+        UbiP.setValue(producto.getUbicacion());
+
+        Boolean estado = producto.getEstado();
+        if (estado != null) {
+            estadoCb.setValue(estado ? "Activo" : "Inactivo");
+        } else {
+            estadoCb.setValue("Inactivo"); // o "Activo", como prefieras
+        }
+
+        // Imagen y demás...
+        this.imagenSeleccionada = producto.getImagen();
     }
 
 
@@ -87,7 +101,6 @@ public class editarProductoController {
 
     @FXML
     private void guardarCambios(ActionEvent event) {
-        // Obtener valores de los campos
         String nombre = nomEditP.getText();
         String descripcion = descEditP.getText();
         String cantidadStr = cantEditP.getText();
@@ -95,42 +108,28 @@ public class editarProductoController {
         String precioVentaStr = precioVentaEditP.getText();
         String categoria = CatP.getValue();
         String ubicacion = UbiP.getValue();
+        String estadoStr = estadoCb.getValue();
 
-        // Validar campos vacíos
         if (nombre.isEmpty() || descripcion.isEmpty() || cantidadStr.isEmpty() ||
-                precioCompraStr.isEmpty() || precioVentaStr.isEmpty() || categoria.isEmpty() || ubicacion.isEmpty()) {
+                precioCompraStr.isEmpty() || precioVentaStr.isEmpty() || categoria.isEmpty() ||
+                ubicacion.isEmpty() || estadoStr.isEmpty()) {
             alerta = new AlertPOSmart(Alert.AlertType.WARNING,"Campos vacíos", "Por favor, completa todos los campos.");
             return;
         }
 
         int cantidad;
         double precioCompra, precioVenta;
+        boolean estado = estadoStr.equals("Activo");
 
-        // Validar formato de cantidad
         try {
             cantidad = Integer.parseInt(cantidadStr);
-        } catch (NumberFormatException e) {
-            alerta = new AlertPOSmart(Alert.AlertType.WARNING, "Formato inválido", "El campo 'Cantidad' debe ser un número entero válido.");
-            return;
-        }
-
-        // Validar formato de precio de compra
-        try {
             precioCompra = Double.parseDouble(precioCompraStr);
-        } catch (NumberFormatException e) {
-            alerta = new AlertPOSmart(Alert.AlertType.WARNING, "Formato inválido", "El campo 'Precio de Compra' debe ser un número decimal válido.");
-            return;
-        }
-
-        // Validar formato de precio de venta
-        try {
             precioVenta = Double.parseDouble(precioVentaStr);
         } catch (NumberFormatException e) {
-            alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Formato inválido", "El campo 'Precio de Venta' debe ser un número decimal válido.");
+            alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Error", "Verifica los campos numéricos.");
             return;
         }
 
-        // Crear el producto actualizado
         Producto productoActualizado = new Producto(
                 producto.getId(),
                 nombre,
@@ -139,10 +138,11 @@ public class editarProductoController {
                 precioCompra,
                 precioVenta,
                 categoria,
-                ubicacion
+                ubicacion,
+                estado,
+                imagenSeleccionada // usa la imagen nueva o la antigua si no cambió
         );
 
-        // Actualizar en la base de datos
         if (baseController.actualizarProductoEnBaseDeDatos(productoActualizado)) {
             alerta = new AlertPOSmart(Alert.AlertType.INFORMATION,"Éxito", "Producto actualizado con éxito.");
             Stage stage = (Stage) GuardarEdicionP.getScene().getWindow();
@@ -151,10 +151,6 @@ public class editarProductoController {
             alerta = new AlertPOSmart(Alert.AlertType.ERROR,"Error", "Hubo un error al actualizar el producto.");
         }
     }
-
-
-
-
 
     public void handleCancelEdicionP() {
         alerta = new AlertPOSmart(Alert.AlertType.WARNING,"Cancelar","Cancelando edicion del producto");
@@ -182,5 +178,32 @@ public class editarProductoController {
         UbiP.getItems().addAll(ubicaciones);
     }
 
+    private void cargarEstados() {
+        estadoCb.getItems().clear();
+        estadoCb.getItems().addAll("Activo", "Inactivo");
+        estadoCb.setValue("Activo");
+    }
+
+    @FXML
+    private void handleAgregarImagen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar Imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Archivos de imagen", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        Stage stage = (Stage) GuardarEdicionP.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                imagenSeleccionada = fis.readAllBytes();
+                alerta = new AlertPOSmart(Alert.AlertType.INFORMATION, "Imagen cargada", "Imagen seleccionada correctamente.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                alerta = new AlertPOSmart(Alert.AlertType.ERROR, "Error", "No se pudo cargar la imagen.");
+            }
+        }
+    }
 }
 

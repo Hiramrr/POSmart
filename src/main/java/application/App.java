@@ -29,7 +29,7 @@ public class App extends Application {
             BufferedReader reader = new BufferedReader(new FileReader(".ultimaSesion.txt"));
             String user = reader.readLine();
             String contraseña = reader.readLine();
-            String rol = reader.readLine(); // Leer también el rol
+            String rol = reader.readLine();
             reader.close();
 
             if (validarCredenciales(user, contraseña)) {
@@ -47,7 +47,6 @@ public class App extends Application {
                 }
             }
         } catch (Exception e) {
-            // Se ignora si el archivo no existe o tiene formato incorrecto
         }
 
         if (mostrarLogin) {
