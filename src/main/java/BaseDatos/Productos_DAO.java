@@ -94,11 +94,22 @@ public class Productos_DAO implements Productos_DAO_Interface {
 
     @Override
     public boolean eliminarProductoDeBaseDeDatos(int idProducto) {
-        String query = "DELETE FROM Productos WHERE id_Producto = ?";
-        try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setInt(1, idProducto);
-            int filas = stmt.executeUpdate();
+        String eliminarRelaciones = "DELETE FROM producto_proveedor WHERE id_Producto = ?";
+        String eliminarProducto = "DELETE FROM productos WHERE id_Producto = ?";
+
+        try (PreparedStatement stmtRelaciones = con.prepareStatement(eliminarRelaciones);
+             PreparedStatement stmtProducto = con.prepareStatement(eliminarProducto)) {
+
+            // Eliminar relaciones en producto_proveedor
+            stmtRelaciones.setInt(1, idProducto);
+            stmtRelaciones.executeUpdate();
+
+            // Eliminar el producto
+            stmtProducto.setInt(1, idProducto);
+            int filas = stmtProducto.executeUpdate();
+
             return filas > 0;
+
         } catch (SQLException e) {
             System.err.println("Error al eliminar producto: " + e.getMessage());
             e.printStackTrace();

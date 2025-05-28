@@ -56,23 +56,19 @@ public class HistorialVentasController {
 
     @FXML
     private void initialize() {
-        // Inicializar columnas de la tabla de compras
         columnaIdCompra.setCellValueFactory(cellData -> cellData.getValue().idCompraProperty().asObject());
         columnaFechaCompra.setCellValueFactory(cellData -> cellData.getValue().fechaCompraProperty());
         columnaTotalCompra.setCellValueFactory(cellData -> cellData.getValue().totalCompraProperty().asObject());
         columnaProveedor.setCellValueFactory(cellData -> cellData.getValue().proveedorProperty());
         columnaUsuario.setCellValueFactory(cellData -> cellData.getValue().usuarioProperty());
 
-        // Inicializar columnas de la tabla de detalles de compra
         columnaProducto.setCellValueFactory(cellData -> cellData.getValue().productoProperty());
         columnaCantidad.setCellValueFactory(cellData -> cellData.getValue().cantidadProperty().asObject());
         columnaPrecioUnitario.setCellValueFactory(cellData -> cellData.getValue().precioUnitarioProperty().asObject());
         columnaMontoFinal.setCellValueFactory(cellData -> cellData.getValue().montoFinalProperty().asObject());
 
-        // Cargar las compras al inicializar la pantalla
         cargarCompras();
 
-        // Acción al seleccionar una compra
         tablaCompras.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 cargarDetallesCompra(newValue.getIdCompra());
@@ -80,8 +76,9 @@ public class HistorialVentasController {
             }
         });
 
-        // Acción de filtrar
-//        btnFiltrar.setOnAction(event -> filtrarCompras());
+        // Listeners para filtrado dinámico
+        txtFechaFiltro.textProperty().addListener((observable, oldValue, newValue) -> filtrarComprasDinamico());
+        txtProveedorFiltro.textProperty().addListener((observable, oldValue, newValue) -> filtrarComprasDinamico());
     }
 
     // Cargar compras en la tabla
@@ -178,4 +175,19 @@ public class HistorialVentasController {
     public void mostrarAlertaWarning(String titulo,String mensaje){
         alerta = new AlertPOSmart(Alert.AlertType.WARNING, titulo, mensaje);
     }
+
+    private void filtrarComprasDinamico() {
+        String fecha = txtFechaFiltro.getText().trim().toLowerCase();
+        String proveedor = txtProveedorFiltro.getText().trim().toLowerCase();
+
+        List<Compra> todasLasCompras = baseDatos.obtenerCompras(); // obtén todas las compras
+        List<Compra> filtradas = todasLasCompras.stream()
+                .filter(c -> (fecha.isEmpty() || c.getFechaCompra().toLowerCase().contains(fecha)) &&
+                        (proveedor.isEmpty() || c.getProveedor().toLowerCase().contains(proveedor)))
+                .toList();
+
+        compras.setAll(filtradas);
+        tablaCompras.setItems(compras);
+    }
+
 }
