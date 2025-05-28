@@ -42,6 +42,7 @@ public class BaseDatos {
         return false;
     }
 
+
     public List<Proveedor> obtenerProveedores() {
         List<Proveedor> proveedores = new ArrayList<>();
         try {
@@ -64,24 +65,23 @@ public class BaseDatos {
     }
 
     public ObservableList<Producto> obtenerProductos() {
-        System.out.println("entra a obtener productos");
         ObservableList<Producto> productos = FXCollections.observableArrayList();
 
         String query = """
-    SELECT p.id_Producto, p.Nombre, p.Descripcion, p.Cantidad_stock,
-           p.Precio_compra, p.Precio_venta,
-           p.Imagen,
-           c.Nombre AS categoria, u.Nombre AS ubicacion
-    FROM Productos p
-    JOIN Categoria c ON p.id_categoria = c.id_categoria
-    JOIN Ubicacion u ON p.id_ubicacion = u.id_ubicacion
-    """;
+            SELECT p.id_Producto, p.Nombre, p.Descripcion, p.Cantidad_stock,
+                   p.Precio_compra, p.Precio_venta,
+                   p.Imagen,
+                   c.Nombre AS categoria, u.Nombre AS ubicacion
+            FROM Productos p
+            JOIN Categoria c ON p.id_categoria = c.id_categoria
+            JOIN Ubicacion u ON p.id_ubicacion = u.id_ubicacion
+        """;
 
         try (PreparedStatement stmt = con.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                byte[] imagenBytes = rs.getBytes("Imagen"); // Obtener la imagen como bytes
+                byte[] imagenBytes = rs.getBytes("Imagen");
                 Producto producto = new Producto(
                         rs.getInt("id_Producto"),
                         rs.getString("Nombre"),
@@ -91,18 +91,14 @@ public class BaseDatos {
                         rs.getDouble("Precio_venta"),
                         rs.getString("categoria"),
                         rs.getString("ubicacion"),
-                        imagenBytes  // nuevo parámetro
+                        imagenBytes
                 );
                 productos.add(producto);
             }
-
-            System.out.println("termina de hacer en la obtener productos");
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println("obtiene los productos con éxito");
         return productos;
     }
 
@@ -191,8 +187,8 @@ public class BaseDatos {
         }
     }
     //------Eliminar producto------------------------------------------
-    public boolean eliminarProductoDeBaseDeDatos(int idProducto) {
-        String query = "DELETE FROM Productos WHERE id_Producto = ?";
+    public boolean darDeBajaProducto(int idProducto) {
+        String query = "UPDATE Productos SET disponible = FALSE WHERE id_Producto = ?\n";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, idProducto);
             int filas = stmt.executeUpdate();
@@ -343,7 +339,7 @@ public class BaseDatos {
     public boolean agregarProductoProveedor(int idProducto, int idProveedor) {
         try {
             consulta = con.createStatement();
-            String query = "INSERT INTO Producto_Proveedor (id_Proveedor, id_Producto) VALUES (" + 
+            String query = "INSERT INTO Producto_Proveedor (id_Proveedor, id_Producto) VALUES (" +
                          idProveedor + ", " + idProducto + ")";
             consulta.executeUpdate(query);
             return true;

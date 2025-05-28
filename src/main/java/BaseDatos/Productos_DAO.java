@@ -30,17 +30,16 @@ public class Productos_DAO implements Productos_DAO_Interface {
     @Override
     public ObservableList<Producto> obtenerProductos() {
         ObservableList<Producto> productos = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM vista_productos"; // si vista_productos no incluye imagen, cambia a tabla Productos
+        String sql = "SELECT * FROM vista_productos"; // Cambia si es necesario
         try {
             consulta = con.createStatement();
             resultado = consulta.executeQuery(sql);
             while (resultado.next()) {
-                // Agrego lectura del campo imagen como bytes
                 byte[] imagenBytes = null;
                 try {
-                    imagenBytes = resultado.getBytes("Imagen"); // puede ser null si no tiene imagen
+                    imagenBytes = resultado.getBytes("Imagen");
                 } catch (SQLException e) {
-                    // Si no existe la columna imagen, ignorar
+                    // Ignorar si no existe la columna imagen
                 }
 
                 Producto producto = new Producto(
@@ -52,12 +51,10 @@ public class Productos_DAO implements Productos_DAO_Interface {
                         resultado.getDouble("Precio_venta"),
                         resultado.getString("categoria"),
                         resultado.getString("ubicacion"),
-                        null // aquí si usas estado en tu tabla puedes ajustarlo
+                        null // Aquí probablemente debas ajustar si quieres el valor disponible
                 );
 
-                // Setear imagen (si tu clase Producto tiene un setter para imagen)
                 producto.setImagen(imagenBytes);
-
                 productos.add(producto);
             }
         } catch (Exception e) {
@@ -112,7 +109,7 @@ public class Productos_DAO implements Productos_DAO_Interface {
     @Override
     public ObservableList<Producto> obtenerProductosActivos() {
         ObservableList<Producto> productos = FXCollections.observableArrayList();
-        String query = "SELECT * FROM Productos WHERE estado = TRUE";
+        String query = "SELECT * FROM Productos WHERE disponible = TRUE";
 
         try (PreparedStatement stmt = con.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -134,7 +131,7 @@ public class Productos_DAO implements Productos_DAO_Interface {
                         rs.getDouble("Precio_venta"),
                         rs.getString("categoria"),
                         rs.getString("ubicacion"),
-                        rs.getBoolean("estado")
+                        rs.getBoolean("disponible")
                 );
                 p.setImagen(imagenBytes);
                 productos.add(p);
@@ -149,10 +146,11 @@ public class Productos_DAO implements Productos_DAO_Interface {
 
     @Override
     public boolean agregarStock(int idProducto, int cantidad) {
-        String query = "UPDATE Productos SET Cantidad_stock = Cantidad_stock + ? WHERE id_Producto = ?";
+        String query = "UPDATE Productos SET Cantidad_stock = Cantidad_stock + ?, disponible = CASE WHEN Cantidad_stock + ? > 0 THEN 1 ELSE 0 END WHERE id_Producto = ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, cantidad);
-            stmt.setInt(2, idProducto);
+            stmt.setInt(2, cantidad);
+            stmt.setInt(3, idProducto);
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
@@ -162,14 +160,13 @@ public class Productos_DAO implements Productos_DAO_Interface {
         }
     }
 
-    // Método para agregar o actualizar producto con imagen
     public boolean agregarProducto(Producto producto) {
-        String sql = "INSERT INTO Productos (id_Producto, Nombre, Descripcion, Cantidad_stock, Precio_compra, Precio_venta, id_Categoria, id_Ubicacion, Imagen, estado) " +
+        String sql = "INSERT INTO Productos (id_Producto, Nombre, Descripcion, Cantidad_stock, Precio_compra, Precio_venta, id_Categoria, id_Ubicacion, Imagen, disponible) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE " +
                 "Nombre = VALUES(Nombre), Descripcion = VALUES(Descripcion), Cantidad_stock = VALUES(Cantidad_stock), " +
                 "Precio_compra = VALUES(Precio_compra), Precio_venta = VALUES(Precio_venta), id_Categoria = VALUES(id_Categoria), " +
-                "id_Ubicacion = VALUES(id_Ubicacion), Imagen = VALUES(Imagen), estado = VALUES(estado)";
+                "id_Ubicacion = VALUES(id_Ubicacion), Imagen = VALUES(Imagen), disponible = VALUES(disponible)";  // cambié estado por disponible
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, producto.getId());
             stmt.setString(2, producto.getNombre());
@@ -178,8 +175,7 @@ public class Productos_DAO implements Productos_DAO_Interface {
             stmt.setDouble(5, producto.getPrecioCompra());
             stmt.setDouble(6, producto.getPrecioVenta());
 
-            // Aquí asumo que tienes los métodos para obtener id_categoria e id_ubicacion como enteros en Producto
-            stmt.setInt(7, Integer.parseInt(producto.getCategoria()));  // Si tu clase Producto usa String, ajusta o agrega un método para traer id
+            stmt.setInt(7, Integer.parseInt(producto.getCategoria()));
             stmt.setInt(8, Integer.parseInt(producto.getUbicacion()));
 
             byte[] imagen = producto.getImagen();
@@ -189,10 +185,9 @@ public class Productos_DAO implements Productos_DAO_Interface {
                 stmt.setNull(9, Types.BLOB);
             }
 
-            // Estado: si es null, por defecto true
-            Boolean estado = producto.getEstado();
-            if (estado != null) {
-                stmt.setBoolean(10, estado);
+            Boolean disponible = producto.getEstado();  // aquí es confuso el getter, pero se usa para disponible
+            if (disponible != null) {
+                stmt.setBoolean(10, disponible);
             } else {
                 stmt.setBoolean(10, true);
             }
@@ -201,6 +196,22 @@ public class Productos_DAO implements Productos_DAO_Interface {
             return filas > 0;
         } catch (SQLException e) {
             System.err.println("Error al agregar o actualizar producto: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean actualizarCantidadYDisponibilidad(int idProducto, int nuevaCantidad) {
+        String query = "UPDATE Productos SET Cantidad_stock = ?, disponible = ? WHERE id_Producto = ?";
+        boolean nuevoEstado = nuevaCantidad > 0;
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, nuevaCantidad);
+            stmt.setBoolean(2, nuevoEstado);
+            stmt.setInt(3, idProducto);
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar cantidad y disponibilidad: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
