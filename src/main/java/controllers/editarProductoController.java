@@ -47,7 +47,7 @@ public class editarProductoController {
         precioVentaEditP.setText(String.valueOf(producto.getPrecioVenta()));
         CatP.setValue(producto.getCategoria());
         UbiP.setValue(producto.getUbicacion());
-        estadoCb.setValue(producto.getEstado() != null && producto.getEstado() ? "Activo" : "Inactivo");
+        estadoCb.setValue(producto.getdisponible() != null && producto.getdisponible() ? "Activo" : "Inactivo");
         this.imagenSeleccionada = producto.getImagen();
     }
 

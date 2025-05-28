@@ -9,15 +9,15 @@ public class Producto {
     private double precioVenta;
     private String ubicacion;
     private String categoria;
-    private Boolean estado;
-    private byte[] imagen;  // <-- nuevo atributo para imagen
+    private Boolean disponible;
+    private byte[] imagen;
 
     public Producto(){
 
     }
 
     public Producto(int id, String nombre, String descripcion, int cantidad,
-                    Double precioCompra, Double precioVenta, String categoria, String ubicacion, boolean estado, byte[] imagen){
+                    Double precioCompra, Double precioVenta, String categoria, String ubicacion, boolean disponible, byte[] imagen){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -26,7 +26,7 @@ public class Producto {
         this.precioVenta = precioVenta;
         this.ubicacion = ubicacion;
         this.categoria = categoria;
-        this.estado = estado;
+        this.disponible = disponible;
         this.imagen = imagen;
     }
 
@@ -40,7 +40,7 @@ public class Producto {
         this.precioVenta = precioVenta;
         this.categoria = categoria;
         this.ubicacion = ubicacion;
-        this.estado = estado;
+        this.disponible = estado;
     }
 
     public Producto(int id, String nombre, String descripcion, int cantidad,
@@ -120,12 +120,12 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Boolean getdisponible() {
+        return disponible;
     }
 
     public void setEstado(Boolean estado) {
-        this.estado = estado;
+        this.disponible = estado;
     }
 
     public byte[] getImagen() {

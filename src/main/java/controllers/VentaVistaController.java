@@ -236,8 +236,8 @@ public class VentaVistaController {
             total = 0.0;
             totalLabel.setText("$0.00");
             todosLosProductos = bd.obtenerProductos();
-            mostrarProductos(todosLosProductos);
 
+            cargarProductosDisponibles();
             AlertaUtil.mostrarInfo("Compra Finalizada", "La compra fue realizada exitosamente.");
         }
     }

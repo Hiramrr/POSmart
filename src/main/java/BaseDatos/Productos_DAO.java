@@ -161,12 +161,26 @@ public class Productos_DAO implements Productos_DAO_Interface {
     }
 
     public boolean agregarProducto(Producto producto) {
+        // Primero obtener los ids de categoria y ubicacion por sus nombres
+        Integer idCategoria = obtenerIdCategoriaPorNombre(producto.getCategoria());
+        Integer idUbicacion = obtenerIdUbicacionPorNombre(producto.getUbicacion());
+
+        if (idCategoria == null) {
+            System.err.println("No se encontró la categoría: " + producto.getCategoria());
+            return false;
+        }
+        if (idUbicacion == null) {
+            System.err.println("No se encontró la ubicación: " + producto.getUbicacion());
+            return false;
+        }
+
         String sql = "INSERT INTO Productos (id_Producto, Nombre, Descripcion, Cantidad_stock, Precio_compra, Precio_venta, id_Categoria, id_Ubicacion, Imagen, disponible) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE " +
                 "Nombre = VALUES(Nombre), Descripcion = VALUES(Descripcion), Cantidad_stock = VALUES(Cantidad_stock), " +
                 "Precio_compra = VALUES(Precio_compra), Precio_venta = VALUES(Precio_venta), id_Categoria = VALUES(id_Categoria), " +
-                "id_Ubicacion = VALUES(id_Ubicacion), Imagen = VALUES(Imagen), disponible = VALUES(disponible)";  // cambié estado por disponible
+                "id_Ubicacion = VALUES(id_Ubicacion), Imagen = VALUES(Imagen), disponible = VALUES(disponible)";
+
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, producto.getId());
             stmt.setString(2, producto.getNombre());
@@ -175,8 +189,8 @@ public class Productos_DAO implements Productos_DAO_Interface {
             stmt.setDouble(5, producto.getPrecioCompra());
             stmt.setDouble(6, producto.getPrecioVenta());
 
-            stmt.setInt(7, Integer.parseInt(producto.getCategoria()));
-            stmt.setInt(8, Integer.parseInt(producto.getUbicacion()));
+            stmt.setInt(7, idCategoria);
+            stmt.setInt(8, idUbicacion);
 
             byte[] imagen = producto.getImagen();
             if (imagen != null) {
@@ -185,7 +199,7 @@ public class Productos_DAO implements Productos_DAO_Interface {
                 stmt.setNull(9, Types.BLOB);
             }
 
-            Boolean disponible = producto.getEstado();  // aquí es confuso el getter, pero se usa para disponible
+            Boolean disponible = producto.getdisponible();
             if (disponible != null) {
                 stmt.setBoolean(10, disponible);
             } else {
@@ -200,6 +214,7 @@ public class Productos_DAO implements Productos_DAO_Interface {
             return false;
         }
     }
+
 
     public boolean actualizarCantidadYDisponibilidad(int idProducto, int nuevaCantidad) {
         String query = "UPDATE Productos SET Cantidad_stock = ?, disponible = ? WHERE id_Producto = ?";
@@ -216,4 +231,38 @@ public class Productos_DAO implements Productos_DAO_Interface {
             return false;
         }
     }
+
+    // Métodos para obtener id por nombre
+    public Integer obtenerIdCategoriaPorNombre(String nombreCategoria) {
+        String sql = "SELECT id_Categoria FROM Categoria WHERE Nombre = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombreCategoria);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_Categoria");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener id_Categoria: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Integer obtenerIdUbicacionPorNombre(String nombreUbicacion) {
+        String sql = "SELECT id_Ubicacion FROM Ubicacion WHERE Nombre = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombreUbicacion);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_Ubicacion");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener id_Ubicacion: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
