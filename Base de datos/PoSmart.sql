@@ -1,18 +1,32 @@
 USE PoSmart;
 
-CREATE TABLE Productos(
-                          id_Producto int PRIMARY KEY,
-                          Nombre VARCHAR(100) NOT NULL,
-                          Descripcion VARCHAR(200),
-                          Cantidad_stock int NOT NULL,
-                          Precio_compra int NOT NULL,
-                          Precio_venta int NOT NULL,
-                          id_categoria int NOT NULL,
-                          id_ubicacion int NOT NULL,
-                          FOREIGN KEY (id_Categoria) REFERENCES Categoria(id_Categoria),
-                          FOREIGN KEY (id_Ubicacion) REFERENCES Ubicacion(id_Ubicacion)
+CREATE TABLE productos (
+    id_Producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(200),
+    Cantidad_stock INT NOT NULL,
+    Precio_compra INT NOT NULL,
+    Precio_venta INT NOT NULL,
+    id_categoria INT NOT NULL,
+    id_ubicacion INT NOT NULL,
+    Imagen MEDIUMBLOB,
+    disponible TINYINT(1) DEFAULT 1, -- 1 = disponible, 0 = no disponible
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria),
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
 );
 
+
+CREATE TABLE productos (
+    id_Producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    id_Proveedor INT,
+    imagen LONGBLOB, -- o VARCHAR si solo guardas la ruta
+    disponible BOOLEAN DEFAULT TRUE, -- NUEVO CAMPO
+    FOREIGN KEY (id_Proveedor) REFERENCES proveedores(id_Proveedor)
+);
 CREATE TABLE Proveedor(
                           id_Proveedor int PRIMARY KEY,
                           Nombre VARCHAR(100) NOT NULL,

@@ -13,4 +13,7 @@ public interface Productos_DAO_Interface {
     public boolean eliminarProductoDeBaseDeDatos(int idProducto);
     public ObservableList<Producto> obtenerProductosActivos();
     public boolean agregarStock(int idProducto, int cantidad);
+    boolean agregarProducto(Producto producto);
+
+    boolean actualizarCantidadYDisponibilidad(int idProducto, int nuevaCantidad);
     }

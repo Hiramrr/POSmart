@@ -2,7 +2,10 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.ByteArrayInputStream;
 
 public class CartaProductoController {
 
@@ -13,7 +16,13 @@ public class CartaProductoController {
     public void setProducto(Producto producto) {
         cartaNombre.setText(producto.getNombre());
         cartaPrecio.setText("$" + producto.getPrecioVenta());
-        // imagen.setImage(new Image(producto.getUrlImagen())); // opcional
+
+        if (producto.getImagen() != null) {
+            ByteArrayInputStream bis = new ByteArrayInputStream(producto.getImagen());
+            imagen.setImage(new Image(bis));
+        } else {
+            imagen.setImage(null); // o una imagen por defecto si quieres
+        }
     }
 
 }

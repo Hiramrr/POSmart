@@ -36,7 +36,7 @@ public class RealizarPedido_DAO implements RealizarPedido_DAO_Interface {
         try {
             consulta = con.createStatement();
             resultado = consulta.executeQuery("SELECT * FROM Productos");
-            while(resultado.next()){
+            while (resultado.next()) {
                 Producto producto = new Producto(
                         resultado.getInt("id_Producto"),
                         resultado.getString("Nombre"),
@@ -45,12 +45,13 @@ public class RealizarPedido_DAO implements RealizarPedido_DAO_Interface {
                         resultado.getDouble("Precio_compra"),
                         resultado.getDouble("Precio_venta"),
                         String.valueOf(resultado.getInt("id_categoria")),
-                        String.valueOf(resultado.getInt("id_ubicacion"))
+                        String.valueOf(resultado.getInt("id_ubicacion")),
+                        resultado.getBytes("imagen") // última propiedad
                 );
                 productos.add(producto);
             }
-        } catch (Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println("Error al obtener productos: " + e.getMessage());
         }
         return productos;
     }

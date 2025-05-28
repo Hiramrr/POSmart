@@ -1,5 +1,6 @@
 package controllers;
-import BaseDatos.BaseDatos;
+
+import BaseDatos.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -11,45 +12,35 @@ import javafx.scene.layout.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import BaseDatos.Compras_DAO;
-
+import java.util.stream.Collectors;
 
 public class VentaVistaController {
-    @FXML
-    private FlowPane flowPaneProductos;
-    @FXML
-    private VBox vboxVenta;
-    @FXML
-    private Label totalLabel;
+    @FXML private FlowPane flowPaneProductos;
+    @FXML private VBox vboxVenta;
+    @FXML private Label totalLabel;
+    @FXML private TextField busquedaField;
 
     private double total = 0.0;
-
-    @FXML
-    private TextField busquedaField;
-
     private List<Producto> todosLosProductos;
     private BaseDatos bd = new BaseDatos();
 
-
     public void initialize() {
         todosLosProductos = bd.obtenerProductos();
-        mostrarProductos(todosLosProductos);
-        busquedaField.textProperty().addListener((observable, oldValue, newValue) -> {
-            buscarProducto(newValue);
-        });
+        cargarProductosDisponibles();
+        busquedaField.textProperty().addListener((obs, oldVal, newVal) -> buscarProducto(newVal));
     }
 
     private void buscarProducto(String busqueda) {
         String filtro = busqueda.trim().toLowerCase();
-
         List<Producto> filtrados = todosLosProductos.stream()
                 .filter(p -> p.getNombre().toLowerCase().contains(filtro) ||
                         p.getCategoria().toLowerCase().contains(filtro) ||
                         p.getDescripcion().toLowerCase().contains(filtro) ||
                         p.getUbicacion().toLowerCase().contains(filtro))
                 .toList();
+
         if (filtrados.isEmpty()) {
-            AlertaUtil.mostrarInfo("Sin resultados", "No se encontraron productos que coincidan con la búsqueda.");
+            AlertaUtil.mostrarInfo("Sin resultados", "No se encontraron productos.");
         }
 
         mostrarProductos(filtrados);
@@ -57,21 +48,19 @@ public class VentaVistaController {
 
     private void agregarProductoACesta(Producto producto) {
         for (Node node : vboxVenta.getChildren()) {
-            if (node instanceof HBox hbox) {
-                if (producto.getNombre().equals(hbox.getUserData())) {
-                    Label cantidadLabel = (Label) hbox.lookup(".cart-qty");
-                    Label precioLabel = (Label) hbox.lookup(".cart-price");
+            if (node instanceof HBox hbox && producto.getNombre().equals(hbox.getUserData())) {
+                Label cantidadLabel = (Label) hbox.lookup(".cart-qty");
+                Label precioLabel = (Label) hbox.lookup(".cart-price");
 
-                    int cantidad = Integer.parseInt(cantidadLabel.getText()) + 1;
-                    cantidadLabel.setText(String.valueOf(cantidad));
+                int cantidad = Integer.parseInt(cantidadLabel.getText()) + 1;
+                cantidadLabel.setText(String.valueOf(cantidad));
 
-                    double precioTotalProducto = cantidad * producto.getPrecioVenta();
-                    precioLabel.setText("$" + String.format("%.2f", precioTotalProducto));
+                double precioTotalProducto = cantidad * producto.getPrecioVenta();
+                precioLabel.setText("$" + String.format("%.2f", precioTotalProducto));
 
-                    total += producto.getPrecioVenta();
-                    totalLabel.setText("$" + String.format("%.2f", total));
-                    return;
-                }
+                total += producto.getPrecioVenta();
+                totalLabel.setText("$" + String.format("%.2f", total));
+                return;
             }
         }
 
@@ -89,7 +78,6 @@ public class VentaVistaController {
         Label nombreLabel = new Label(producto.getNombre());
         nombreLabel.getStyleClass().add("cart-name");
 
-        // si los nombres de los productos son mas cortos  se empuja el precio a la derecha
         Region spacer = new Region();
         spacer.getStyleClass().add("spacer");
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -119,9 +107,21 @@ public class VentaVistaController {
         totalLabel.setText("$" + String.format("%.2f", total));
     }
 
+    private void cargarProductosDisponibles() {
+        BaseDatos bd = new BaseDatos();
+        Compras_DAO comprasDAO = new Compras_DAO();
+        comprasDAO.conexion();
+
+        List<Producto> productos = bd.obtenerProductos();
+        todosLosProductos = productos.stream()
+                .filter(producto -> comprasDAO.obtenerDisponibilidad(producto.getId()))
+                .collect(Collectors.toList());
+
+        mostrarProductos(todosLosProductos);
+    }
+
     private void mostrarProductos(List<Producto> productos) {
         flowPaneProductos.getChildren().clear();
-
         for (Producto producto : productos) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/CartasProductos.fxml"));
@@ -143,33 +143,46 @@ public class VentaVistaController {
     }
 
     public void finalizarCompra() {
+        if (vboxVenta.getChildren().isEmpty()) {
+            AlertaUtil.mostrarError("Error", "No hay productos en el carrito.");
+            return;
+        }
+
         if (AlertaUtil.confirmar("Confirmar Compra", "¿Estás seguro de finalizar la compra?")) {
             Compras_DAO comprasDAO = new Compras_DAO();
+            RealizarPedido_DAO pedidoDAO = new RealizarPedido_DAO();
             comprasDAO.conexion();
+            pedidoDAO.conexion();
 
-            // Obtener el username desde la sesión
             String username = Sesion.getInstancia().getNombreUsuario();
             int idUsuario = bd.obtenerIdUsuario(username);
-
             if (idUsuario == -1) {
                 AlertaUtil.mostrarError("Error", "No se pudo obtener el id del usuario.");
                 return;
             }
 
-            //Temporalmente por pruebas usar el mismo provedor para todos
-            String nombreProveedor = "Proveedor A";
-            int idProveedor = bd.obtenerIdProveedor(nombreProveedor);
+            // Tomar proveedor del primer producto
+            HBox primerProductoHBox = (HBox) vboxVenta.getChildren().get(0);
+            String nombreProducto = (String) primerProductoHBox.getUserData();
+            Producto productoCarrito = todosLosProductos.stream()
+                    .filter(p -> p.getNombre().equals(nombreProducto))
+                    .findFirst().orElse(null);
 
-            if (idProveedor == -1) {
-                AlertaUtil.mostrarError("Error", "No se pudo obtener el id del proveedor.");
+            if (productoCarrito == null) {
+                AlertaUtil.mostrarError("Error", "No se encontró el producto en la lista.");
                 return;
             }
 
-            String fechaActual = LocalDate.now().toString();
-            double totalCompra = total;
+            List<Proveedor> proveedores = pedidoDAO.obtenerProveedoresPorProducto(productoCarrito.getId());
+            if (proveedores.isEmpty()) {
+                AlertaUtil.mostrarError("Error", "No hay proveedor para el producto.");
+                return;
+            }
 
-            boolean compraExitosa = comprasDAO.agregarCompra(fechaActual, totalCompra, idProveedor, idUsuario);
-            if (!compraExitosa) {
+            int idProveedor = proveedores.get(0).getId();
+            String fechaActual = LocalDate.now().toString();
+
+            if (!comprasDAO.agregarCompra(fechaActual, total, idProveedor, idUsuario)) {
                 AlertaUtil.mostrarError("Error", "No se pudo registrar la compra.");
                 return;
             }
@@ -178,29 +191,41 @@ public class VentaVistaController {
 
             for (Node node : vboxVenta.getChildren()) {
                 if (node instanceof HBox hbox) {
-                    String nombreProducto = (String) hbox.getUserData();
+                    String nombreProd = (String) hbox.getUserData();
                     Label cantidadLabel = (Label) hbox.lookup(".cart-qty");
                     int cantidadVendida = Integer.parseInt(cantidadLabel.getText());
 
-                    Producto productoOriginal = todosLosProductos.stream()
-                            .filter(p -> p.getNombre().equals(nombreProducto))
-                            .findFirst()
-                            .orElse(null);
+                    Producto prod = todosLosProductos.stream()
+                            .filter(p -> p.getNombre().equals(nombreProd))
+                            .findFirst().orElse(null);
 
-                    if (productoOriginal != null) {
-                        int nuevoStock = productoOriginal.getCantidad() - cantidadVendida;
-                        productoOriginal.setCantidad(nuevoStock);
-
-                        if (nuevoStock <= 0) {
-                            bd.eliminarProductoDeBaseDeDatos(productoOriginal.getId());
-                        } else {
-                            bd.actualizarProductoEnBaseDeDatos(productoOriginal);
+                    if (prod != null) {
+                        // Validar si se intenta vender más que el stock
+                        if (!comprasDAO.validarCantidadDisponible(prod.getId(), cantidadVendida)) {
+                            AlertaUtil.mostrarError("Stock insuficiente", "Intentas comprar más de lo disponible en stock para el producto: " + prod.getNombre());
+                            return; // Cancela la compra completa
                         }
 
-                        double montoFinal = cantidadVendida * productoOriginal.getPrecioVenta();
-                        boolean detalleExitoso = comprasDAO.agregarDetalleCompra(productoOriginal.getId(), idCompra, cantidadVendida, montoFinal);
-                        if (!detalleExitoso) {
-                            AlertaUtil.mostrarError("Error", "No se pudo registrar el detalle de la compra.");
+                        // Actualizar stock solo si hay suficiente cantidad
+                        boolean actualizado = comprasDAO.actualizarStockProducto(prod.getId(), cantidadVendida);
+                        if (!actualizado) {
+                            AlertaUtil.mostrarError("Error", "No se pudo actualizar el stock para el producto: " + prod.getNombre());
+                            return;
+                        }
+
+                        int nuevoStock = prod.getCantidad() - cantidadVendida;
+                        prod.setCantidad(nuevoStock);
+
+                        if (nuevoStock <= 0) {
+                            bd.darDeBajaProducto(prod.getId());
+                            comprasDAO.actualizarDisponibilidad(prod.getId(), false);
+                        } else {
+                            bd.actualizarProductoEnBaseDeDatos(prod);
+                        }
+
+                        double montoFinal = cantidadVendida * prod.getPrecioVenta();
+                        if (!comprasDAO.agregarDetalleCompra(prod.getId(), idCompra, cantidadVendida, montoFinal)) {
+                            AlertaUtil.mostrarError("Error", "No se pudo registrar el detalle.");
                             return;
                         }
                     }
@@ -211,12 +236,9 @@ public class VentaVistaController {
             total = 0.0;
             totalLabel.setText("$0.00");
             todosLosProductos = bd.obtenerProductos();
-            mostrarProductos(todosLosProductos);
 
-            AlertaUtil.mostrarInfo("Compra Finalizada", "La compra se realizó con éxito.");
+            cargarProductosDisponibles();
+            AlertaUtil.mostrarInfo("Compra Finalizada", "La compra fue realizada exitosamente.");
         }
     }
-
-
-
 }

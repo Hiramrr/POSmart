@@ -63,6 +63,26 @@ public class ProductosController {
                 cantidad.clear();
             }
         });
+
+        TProductos.setRowFactory(tv -> new TableRow<Producto>() {
+            @Override
+            protected void updateItem(Producto producto, boolean empty) {
+                super.updateItem(producto, empty);
+
+                if (producto == null || empty) {
+                    setStyle(""); // Restablece el estilo si está vacío
+                } else {
+                    int cantidad = producto.getCantidad();
+                    if (cantidad == 0) {
+                        setStyle("-fx-background-color: #f8d7da;"); // rojo claro
+                    } else if (cantidad < 5) {
+                        setStyle("-fx-background-color: #fff3cd;"); // amarillo claro
+                    } else {
+                        setStyle(""); // Sin color si no hay alerta
+                    }
+                }
+            }
+        });
     }
 
     public void cargarProductos(){
@@ -104,14 +124,18 @@ public class ProductosController {
         }
 
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar Eliminación");
-        confirmacion.setHeaderText("¿Estás seguro de eliminar este producto?");
-        confirmacion.setContentText("ID: " + producto.getId() + "\nNombre: " + producto.getNombre());
+        confirmacion.setTitle("Confirmar Eliminación Definitiva");
+        confirmacion.setHeaderText("¿Estás seguro de eliminar este producto permanentemente?");
+        confirmacion.setContentText(
+                "ID: " + producto.getId() +
+                        "\nNombre: " + producto.getNombre() +
+                        "\n\n⚠ Esta acción eliminará también los registros de ventas asociados.\nNo se podrá deshacer."
+        );
 
         confirmacion.showAndWait().ifPresent(respuesta -> {
             if (respuesta == ButtonType.OK) {
                 if (baseDatos.eliminarProductoDeBaseDeDatos(producto.getId())) {
-                    mostrarAlerta("Éxito", "Producto eliminado correctamente.");
+                    mostrarAlerta("Éxito", "Producto y registros asociados eliminados correctamente.");
                     actualizarTabla();
                 } else {
                     mostrarAlerta("Error", "No se pudo eliminar el producto.");

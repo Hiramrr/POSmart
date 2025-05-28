@@ -18,8 +18,8 @@
                   <Text fill="#100f0f" layoutX="191.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Productos" textAlignment="CENTER" />
                </children>
             </Pane>
-            <Button fx:id="GuardarEdicionP" layoutX="324.0" layoutY="304.0" mnemonicParsing="false" onAction="#guardarCambios" style="-fx-background-color: #f2b85b;" text="Guardar Cambios" />
-            <Button fx:id="CancelEdicionP" layoutX="192.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleCancelEdicionP" style="-fx-background-color: #f2b85b;" text="Cancelar" textAlignment="CENTER" />
+            <Button fx:id="GuardarEdicionP" layoutX="324.0" layoutY="341.0" mnemonicParsing="false" onAction="#guardarCambios" style="-fx-background-color: #f2b85b;" text="Guardar Cambios" />
+            <Button fx:id="CancelEdicionP" layoutX="192.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleCancelEdicionP" style="-fx-background-color: #f2b85b;" text="Cancelar" textAlignment="CENTER" />
             <Label layoutX="54.0" layoutY="89.0" text="ID" />
             <Label layoutX="38.0" layoutY="128.0" text="Nombre" />
             <Label layoutX="29.0" layoutY="180.0" text="Descripcion" />
@@ -36,6 +36,9 @@
             <TextField fx:id="precioCompraEditP" layoutX="378.0" layoutY="85.0" />
             <ComboBox fx:id="UbiP" layoutX="378.0" layoutY="164.0" prefWidth="150.0" />
             <ComboBox fx:id="CatP" layoutX="378.0" layoutY="204.0" prefWidth="150.0" />
+            <Label layoutX="329.0" layoutY="248.0" text="Estado" />
+            <ComboBox fx:id="estadoCb" layoutX="378.0" layoutY="244.0" prefWidth="150.0" />
+            <Button id="agregarImagen" fx:id="agregarImagen" layoutX="402.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleAgregarImagen" style="-fx-background-color: #88DC65;" text="Agregar imagen" />
          </children>
       </AnchorPane>
    </children>

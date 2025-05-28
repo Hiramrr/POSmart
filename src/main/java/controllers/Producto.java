@@ -9,14 +9,15 @@ public class Producto {
     private double precioVenta;
     private String ubicacion;
     private String categoria;
-    private Boolean estado;
+    private Boolean disponible;
+    private byte[] imagen;
 
     public Producto(){
 
     }
 
     public Producto(int id, String nombre, String descripcion, int cantidad,
-                    Double precioCompra, Double precioVenta, String categoria, String ubicacion, boolean estado){
+                    Double precioCompra, Double precioVenta, String categoria, String ubicacion, boolean disponible, byte[] imagen){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -25,11 +26,25 @@ public class Producto {
         this.precioVenta = precioVenta;
         this.ubicacion = ubicacion;
         this.categoria = categoria;
-        this.estado = estado;
+        this.disponible = disponible;
+        this.imagen = imagen;
     }
 
     public Producto(int id, String nombre, String descripcion, int cantidad,
-                    Double precioCompra, Double precioVenta, String categoria, String ubicacion){
+                    double precioCompra, double precioVenta, String categoria, String ubicacion, boolean estado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.categoria = categoria;
+        this.ubicacion = ubicacion;
+        this.disponible = estado;
+    }
+
+    public Producto(int id, String nombre, String descripcion, int cantidad,
+                    Double precioCompra, Double precioVenta, String categoria, String ubicacion, byte[] imagen){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -38,6 +53,7 @@ public class Producto {
         this.precioVenta = precioVenta;
         this.ubicacion = ubicacion;
         this.categoria = categoria;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -77,7 +93,7 @@ public class Producto {
     }
 
     public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = this.precioCompra;
+        this.precioCompra = precioCompra;  // corregido
     }
 
     public double getPrecioVenta() {
@@ -85,7 +101,7 @@ public class Producto {
     }
 
     public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = this.precioVenta;
+        this.precioVenta = precioVenta;  // corregido
     }
 
     public String getUbicacion() {
@@ -104,11 +120,19 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Boolean getdisponible() {
+        return disponible;
     }
 
     public void setEstado(Boolean estado) {
-        this.estado = estado;
+        this.disponible = estado;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 }

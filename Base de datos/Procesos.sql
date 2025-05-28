@@ -148,7 +148,10 @@ END$$
 DELIMITER ;
 
 
-/*DELIMITER //
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS agregar_producto;
+//
 
 CREATE PROCEDURE agregar_producto(
     IN p_id INT,
@@ -157,17 +160,21 @@ CREATE PROCEDURE agregar_producto(
     IN p_cantidad INT,
     IN p_precio DOUBLE,
     IN p_ubicacion VARCHAR(255),
-    IN p_categoria VARCHAR(255)
+    IN p_categoria VARCHAR(255),
+    IN p_imagen LONGBLOB
 )
 BEGIN
-    INSERT INTO productos (id_producto, nombre, descripcion, cantidad, precio, ubicacion, categoria)
-    VALUES (p_id, p_nombre, p_descripcion, p_cantidad, p_precio, p_categoria, p_ubicacion);
+    INSERT INTO productos (id_producto, nombre, descripcion, cantidad, precio, ubicacion, categoria, Imagen)
+    VALUES (p_id, p_nombre, p_descripcion, p_cantidad, p_precio, p_ubicacion, p_categoria, p_imagen);
 END //
 
-DELIMITER ;*/
+DELIMITER ;
 
 
 DELIMITER //
+
+DROP PROCEDURE IF EXISTS agregar_producto;
+//
 
 CREATE PROCEDURE agregar_producto(
     IN p_id_producto INT,
@@ -177,7 +184,8 @@ CREATE PROCEDURE agregar_producto(
     IN p_precio_compra INT,
     IN p_precio_venta INT,
     IN p_nombre_categoria VARCHAR(50),
-    IN p_nombre_ubicacion VARCHAR(50)
+    IN p_nombre_ubicacion VARCHAR(50),
+    IN p_imagen LONGBLOB  -- nuevo parámetro para la imagen
 )
 BEGIN
     DECLARE v_id_categoria INT;
@@ -207,14 +215,14 @@ BEGIN
         SET v_id_ubicacion = LAST_INSERT_ID();
     END IF;
 
-    -- Insertar el producto
+    -- Insertar el producto con la imagen
     INSERT INTO Productos (
         id_Producto, Nombre, Descripcion, Cantidad_stock,
-        Precio_compra, Precio_venta, id_Categoria, id_Ubicacion
+        Precio_compra, Precio_venta, id_Categoria, id_Ubicacion, Imagen
     ) VALUES (
-                 p_id_producto, p_nombre, p_descripcion, p_cantidad_stock,
-                 p_precio_compra, p_precio_venta, v_id_categoria, v_id_ubicacion
-             );
+        p_id_producto, p_nombre, p_descripcion, p_cantidad_stock,
+        p_precio_compra, p_precio_venta, v_id_categoria, v_id_ubicacion, p_imagen
+    );
 END//
 
 DELIMITER ;

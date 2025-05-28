@@ -2,10 +2,7 @@ package BaseDatos;
 
 import Interfaz_DAO.GestionarCompras_DAO_Interface;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Compras_DAO implements GestionarCompras_DAO_Interface {
     private static Connection con;
@@ -61,5 +58,65 @@ public class Compras_DAO implements GestionarCompras_DAO_Interface {
             System.out.println("Error al obtener el último id de compra: " + e.getMessage());
         }
         return idCompra;
+    }
+
+    public boolean actualizarDisponibilidad(int idProducto, boolean disponible) {
+        try {
+            String query = "UPDATE Productos SET disponible = ? WHERE id_Producto = ?";
+            var ps = con.prepareStatement(query);
+            ps.setBoolean(1, disponible);
+            ps.setInt(2, idProducto);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar disponibilidad: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean obtenerDisponibilidad(int idProducto) {
+        try {
+            String query = "SELECT disponible FROM Productos WHERE id_Producto = ?";
+            var ps = con.prepareStatement(query);
+            ps.setInt(1, idProducto);
+            var rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean("disponible");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener disponibilidad: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean validarCantidadDisponible(int idProducto, int cantidadSolicitada) {
+        String query = "SELECT Cantidad_stock FROM Productos WHERE id_Producto = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, idProducto);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int stockDisponible = rs.getInt("Cantidad_stock");
+                    return cantidadSolicitada <= stockDisponible;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public boolean actualizarStockProducto(int idProducto, int cantidadVendida) {
+        String query = "UPDATE Productos SET Cantidad_stock = Cantidad_stock - ? WHERE id_Producto = ? AND Cantidad_stock >= ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, cantidadVendida);
+            stmt.setInt(2, idProducto);
+            stmt.setInt(3, cantidadVendida);
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
