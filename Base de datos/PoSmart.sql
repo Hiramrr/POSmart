@@ -100,3 +100,18 @@ CREATE TABLE productos (
 );
 
 SELECT * from Usuario;
+
+DELIMITER $$
+
+CREATE TRIGGER actualizar_disponibilidad
+BEFORE UPDATE ON productos
+FOR EACH ROW
+BEGIN
+    IF NEW.Cantidad_stock <= 0 THEN
+        SET NEW.disponible = 0;
+    ELSE
+        SET NEW.disponible = 1;
+    END IF;
+END $$
+
+DELIMITER ;
