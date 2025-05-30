@@ -97,6 +97,15 @@ public class GestionEmpleadoController implements Initializable {
 
     @FXML
     void handleActualizarEmpleado(ActionEvent event) {
+        if (id.getText().isEmpty() || nombre.getText().isEmpty() || contraseña.getText().isEmpty()
+                || nombre_completo.getText().isEmpty() || telefono.getText().isEmpty()
+                || ciudad.getText().isEmpty() || direccion.getText().isEmpty()
+                || rolOpciones.getValue() == null || rolOpciones.getValue().isEmpty()) {
+
+            AlertaUtil.mostrarError("Error", "Campo vacío. Rellena todos los campos");
+            return;
+        }
+
         int nuevoId = Integer.parseInt(id.getText());
         String nuevoNombre = nombre.getText();
         String nuevoContraseña = contraseña.getText();

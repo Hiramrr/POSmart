@@ -45,7 +45,7 @@
             <Button id="buttonOpciones" fx:id="realizarPedido" mnemonicParsing="false" onAction="#handlerRealizarPedido" prefHeight="50.0" prefWidth="226.0" styleClass="buttonOpciones" stylesheets="@styles_principal.css" text="Realizar pedido" />
             <Pane prefHeight="440.0" prefWidth="225.0">
                <children>
-                  <Button id="CerrarSesion" fx:id="cerrarSesion" layoutX="65.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesion" />
+                  <Button id="CerrarSesion" fx:id="cerrarSesion" layoutX="55.0" layoutY="411.0" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="CerrarSesion" stylesheets="@styles_principal.css" text="Cerrar Sesion" />
                </children>
             </Pane>
          </children>
